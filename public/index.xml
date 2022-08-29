@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>https://lsy-dot.github.io/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language><atom:link href="https://lsy-dot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>https://lsy-dot.github.io/github&#43;hugo%E6%90%AD%E5%BB%BAblog/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/github&#43;hugo%E6%90%AD%E5%BB%BAblog/</guid>
+      <description>创建github账号和设置repository 下载hugo，初始化site 选择theme主题 新建md文档，提交 </description>
+    </item>
+    
+  </channel>
+</rss>
