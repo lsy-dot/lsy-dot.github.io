@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据结构与算法 on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 数据结构与算法 on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>排序算法学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/</guid>
+      <description>quote 自信即巅峰
+参考链接和资料 快速排序 //快速排序 public static Random random = new Random(); public int[] quickSort(int[] nums,int l,int r) { if(l&amp;gt;=r)return nums; int pos=quickSortOne(nums,l,r); quickSort(nums,l,pos-1); quickSort(nums,pos+1,r); return nums; } public int quickSortOne(int[] nums,int l,int r) { //加入随机 int pos=random.nextInt(r-l+1)+l; swap(nums,l,pos); int pivot=nums[l]; while(l&amp;lt;r) { while(l&amp;lt;r&amp;amp;&amp;amp;nums[r]&amp;gt;=pivot)r--; nums[l]=nums[r]; while(l&amp;lt;r&amp;amp;&amp;amp;nums[l]&amp;lt;pivot)l++; nums[r]=nums[l]; } nums[l]=pivot; return l; } public void swap(int[] nums,int p,int q) { int temp=nums[p]; nums[p]=nums[q]; nums[q]=temp; } 堆排序 //heap sort public void adjust(int[] nums,int len,int index) { // &amp;lt;&amp;lt; 要加括号，不然运算符优先级不够 int l=(index&amp;lt;&amp;lt;1)+1; int r=(index&amp;lt;&amp;lt;1)+2; int maxIndex=index; //这里记住比较的是nums[maxIndex] 而不是 nums[index] if(l&amp;lt;len&amp;amp;&amp;amp;nums[l]&amp;gt;nums[maxIndex])maxIndex=l; if(r&amp;lt;len&amp;amp;&amp;amp;nums[r]&amp;gt;nums[maxIndex])maxIndex=r; if(maxIndex!</description>
+    </item>
+    
+  </channel>
+</rss>

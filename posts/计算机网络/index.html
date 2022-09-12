@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>计算机网络</title>
+    <meta name="description" content="关于计算机网络学习的一些笔记">
+    <meta name="keywords" content='计算机网络'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="计算机网络">
+    <meta property="og:description" content="关于计算机网络学习的一些笔记">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="计算机网络">
+    <meta name="twitter:description" content="关于计算机网络学习的一些笔记">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>计算机网络</h1>
+        <small role="doc-subtitle">关于计算机网络学习的一些笔记</small>
+        <p class="post-date">
+            September 11, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C">计算机网络</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗</strong></p>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://blog.csdn.net/qq_46312987/article/details/124061775">拥塞控制</a></li>
+<li><a href="https://blog.csdn.net/qq_35091353/article/details/117135184">流量控制</a></li>
+<li><a href="https://blog.csdn.net/jiaomubai/article/details/100862807">UDP的首部格式</a></li>
+<li><a href="https://blog.csdn.net/sc179/article/details/111342222">HTTP的POST与PUT的区别（幂等性）</a></li>
+<li><a href="https://blog.csdn.net/lpw666_/article/details/122813110">重定向和转发的区别</a></li>
+<li><a href="https://juejin.cn/post/6844903853985366023">什么是队头阻塞以及如何解决</a></li>
+</ul>
+<h1 id="基础知识">基础知识</h1>
+<h2 id="架构分层">架构分层</h2>
+<h3 id="tcpip">TCP/IP</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">应用层:完成不同主机进程间的通信[DNS、HTTP]
+运输层:完成不同主机间的通信，提供通用的数据传输服务[TCP、UDP]
+网络层:选择合适的网间路由，交换结点，确保数据的及时传递[IP]
+数据链路层:完成点到点通信，使接收端明白一个帧的起始和结束
+物理层:相邻结点比特流的透明传输，屏蔽物理设备、传输介质的差异
+</code></pre><h3 id="iso">ISO</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">应用层:完成不同主机进程间的通信[DNS、HTTP]
+
+#多了这两层
+表示层:不同机器上的用户之间建立会话[SSL、TLS、RPC]
+会话层:信息的语法语义以及他们的关联，如加密压缩、转换翻译[LPP、XDP]
+
+运输层:完成不同主机间的通信，提供通用的数据传输服务[TCP、UDP]
+网络层:选择合适的网间路由，交换结点，确保数据的及时传递[IP]
+数据链路层:完成点到点通信，使接收端明白一个帧的起始和结束
+物理层:相邻结点比特流的透明传输，屏蔽物理设备、传输介质的差异
+</code></pre><h1 id="重要协议">重要协议</h1>
+<h2 id="tcp">TCP</h2>
+<h3 id="首部字段">首部字段</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">总结：一共20byte
+前12byte
+[2byte+2byte]端口=源端口+目的端口
+[4byte]序号
+[4byte]确认号
+后8byte
+[4bit]数据偏移
+[6bit]保留
+[6bit]标志位(URG、ACK、PSH、SYN、FIN、RST)
+[2byte]窗口
+[2byte]校验和
+[2byte]紧急指针
+[最大可达40byte]可选字段
+
+
+
+1.源端口和目的端口，各占2个字节。
+2.序号：占4个字节，序号范围为0到2的32次方-1，序号增加到2的32次方-1之后，下一个序号变为0，在一个TCP连接中传送的字节流中的每一个字节都按顺序编号。首部中的序号字段值指的是本报文段所发送的数据的第一个字节的序号。可对4GB的数据进行编号。在一般情况下可保证当序号重复使用时，旧序号的数据早已通过网络到达终点了。
+3.确认号：占4字节，是期望收到对方下一个报文段的第一个数据字节的序号。记住：若确认号是N，则表明：到序号N-1为止的所有数据都已正确收到。
+4.数据偏移：占4位，它指出TCP报文段的数据起始处距离TCP报文段的起始处有多远，这个字段实际上是指出TCP报文段的首部长度。
+6.保留：占6位。保留为今后使用，目前置为0
+7.紧急URG（URGent）：当URG=1时，表明紧急字段有效，告诉系统此报文中有紧急数据，应尽快传送。于是发送方TCP就把紧急数据插入到本报文段数据的最前面，而在紧急数据后面的数据仍是普通数据。这时要与首部中紧急指针字段配合使用。
+8.确认ACK（ACKnowlegment）仅当ACK=1时确认号字段才有效，TCP规定，连接建立后所有传送的报文段都必须把ACK置1.
+9.推送PSH（PuSH）：当两个应用进程进行交互式的通信时，有时在一端的应用进程希望在键入一个命令后立即就能收到对方的响应。在这种情况下，TCP就可以使用推送操作。
+10.复位RST（ReSeT）:当RST=1时，表明TCP连接中出现严重错误，必须释放连接，然后再重新建立运输连接。
+11.同步SYN，在连接建立时用来同步序号，当SYN=1而ACK=0时，表明这是一个连接请求报文段。对方若同意时，则应在响应的报文段中使SYN=1和ACK=1，因此，SYN置1就表示这是一个连接请求或连接接受报文。
+12.终止FIN，用来释放一个连接，当FIN=1时，表示此报文段的发送方的数据已发送完毕，并要求释放运输连接。
+13.窗口，占2个字节，窗口指的是发送本报文段的一方的接收窗口，不是自己的发送窗口，告诉对方：从本报文段首部中的确认号算起，接收方目前允许对方发送的数据量。窗口值作为接受方让发送方设置其发送窗口的依据。
+14.校验和，占2字节。校验和字段检验的范围包括首部和数据这两部分。
+15.紧急指针：占2个字节，紧急指针仅在URG=1时才有意义，它指出本报文段中的紧急数据的字节数。当所有紧急数据处理完毕时，TCP就告诉应用程序恢复到正常操作。值得注意的是，即使窗口为0时也可发送紧急数据。
+15.选项：长度可变，最长可达40字节，当没有选项时，TCP的首部长度是20字节。
+最大报文段长度MSS，MSS是指每一个TCP报文段中的数据字段的最大长度。
+</code></pre><p><img src="/images/TCP_head.png" alt="Markdowm Image"></p>
+<h3 id="三次握手">三次握手</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">第一次握手syn：接收方确认了自己的接收和发送方的发送是没问题的   
+第二次握手syn/ack：发送方确认了自己的发送和接收和发送方的发送是没问题的
+第三次握手ack：接收方确认了自己的发送和发送方的接收是没问题的
+第三次的作用是为了防止第一次失效连接的捣乱。
+</code></pre><h3 id="四次挥手">四次挥手</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">fin
+ack
+fin
+ack
+
+为什么中间要分开来，是因为接收方可能还有要发送的数据。  
+为什么最后发完ack要等待2msl，因为ack可能丢失，丢失要重发，还能利用存活时间清除丢失的包
+</code></pre><h3 id="可靠传输">可靠传输</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、数据分块，编号，接收排序，组装
+2、校验和
+3、流量控制（滑动窗口）
+4、停止等待ARQ（确认，超时重传）
+5、拥塞控制（拥塞窗口cwnd）
+</code></pre><h3 id="拥塞控制和流量控制">拥塞控制和流量控制</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">拥塞控制（针对整个网络而言）
+1、慢开始:当主机开始发送数据时，由于并不清楚网路的负荷情况，所以如果立即把大量数据字节注入到网络，那么就有可能引发网络发生拥塞。所以最好的方法是先探测一下，即由小到大逐渐增大发送窗口，也就是说，由小到达逐渐增大拥塞窗口值。
+总结:窗口指数上升，探测网络的上限
+2、拥塞避免:
+为了防止拥塞窗口cwnd增长过大引起网络拥塞，还需要设置一个慢开始门限ssthresh状态变量，
+总结:达到上限，开始线性指数上升。
+3、快重传和快恢复:
+为什么要？(避免个别报文的丢失造成误认为拥塞从而导致慢开始降低传输效率)
+有时，个别报文段会在网络中丢失，但实际上网络并未发生拥塞，如果发送方迟迟收不到确认，就会产生超时，就会误认为网络发生了拥塞，就导致了上图中重新开始了慢开始，将拥塞窗口cwnd又设置为1，因而降低了传输效率。
+执行流程：
+快重传算法规定，发送方只要一连收到3个重复确认，就知道接收方确实没有收到报文段，那么开始快恢复算法，
+总结:3个重复确认，窗口减半，开始拥塞避免。
+
+流量控制（针对端到端而言）
+TCP头部字段设置发送窗口的大小，
+TCP发送方的发送窗口 = min{ 自身拥塞窗口，TCP接收方的接收窗口 }
+</code></pre><h2 id="udp">UDP</h2>
+<h3 id="首部字段-1">首部字段</h3>
+<p><img src="/images/UDP_head.png" alt="">
+<img src="/images/UDP%E4%BC%AA%E9%A6%96%E9%83%A8.png" alt=""></p>
+<pre tabindex="0"><code class="language-a" data-lang="a">总结:这里的伪首部只是为了计算校验和
+[2byte]源端口号
+[2byte]目标端口号
+[]包长度
+[]校验和
+
+UDP用户数据报首部中检验和的计算方法很特殊。在计算检验和时，要在UDP用户数据报之前增加12个字节的伪首部。
+所谓“伪首部”是因为这种伪首部并不是UDP用户数据报的真正的首部。只是在计算检验和时临时添加在UDP用户数据报前面，得到一个临时的UDP用户数据报。检验和就是按照这个临时的UDP用户数据报来计算的。伪首部既不向下传送也不向上递交，而仅仅是为了计算检验和。
+
+
+源端口号：表示发送端端口号，字段长16位。该字段是可选项，有时可能不会设置源端口号。没有源端口号的时候该字段的设置为0。可用于不需要返回的通信中。
+目标端口号：表示接收端端口，字段长度16位。
+包长度：该字段保存了UDP首部的长度跟数据的长度之和。单位为字节。
+校验和：校验和是为了提供可靠的UDP首部和数据而设计的。
+</code></pre><h3 id="和tcp的对比">和TCP的对比</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">TCP:面向连接,可靠交付,面向字节流,一对一,首部20字节必选，40字节可选
+UDP:无连接,最大努力交付,面向报文,一对一、一对多、多对一、多对多,
+8字节，源端口、目的端口、长度、检验和
+</code></pre><h2 id="http">http</h2>
+<h3 id="端口">端口</h3>
+<ul>
+<li>服务端：80</li>
+<li>客户端：动态分配</li>
+</ul>
+<h3 id="报文结构">报文结构</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">报文首部
+	请求行[方法、URI、HTTP版本]
+	首部字段
+		请求首部字段
+		通用首部字段
+		实体首部字段
+	其他
+空行
+报文主体
+</code></pre><h3 id="请求方式">请求方式</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">http1.0:get,post,head
+http1.1:options,put,delete,trace,connect
+
+get,put,delete是幂等的
+POST不是幂等操作，因为一次请求添加一份新资源，二次请求则添加了两份新资源，多次请求会产生不同的结果，因此POST不是幂等操作；
+
+1、OPTIONS
+返回服务器针对特定资源所支持的HTTP请求方法，也可以利用向web服务器发送‘*’的请求来测试服务器的功能性
+2、HEAD
+向服务器索与GET请求相一致的响应，只不过响应体将不会被返回。这一方法可以再不必传输整个响应内容的情况下，就可以获取包含在响应小消息头中的元信息。
+7、TRACE
+回显服务器收到的请求，主要用于测试或诊断
+8、CONNECT
+HTTP/1.1协议中预留给能够将连接改为管道方式的代理服务器。
+</code></pre><h3 id="状态码">状态码</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">概览
+1xx:informational[接收的请求正在处理]
+2xx:success[请求正常处理完毕]
+3xx:redirection[需要进行附加操作以完成请求]
+4xx:client error[服务器无法处理请求]
+5xx:server error[服务器处理请求出错]
+
+常用状态码
+100：continue，表示到目前位置都很正常，可以继续请求或者忽略这个回应。
+200：OK
+204：No content：请求已经成功处理，但是响应不包含主体部分。
+206：partial content：返回请求的范围部分
+301：move permanently：永久性重定向，一般是资源（网页等）被永久转移到其它URL
+302：found：临时性重定向，一般是资源临时移动
+303：see other:和302类似，但是明确要求用GET
+304：not modified；请求首部包含一些条件，不满足则返回304
+307：和302类似，但是明确要求浏览器不将POST变为GET
+400：bad request:请求报文中存在语法错误，多半是前端提交的字段名称或者字段类型和后台的实体类不一样，或者前端提交的参数跟后台需要的参数个数不一致，导致无法封装。
+401：unauthorized:表示请求需要有认证信息，如果已经请求过一次了，则说明认证失败。
+403：forbidden:请求被拒绝，通常原因是服务器上某些文件或目录设置了权限，客户端权限不够
+404：not found: 用户输入错误的链接，该链接指向的网页不存在。除此之外，也可以在服务器端拒绝请求且不想说明理由时使用。
+405: method not allowed:方法不允许
+500: Internal serval error:服务器处理请求时发生错误, 服务器内部错误（比如浏览器代理除了问题，ip，端口不对等）该状态码表明服务器端在执行请求时发生了错误。也有可能是Web应用存在的bug或某些临时的故障。
+501:Not implemented,服务器501错误是服务器还是不具有请求功能的
+502:Bad GateWay,这是服务器上的一个错误网关 ，因此说它是无效的
+503: server unavarilable：服务器负载过大或者正在维护。
+504，Gateway Timeout网关超时 服务器作为网关或代理，未及时从上游服务器接收请求。
+</code></pre><h3 id="restful-api">restful api</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">什么是restful api？
+Representational State Transfer  表现层状态转化，
+特点： http+资源，统一了接口,无状态（http带状态信息来）
+eg： 非restful: /dogs/query/{dogid}    restful: get /dogs/{dogid}
+</code></pre><h3 id="各个版本的区别">各个版本的区别</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">总结：
+http1.1
+	短连接-&gt;长连接
+	断点续传
+	虚拟注解host域
+http2.0
+	多路复用
+	头部压缩
+	服务器推送，预加载
+
+
+HTTP1.0和HTTP1.1的区别
+1、长连接
+HTTP1.0 默认是短连接，发送一次 http 请求就会断开连接，除非设置Connection: keep-alive，而 在HTTP1.1中默认开启长连接keep-alive，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟。
+2、节约带宽
+HTTP 1.1 支持只发送header 信息和断点续传功能。节约了带宽。
+3、HOST域
+因为一个 iP 地址可能存在多台虚拟主机，所以发送请求时必须指明虚拟主机的主机号。
+
+HTTP1.1 和 HTTP 2.0 的区别
+1、 多路复用
+HTTP2.0使用了多路复用的技术，做到同一个连接并发处理多个请求
+2、头部压缩
+HTTP1.1不支持header数据的压缩，只会压缩消息主题，HTTP2.0支持对header的数据进行压缩，这样数据体积更小了，在网络上传输就会更快。
+3、服务器推送
+也就是我们常说的预加载功能，允许服务器将当前网页所用的其他资源提前加载到浏览器，而不必等我们点击这个资源时再发起请求。这样可以降低延迟。
+</code></pre><h2 id="https">https</h2>
+<h3 id="对称加密和非对称加密">对称加密和非对称加密</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">加密和解密同用一个密钥的方式称为共享密钥加密（Common key crypto system），也被叫做对称密钥加密。
+公开密钥加密使用一对非对称的密钥。一把叫做私有密钥 （private key），
+另一把叫做公开密钥（public key）。顾名思 义，私有密钥不能让其他任何人知道，
+而公开密钥则可以随意发 布，任何人都可以获得。也被叫做非对称密钥加密。
+</code></pre><h3 id="认证流程">认证流程</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">首先，服务器 的运营人员向数字证书认证机构提出公开密钥的申请。
+数字证书认证机构在判明提出申请者的身份之后，会对已申请的公开密钥做数字签名
+（用CA的私有密钥进行签名，防止伪造），
+然后分配这个已签名的公开密钥，并将该公开密钥放入公钥证书后绑定在一起。
+服务器会将这份由数字证书认证机构颁发的公钥证书发送给客户端，
+以进行公开密钥加密方式通信。公钥证书也可叫做数字证书或直接称为证书。
+接到证书的客户端可使用数字证书认证机构的公开密钥，对那张证书上的数字签名进行验证，
+一旦验证通过，客户端便可明确两件事： 
+一，认证服务器的公开密钥的是真实有效的数字证书认证机构。
+二， 服务器的公开密钥是值得信赖的。
+此处认证机关的公开密钥必须安全地转交给客户端。使用通信方 时，如何安全转交是一件很困难的事，因此，多数浏览器开发商发布版本时，会事先在内部植入常用认证机关的公开密钥。
+</code></pre><h2 id="dns">DNS</h2>
+<h3 id="流程">流程</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">把网址转换成 ip 地址
+域名服务器的结构：
+根域名服务器，顶级域名服务器， 权限域名服务器，本地域名服务器
+域名查询的方式：
+1、 迭代查询
+2、 递归查询
+</code></pre><h3 id="dns缓存">dns缓存</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">DNS 缓存是一个临时数据库，用于存储有关以前的 DNS 查找的信息。换句话说，每当你访问网站时，
+你的操作系统和网络浏览器都会保留该域和相应 IP 地址的记录。这消除了对远程 DNS 服务器重复查询的需要，
+并允许你的 OS 或浏览器快速解析网站的 URL。
+</code></pre><h1 id="常见问题">常见问题</h1>
+<h2 id="队头阻塞">队头阻塞</h2>
+<h3 id="定义">定义</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">队头阻塞（head-of-line blocking）发生在一个TCP分节丢失，导致其后续分节不按序到达接收端的时候。该后续分节将被接收端一直保持直到丢失的第一个分节被发送端重传并到达接收端为止。该后续分节的延迟递送确保接收应用进程能够按照发送端的发送顺序接收数据。这种为了达到完全有序而引入的延迟机制非常有用，但也有不利之处。
+</code></pre><h3 id="http队头阻塞">http队头阻塞</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">总结：http1.1管道化导致队头阻塞，http分帧可以解决
+
+对于HTTP1.1中管道化导致的请求/响应级别的队头阻塞，可以使用HTTP2解决。HTTP2不使用管道化的方式，而是引入了帧、消息和数据流等概念，每个请求/响应被称为消息，每个消息都被拆分成若干个帧进行传输，每个帧都分配一个序号。每个帧在传输是属于一个数据流，而一个连接上可以存在多个流，各个帧在流和连接上独立传输，到达之后在组装成消息，这样就避免了请求/响应阻塞。
+</code></pre><h3 id="tcp队头阻塞">tcp队头阻塞</h3>
+<pre tabindex="0"><code>TCP中的队头阻塞的产生是由TCP自身的实现机制决定的，无法避免。想要在应用程序当中避免TCP队头阻塞带来的影响，只有舍弃TCP协议。
+</code></pre><h2 id="https一定安全可靠吗">https一定安全可靠吗？</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">不一定，如果用户点了信任陌生网站的证书就不安全
+如何预防中间人攻击，不要去点信任恶意网站的证书，如果信任了的话，
+那么中间人就可以和客户端和服务端分别进行https tls握手，建立连接
+还有一种方式就是可以进行https双向验证，让服务器去验证客户端的身份
+</code></pre><h2 id="重定向和转发的区别">重定向和转发的区别</h2>
+<pre tabindex="0"><code>总结：
+相同点：二者都会发生页面跳转
+不同点：
+	客户端地址栏是否改变:转发不变，重定向会变
+	共享数据：转发共享，重定向会丢失
+
+重定向过程： 客户端浏览器发送http请求 → web服务器接收后发送30X状态码响应及对应新的location给客户浏览器 → 客户浏览器发现是30X响应，则自动再发送一个新的http请求，请求url是新的location地址
+
+客户端浏览器发送http请求 → web服务器接受此请求 → 调用内部的一个方法在容器内部完成请求处理和转发动作 → 将目标资源发送给客户。
+</code></pre><h2 id="在浏览器中输入url地址---显示主页的过程">在浏览器中输入url地址 -&raquo; 显示主页的过程</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、DNS解析，将域名解析为ip地址，这个ip的查找过程又分成三种情况：浏览器缓存、路由器缓存、DNS缓存
+2、TCP连接，用到了IP协议、OSPF协议、ARP协议
+3、发送HTTP请求 ，用到了HTTP协议，浏览器将用户的数据封装到cookies中，并将cookie封装到一个http请求中，如果网页中存在多个url请求，会在本次tcp连接请求中发起多次http请求。
+4、服务器处理请求并生成一个html响应，将这个响应封装到一个http报文中并并返回HTTP报文
+5、浏览器解析渲染页面
+6、连接结束
+</code></pre><h2 id="tcp粘包和拆包">TCP粘包和拆包</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">TCP是面向流，没有界限的一串数据。TCP底层并不了解上层业务数据的具体含义，它会根据TCP缓冲区的实际情况进行包的划分，所以在业务上认为，一个完整的包可能会被TCP拆分成多个包进行发送，也有可能把多个小的包封装成一个大的数据包发送，这就是所谓的TCP粘包和拆包问题。
+解决办法
+	发送端将每个数据包封装为固定长度
+	在数据尾部增加特殊字符进行分割
+	将数据分为两部分，一部分是头部，一部分是内容体；其中头部结构大小固定，且有一个字段声明内容体的大小。
+</code></pre><h2 id="跨域问题的域是指什么">跨域问题的域是指什么</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">首先一个url是由：协议、域名、端口 三部分组成。（一般端口默认80）
+当一个请求url的协议、域名、端口三者之间的任意一个与当前页面url不同即为跨域。
+</code></pre>
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#基础知识">基础知识</a>
+      <ul>
+        <li><a href="#架构分层">架构分层</a>
+          <ul>
+            <li><a href="#tcpip">TCP/IP</a></li>
+            <li><a href="#iso">ISO</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#重要协议">重要协议</a>
+      <ul>
+        <li><a href="#tcp">TCP</a>
+          <ul>
+            <li><a href="#首部字段">首部字段</a></li>
+            <li><a href="#三次握手">三次握手</a></li>
+            <li><a href="#四次挥手">四次挥手</a></li>
+            <li><a href="#可靠传输">可靠传输</a></li>
+            <li><a href="#拥塞控制和流量控制">拥塞控制和流量控制</a></li>
+          </ul>
+        </li>
+        <li><a href="#udp">UDP</a>
+          <ul>
+            <li><a href="#首部字段-1">首部字段</a></li>
+            <li><a href="#和tcp的对比">和TCP的对比</a></li>
+          </ul>
+        </li>
+        <li><a href="#http">http</a>
+          <ul>
+            <li><a href="#端口">端口</a></li>
+            <li><a href="#报文结构">报文结构</a></li>
+            <li><a href="#请求方式">请求方式</a></li>
+            <li><a href="#状态码">状态码</a></li>
+            <li><a href="#restful-api">restful api</a></li>
+            <li><a href="#各个版本的区别">各个版本的区别</a></li>
+          </ul>
+        </li>
+        <li><a href="#https">https</a>
+          <ul>
+            <li><a href="#对称加密和非对称加密">对称加密和非对称加密</a></li>
+            <li><a href="#认证流程">认证流程</a></li>
+          </ul>
+        </li>
+        <li><a href="#dns">DNS</a>
+          <ul>
+            <li><a href="#流程">流程</a></li>
+            <li><a href="#dns缓存">dns缓存</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#常见问题">常见问题</a>
+      <ul>
+        <li><a href="#队头阻塞">队头阻塞</a>
+          <ul>
+            <li><a href="#定义">定义</a></li>
+            <li><a href="#http队头阻塞">http队头阻塞</a></li>
+            <li><a href="#tcp队头阻塞">tcp队头阻塞</a></li>
+          </ul>
+        </li>
+        <li><a href="#https一定安全可靠吗">https一定安全可靠吗？</a></li>
+        <li><a href="#重定向和转发的区别">重定向和转发的区别</a></li>
+        <li><a href="#在浏览器中输入url地址---显示主页的过程">在浏览器中输入url地址 -&raquo; 显示主页的过程</a></li>
+        <li><a href="#tcp粘包和拆包">TCP粘包和拆包</a></li>
+        <li><a href="#跨域问题的域是指什么">跨域问题的域是指什么</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>

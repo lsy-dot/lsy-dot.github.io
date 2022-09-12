@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>项目 on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/%E9%A1%B9%E7%9B%AE/</link>
+    <description>Recent content in 项目 on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 11 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/%E9%A1%B9%E7%9B%AE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>项目(BBS&#43;open-falcon)</title>
+      <link>https://lsy-dot.github.io/posts/%E9%A1%B9%E7%9B%AEbbs&#43;open-falcon/</link>
+      <pubDate>Sun, 11 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/%E9%A1%B9%E7%9B%AEbbs&#43;open-falcon/</guid>
+      <description>quote 难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗
+参考链接 BBS 简单介绍 功能 这是一个基于SpringBoot的论坛项目，主要实现了用户的登录、注册、关注帖子的发布、删除、加精、置顶、检索系统的通知评论的点赞热帖排行榜等功能 技术栈 技术栈方面主要是SpringBoot+Mybatis做了一个基本的功能实现在这个基础上引入了redis来缓存一些访问比较密集的数据，比如点赞的数量和关注的用户列表引入了定时任务Quartz来实现热帖排行榜引入了ES做帖子的内容检索 数据库表 用户表id username password salt emailtype 超管 版主 普通用户status 未激活 已激活activattion_code header_url create_timediscuss 帖子表id user_id title contenttype 普通 置顶status 正常 精华 置顶create_time comment_count scorecomment 评论表id user_identity_type 帖子的评论 评论的评论entity_id 评论的idtarget_id 评论目标的idcontent statuscreate_timemessage 消息表（私信消息、系统通知）idfrom_id 发送方to_id 接受方conversation_id from_id+to_idcontent create_timestatus 未读 已读 删除 亮点和挑战 亮点 从整个项目来说，我觉得我在登录上花的精力比较多版本1：数据库表login_ticket缺点:频繁访问数据库版本2:存redistoken采用jwt但是引入jwt需要考虑他的失效，考虑加了黑名单，设置了过期时间。使用了redis的的hyperlog和bitmap统计DAU、UV事务注册时，写入数据库和发邮件扯一下Spring的事务 压测调优 讲下压测工具，流程数据库调优查帖子对应的评论加上索引，加快查询。说下索引的三星原则where 过滤排序 select 覆盖索引分页查询limit先偏移再查jvm调优讲下gc的流程把堆的大小调大一些。threadlocal用完要remove扯一扯线程池 redis相关问题 点赞 维护key-value 实体-点赞实体（人）的id 用户-用户获得的点赞数量关注 维护key-value 用户+实体类型-实体id（用户关注了那些实体） 实体id+实体类型-用户id（实体被那些用户关注了）redis持久化问题 改进方向 改成分布式，用SpringCloud微服务nginx+gateway，nginx负载均衡的三种方式轮询、权重、ip_hashmysql改成主从架构，主从复制，读写分离 open-falcon 简单介绍 任务 1，消息队列的监控告警，主要是监控每个队列里消息情况，包括空闲，消息积压，消费者列表，也可以涵盖消息队列的性能监控。监控指标整体单实例 rabbitmq问题 基础架构producer-&amp;gt;exchange-&amp;gt;queue-&amp;gt;consumerMQ的模式1、简单模式[一个生产者一个消费者]2、work模式[一个生产者多个消费者]3、订阅模式[work模式中间加个交换机]4、路由模式[交换机加上一个key进行匹配才发送消息]5、Topic模式[key变成topic进行模糊匹配]6、RPC4种类型的Exchange1、direct（精确匹配）2、fanout（广播）3、topic（通配符）4、headers（设置头部属性）1、如何确保消息不丢失先说哪里可能丢失消息，无非三个地方生产者-&amp;gt;队列-&amp;gt;消费者手段就是开启消息确认机制，和持久化机制。2、如何处理消息积压多开机器、先把消息存数据库再慢慢消化3、rabbtimq如何实现延迟队列、死信队列？延迟队列：见上文，一个是用TTL参数+DLX，一个是delay_que死信队列：自带DLX4、消息队列如何限流？（https://segmentfault.</description>
+    </item>
+    
+  </channel>
+</rss>

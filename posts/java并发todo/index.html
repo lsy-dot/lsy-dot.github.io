@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>java并发</title>
+    <meta name="description" content="关于java并发学习的一些笔记">
+    <meta name="keywords" content='并发'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/java%E5%B9%B6%E5%8F%91todo/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="java并发">
+    <meta property="og:description" content="关于java并发学习的一些笔记">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="java并发">
+    <meta name="twitter:description" content="关于java并发学习的一些笔记">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/java%E5%B9%B6%E5%8F%91todo/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/java%E5%B9%B6%E5%8F%91todo/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/java%E5%B9%B6%E5%8F%91todo/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>java并发</h1>
+        <small role="doc-subtitle">关于java并发学习的一些笔记</small>
+        <p class="post-date">
+            September 11, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/%E5%B9%B6%E5%8F%91">并发</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗</strong></p>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li>
+<p>[<a href="https://tech.meituan.com/2019/12/05/aqs-theory-and-apply.html">从ReentrantLock的实现看AQS的原理及应用</a>]</p>
+</li>
+<li>
+<p><a href="https://segmentfault.com/a/1190000017372067">(九)深入分析AQS实现原理</a></p>
+</li>
+</ul>
+<h1 id="基本概念">基本概念</h1>
+<h2 id="并行和并发">并行和并发</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">并发指的是多个任务交替进行，
+而并行则是指真正意义上的“同时进行”。
+</code></pre><h2 id="进程和线程">进程和线程</h2>
+<pre tabindex="0"><code></code></pre><h2 id="同步和异步">同步和异步</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">同步方法调用一开始，调用者必须等待被调用的方法结束后
+，调用者后面的代码才能执行。
+而异步调用，指的是，调用者不用管被调用方法是否完成，
+都会继续执行后面的代码，当被调用的方法完成后会通知调用者。
+</code></pre><h1 id="java线程">java线程</h1>
+<pre tabindex="0"><code class="language-a" data-lang="a">进程:分配资源最小的单位
+线程:调度的最小单位
+
+1、包含关系：进程基本上相互独立的，而线程存在于进程内，是进程的一个子集
+2、资源共享：进程拥有共享的资源，如内存空间等，供其内部的线程共享
+3、通信：进程间通信较为复杂,线程通信相对简单，因为它们共享进程内的内存，一个例子是多个线程可以访问同一个共享变量
+4、体量：线程更轻量，线程上下文切换成本一般上要比进程上下文切换低
+</code></pre><h2 id="状态">状态</h2>
+<h3 id="定义">定义</h3>
+<pre tabindex="0"><code>java
+New
+Runnable,blocked  waiting,time-waiting
+Terminated
+
+os操作系统
+初始状态
+可运行状态
+阻塞状态
+运行状态
+终止状态
+</code></pre><h3 id="线程何时出现blocked的状态">线程何时出现blocked的状态</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">synchronized 修饰的方法、代码块同一时刻只允许一个线程执行，其他线程只能等待，
+等待的线程会从 RUNNABLE 转变到 BLOCKED 状态。
+https://www.javanav.com/interview/991455b7c5174aa8b3f820388c1138fc.html
+</code></pre><h3 id="new-到-runnable-状态">NEW 到 RUNNABLE 状态</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">从 NEW 状态转变到 RUNNABLE 状态调用线程对象的 start() 方法就可以了
+</code></pre><h3 id="runnable-与-waiting-的状态转变">RUNNABLE 与 WAITING 的状态转变</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">调用 Object.notify()、Object.notifyAll() 方法，线程可能从 WAITING 转变到 RUNNABLE 状态。
+当调用 t.join() 的时候，执行代码的线程的状态会从 RUNNABLE 转变到 WAITING
+调用 LockSupport.park() 方法，线程的状态会从 RUNNABLE 转变到 WAITING
+</code></pre><h3 id="runnable-与-timed_waiting-的状态转变">RUNNABLE 与 TIMED_WAITING 的状态转变</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">Thread.sleep(long millis)
+Object.wait(long timeout)
+Thread.join(long millis)
+LockSupport.parkNanos(Object blocker, long deadline)
+LockSupport.parkUntil(long deadline)
+TIMED_WAITING 和 WAITING 状态的区别，仅仅是调用的是超时参数的方法。
+</code></pre><h2 id="创建">创建</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">总结
+1、直接使用Thread
+2、使用 Runnable 注入到Thread
+3、FutureTask注入到Thread
+
+1、// 构造方法的参数是给线程指定名字，推荐
+Thread t1 = new Thread(&#34;t1&#34;) {
+ @Override
+ // run 方法内实现了要执行的任务
+ public void run() {
+ log.debug(&#34;hello&#34;);
+ }
+};
+t1.start();
+
+2、// 创建任务对象
+Runnable task2 = new Runnable() {
+ @Override
+ public void run() {
+ log.debug(&#34;hello&#34;);
+ }
+};
+// 参数1 是任务对象; 参数2 是线程名字，推荐
+Thread t2 = new Thread(task2, &#34;t2&#34;);
+t2.start();
+
+3、// 创建任务对象
+FutureTask&lt;Integer&gt; task3 = new FutureTask&lt;&gt;(() -&gt; {
+ log.debug(&#34;hello&#34;);
+ return 100;
+});
+// 参数1 是任务对象; 参数2 是线程名字，推荐
+new Thread(task3, &#34;t3&#34;).start();
+// 主线程阻塞，同步等待 task 执行完毕的结果
+Integer result = task3.get();
+log.debug(&#34;结果是:{}&#34;, result);
+</code></pre><h2 id="常见方法">常见方法</h2>
+<h3 id="start-vs-run">start vs run</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">start会开启一个新的线程，run不会。
+</code></pre><h3 id="sleep-vs-yield">sleep vs yield</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">sleep 进入睡眠状态不会释放锁，而yield会释放锁重新进入调度。
+</code></pre><h3 id="join">join</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">等待其他线程结束
+
+t1,t2,t3线程按照顺序执行线程
+https://blog.51cto.com/u_15127557/3479468
+调用join
+</code></pre><h3 id="interupt">interupt</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">打断 sleep，wait，join 的线程
+这几个方法都会让线程进入阻塞状态
+打断 sleep 的线程, 会清空打断状态
+</code></pre><h3 id="threadsleep原理">thread.sleep原理</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">https://blog.csdn.net/yb223731/article/details/94560006
+Thread.Sleep(0)的作用，就是“让出cpu，会触发操作系统立刻重新进行一次CPU竞争”。
+竞争的结果也许是当前线程仍然获得CPU控制权，也许会换成别的线程获得CPU控制权。
+这也是我们在大循环里面经常会写一句Thread.Sleep(0) ，因为这样就给了其他线程比如Paint线程获得CPU控制权的权力，这样界面就不会假死在那里。
+内核的sleep()函数是在挂起原语的基础上利用定时器实现的。
+</code></pre><h1 id="java管程">java管程</h1>
+<h2 id="synchronize">synchronize</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">定位:java关键字
+作用:锁
+
+原理:todo
+
+synchronize与锁升级
+1、最初直接加重量级锁，需要在用户态和内核态进行切换，耗费大量资源
+2、jdk1.6之后采用 无锁-&gt;偏向锁(单个线程)-&gt;轻量级锁(少量线程)-&gt;重量级锁(大量线程) 升级的过程进行优化，使得对于锁的获取释放变得更快。
+</code></pre><h2 id="reentranlock">ReentranLock</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">定位:api
+作用:锁
+
+原理:todo
+
+Synchronize vs reentrantlock
+1、关键字和api
+2、是否可手动释放
+3、是否可以中断
+4、是否公平
+5、是否可以加condition
+6、锁对象和锁线程
+</code></pre><h2 id="无锁">无锁</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">底层原理:CAS(compare and set),
+volatile(保证可见性)
+</code></pre><h2 id="synchronize和lock适用的场景分别是">synchronize和lock适用的场景分别是？</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">一个是关键字，一个是api
+讲讲区别，lock可以中断，性能很好，但是jdk1.6之后synchronize做了优化，性能也不差
+synchronize是悲观锁
+lock是乐观锁，CAS机制
+synchronized：在需要同步的对象中加入此控制，synchronized可以加在方法上，也可以加在特定代码块中，括号中表示需要锁的对象。
+lock：需要显示指定起始位置和终止位置。一般使用ReentrantLock类做为锁，
+多个线程中必须要使用一个ReentrantLock类做为对象才能保证锁的生效。且在加锁和解锁处需要通过lock()和unlock()显示指出。
+所以一般会在finally块中写unlock()以防死锁。
+
+synchronized原语和ReentrantLock在一般情况下没有什么区别，但是在非常复杂的同步应用中，
+http://guanzhou.pub/2020/03/04/Sync-and-lock/
+请考虑使用ReentrantLock，特别是遇到下面2种需求的时候。
+1.某个线程在等待一个锁的控制权的这段时间需要中断 
+2.需要分开处理一些wait-notify，ReentrantLock里面的Condition应用，能够控制notify哪个线程 
+3.具有公平锁功能，每个到来的线程都将排队等候
+</code></pre><h1 id="java-内存模型">java 内存模型</h1>
+<h2 id="可见性">可见性</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义：保证指令不会受 cpu 缓存的影响
+</code></pre><h2 id="有序性">有序性</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义：保证指令不会受 cpu 指令并行优化的影响
+</code></pre><h2 id="单例模式实现">单例模式实现</h2>
+<h3 id="懒汉式和饿汉式的区别">懒汉式和饿汉式的区别</h3>
+<ul>
+<li>饿汉式（jvm类加载就生成）</li>
+<li>懒汉式(存在线程风险[解决办法，double check + volatile])</li>
+</ul>
+<h3 id="枚举">枚举</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">// 问题1：枚举单例是如何限制实例个数的  静态实例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 问题2：枚举单例在创建时是否有并发问题	没有
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 问题3：枚举单例能否被反射破坏单例 不能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 问题4：枚举单例能否被反序列化破坏单例  不能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 问题5：枚举单例属于懒汉式还是饿汉式  饿汉式
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 问题6：枚举单例如果希望加入一些单例创建时的初始化逻辑该如何做  加构造方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">enum</span> Singleton <span style="color:#f92672">{</span> 
+</span></span><span style="display:flex;"><span> INSTANCE<span style="color:#f92672">;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="double-check-锁类">double check 锁类</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> Singleton INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 分析这里的线程安全, 并说明有什么缺点  锁的粒度太大，锁的是整个class
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">synchronized</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span> INSTANCE <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> INSTANCE<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">}</span> 
+</span></span><span style="display:flex;"><span>         INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> INSTANCE<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="double-check-锁方法">double check 锁方法</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Singleton</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 问题1：解释为什么要加 volatile ?  保证多个线程的可见性
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">volatile</span> Singleton INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>     <span style="color:#75715e">// 问题2：对比实现3, 说出这样做的意义   后续的调用可以并发，只是第一次会阻塞。
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Singleton <span style="color:#a6e22e">getInstance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>INSTANCE <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">return</span> INSTANCE<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#66d9ef">synchronized</span> <span style="color:#f92672">(</span>Singleton<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+</span></span><span style="display:flex;"><span>         <span style="color:#75715e">// 问题3：为什么还要在这里加为空判断, 之前不是判断过了吗   防止创建多个实例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>             <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>INSTANCE <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e">// t2 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>             <span style="color:#66d9ef">return</span> INSTANCE<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>             <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>             INSTANCE <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton<span style="color:#f92672">();</span> 
+</span></span><span style="display:flex;"><span>             <span style="color:#66d9ef">return</span> INSTANCE<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#f92672">}</span> 
+</span></span><span style="display:flex;"><span>     <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h1 id="工具">工具</h1>
+<h2 id="线程池">线程池</h2>
+<h3 id="参数">参数</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">线程池的参数
+[
+corepoolsize-&gt;核心线程数目(最多保留的线程数),
+maximumPoolSize-&gt;最大线程数目超过核心线程数目时创建的线程(救急线程),
+keepAliveTime-&gt;生存时间(针对救急线程),
+unit 时间单位-&gt;针对救急线程,
+workQueue-&gt;阻塞队列(超过最大线程数目时放置阻塞线程的地方),
+threadFactory-&gt;线程工厂(可以为线程创建时起个好名字),
+handler-&gt;拒绝策略,
+]
+</code></pre><h3 id="分类">分类</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">Executors.newCachedThreadPool();
+ 	线程池中数量没有固定，可达到最大值（Interger. MAX_VALUE）
+ 	线程池中的线程可进行缓存重复利用和回收（回收默认时间为1分钟）
+ 	当线程池中，没有可用线程，会重新创建一个线程
+Executors.newFixedThreadPool(int nThreads)；
+	线程池中的线程处于一定的量，可以很好的控制线程的并发量
+	线程可以重复被使用，在显示关闭之前，都将一直存在
+	超出一定量的线程被提交时候需在队列中等待
+Executors.newSingleThreadExecutor() ； 
+	线程池中最多执行1个线程，之后提交的线程活动将会排在队列中以此执行
+Executors.newScheduledThreadPool(int corePoolSize)
+	线程池中具有指定数量的线程，即便是空线程也将保留
+	可定时或者延迟执行线程活动
+Executors.newSingleThreadScheduledExecutor() 
+	线程池中最多执行1个线程，之后提交的线程活动将会排在队列中以此执行
+	可定时或者延迟执行线程活动
+</code></pre><h2 id="juc">JUC</h2>
+<h3 id="aqs原理">AQS原理</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">aqs全称为AbstractQueuedSynchronizer，它提供了一个FIFO队列，可以看成是一个用来实现同步锁以及其他涉及到同步功能的核心组件，
+常见的有:ReentrantLock、CountDownLatch等。
+AQS是一个抽象类，主要是通过继承的方式来使用，它本身没有实现任何的同步接口，仅仅是定义了同步状态的获取以及释放的方法来提供自定义的同步组件。
+
+AQS里面维护了
+state  状态[代表上没上锁]
+head,tail  队列头尾结点[存放正在等待的线程]
+实现了acquire，release这些api
+自定义同步器要实现tryAcquire,tryRelease
+
+加锁的过程
+1、直接加锁成功
+2、加锁失败
+	自旋一次，加锁成功
+	自旋失败，进入队列，等待唤醒
+这里注意，唤醒的时候是从尾部向头部遍历来唤醒，为的是防止极端
+如果是从前往后找，由于极端情况下入队的非原子操作和CANCELLED节点产生过程中断开Next指针的操作，可能会导致无法遍历所有的节点。
+</code></pre><p><img src="https://p1.meituan.net/travelcube/82077ccf14127a87b77cefd1ccf562d3253591.png" alt="img"></p>
+<h3 id="semaphore">Semaphore</h3>
+<h3 id="countdownlatch">CountdownLatch</h3>
+<h3 id="concurrenthashmap">ConcurrentHashMap</h3>
+<h3 id="blockingqueue">BlockingQueue</h3>
+<h3 id="concurrentlinkedqueue">ConcurrentLinkedQueue</h3>
+<h3 id="copyonwritearraylist">CopyOnWriteArrayList</h3>
+
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#基本概念">基本概念</a>
+      <ul>
+        <li><a href="#并行和并发">并行和并发</a></li>
+        <li><a href="#进程和线程">进程和线程</a></li>
+        <li><a href="#同步和异步">同步和异步</a></li>
+      </ul>
+    </li>
+    <li><a href="#java线程">java线程</a>
+      <ul>
+        <li><a href="#状态">状态</a>
+          <ul>
+            <li><a href="#定义">定义</a></li>
+            <li><a href="#线程何时出现blocked的状态">线程何时出现blocked的状态</a></li>
+            <li><a href="#new-到-runnable-状态">NEW 到 RUNNABLE 状态</a></li>
+            <li><a href="#runnable-与-waiting-的状态转变">RUNNABLE 与 WAITING 的状态转变</a></li>
+            <li><a href="#runnable-与-timed_waiting-的状态转变">RUNNABLE 与 TIMED_WAITING 的状态转变</a></li>
+          </ul>
+        </li>
+        <li><a href="#创建">创建</a></li>
+        <li><a href="#常见方法">常见方法</a>
+          <ul>
+            <li><a href="#start-vs-run">start vs run</a></li>
+            <li><a href="#sleep-vs-yield">sleep vs yield</a></li>
+            <li><a href="#join">join</a></li>
+            <li><a href="#interupt">interupt</a></li>
+            <li><a href="#threadsleep原理">thread.sleep原理</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#java管程">java管程</a>
+      <ul>
+        <li><a href="#synchronize">synchronize</a></li>
+        <li><a href="#reentranlock">ReentranLock</a></li>
+        <li><a href="#无锁">无锁</a></li>
+        <li><a href="#synchronize和lock适用的场景分别是">synchronize和lock适用的场景分别是？</a></li>
+      </ul>
+    </li>
+    <li><a href="#java-内存模型">java 内存模型</a>
+      <ul>
+        <li><a href="#可见性">可见性</a></li>
+        <li><a href="#有序性">有序性</a></li>
+        <li><a href="#单例模式实现">单例模式实现</a>
+          <ul>
+            <li><a href="#懒汉式和饿汉式的区别">懒汉式和饿汉式的区别</a></li>
+            <li><a href="#枚举">枚举</a></li>
+            <li><a href="#double-check-锁类">double check 锁类</a></li>
+            <li><a href="#double-check-锁方法">double check 锁方法</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#工具">工具</a>
+      <ul>
+        <li><a href="#线程池">线程池</a>
+          <ul>
+            <li><a href="#参数">参数</a></li>
+            <li><a href="#分类">分类</a></li>
+          </ul>
+        </li>
+        <li><a href="#juc">JUC</a>
+          <ul>
+            <li><a href="#aqs原理">AQS原理</a></li>
+            <li><a href="#semaphore">Semaphore</a></li>
+            <li><a href="#countdownlatch">CountdownLatch</a></li>
+            <li><a href="#concurrenthashmap">ConcurrentHashMap</a></li>
+            <li><a href="#blockingqueue">BlockingQueue</a></li>
+            <li><a href="#concurrentlinkedqueue">ConcurrentLinkedQueue</a></li>
+            <li><a href="#copyonwritearraylist">CopyOnWriteArrayList</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>

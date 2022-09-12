@@ -15,7 +15,7 @@
       <guid>https://lsy-dot.github.io/posts/github&#43;hugo%E6%90%AD%E5%BB%BAblog/</guid>
       <description>参考链接 用 Hugo 和 Github Pages 构建个人博客 Install Hugo hugo 模板basic 模板davantage [hugo github] (https://github.com/gohugoio/hugo/releases) github pages quickstart 创建github账号和设置repository 如果没有github账号，你得先去注册一个github账号
 然后创建一个仓库(repository), 选择settings下面的pages，按照官方文档进行操作，这里建议可以下载一个github-destktop进行操作，比命令行要方便些
-在仓库新建一个index.html,随便写一点东西看看，访问 https://.github.io 看看是否能够访问成功(这里会有个延时，github才会更新你的提交，要等待一会) 下载hugo，初始化site 安装hugo,我这里的话是直接在github上找到exe文件下载就可以了，其他安装方式可以参照官网，安装好以后再配置下环境变量即可 初始化 hugo new site blog # 进入blog目录以后可以看到如下结构 config.toml: 我们需要更改的配置文件 content: 存放所有的博客文章 static: 存储静态文件，例如背景图片，徽标，CSS，JS 等。此目录中的文件将直接复制到 /public 中。该文件夹的优先级高于主题下的 /static。 themes: 存放下载的主题 archetypes: 存储的.md 模板文件，其优先级高于 theme 文件下的 /archetypes 文件。 layouts: 存放 .html 模板，优先级高于 theme 文件夹下的 /layouts 文件夹 public: 在执行 hugo 命令后，生成的静态文件存放的目录 选择theme主题 进入hugo官网选在一个自己喜欢的主题，然后按照里面的提示把主题下载到themes文件夹里面，然后可以按照模板里面的文档配置下config.toml，这里我选择的模板是 模板地址
+在仓库新建一个index.html,随便写一点东西看看，访问 https://.github.io 看看是否能够访问成功(这里会有个延时，github才会更新你的提交，要等待一会) 下载hugo，初始化site 安装hugo,我这里的话是直接在github上找到exe文件下载就可以了，其他安装方式可以参照官网，安装好以后再配置下环境变量即可 初始化 hugo new site blog# 进入blog目录以后可以看到如下结构config.toml: 我们需要更改的配置文件content: 存放所有的博客文章static: 存储静态文件，例如背景图片，徽标，CSS，JS 等。此目录中的文件将直接复制到 /public 中。该文件夹的优先级高于主题下的 /static。themes: 存放下载的主题archetypes: 存储的.md 模板文件，其优先级高于 theme 文件下的 /archetypes 文件。layouts: 存放 .html 模板，优先级高于 theme 文件夹下的 /layouts 文件夹public: 在执行 hugo 命令后，生成的静态文件存放的目录 选择theme主题 进入hugo官网选在一个自己喜欢的主题，然后按照里面的提示把主题下载到themes文件夹里面，然后可以按照模板里面的文档配置下config.toml，这里我选择的模板是 模板地址
 新建md文档，提交 按照模板给出的文档，在content目录下新建posts，然后在这里面写md文档，按照他的格式来，有两种，</description>
     </item>
     

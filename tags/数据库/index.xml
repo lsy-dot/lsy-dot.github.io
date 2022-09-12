@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数据库 on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/</link>
+    <description>Recent content in 数据库 on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>mysql学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/mysql/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/mysql/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 sql(join on 和where的执行顺序） 关于SQL语句的执行顺序 详细介绍MySQL中的数据类型 详解MySQL执行事务的语法和流程 如何设计索引？ 为什么InnoDB使用B+树而不是B树 4种MySQL分页查询优化的方法，你知道几个？ mysql语法 常用的关键字 select,from,where,and,or [基本]left join,inner join,on,using [多表查询]group by[分组],order by[排序]max,avg,min,count[聚合函数]year,mouth,day,sub [日期函数]union all 常见问题 left join,right join, join的区别 一、基表不同1、left join：left join以左数据表为基表。2、right join：right join以右数据表为基表。二、操作不同1、left join：left join会把左表中的全部信息输出，然后搜索右表中符合条件的记录。2、right join：right join会把右表中的全部信息输出，然后左搜索表中符合条件的记录。三、结果不同1、left join：left join查出来的结果是左边的所有数据和与左边有交集部分的数据。2、right join：right join查出来的结果是右边的所有数据和与右边有交集部分的数据。 sql语句的执行顺序 from&amp;gt;(如果有join会先执行join)where&amp;gt;group by&amp;gt;having&amp;gt;select&amp;gt;order by&amp;gt;limit 常见sql语句错误和一些小技巧 1、Mysql中在用连接查询的时候，若两个表的连接字段名完全相同，则可以使用join using来简化join on简化前select * from question_practice_detail inner join question_detail on question_practice_detail.</description>
+    </item>
+    
+    <item>
+      <title>redis学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/redis/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/redis/</guid>
+      <description>quote 君子不立危墙之下
+参考链接和资料 redis 设计与实现 杀穿面试官-深入Redis分布式锁 Redis 在使用中会遇到哪些坑？如何规避？ 分布式id生成策略，我和面试官扯了一个半小时 多时钟解决雪花算法的时间回拨问题 redis基础知识 redis的基本数据结构 redis的数据都是key-value的形式，key是一个字符串value可以是字符串、hash、list、set、zset（有序的set）这五种value的数据量小的时候redis做了一些优化，比如list使用了压缩列表进行压缩降低存储空间，具体可以看redis 设计与实现里面的细节，zset是基于跳表这种数据结构来设计的。 redis的特殊数据结构 bitmap统计dau https://segmentfault.com/a/1190000023704266每天开一个bitmap,用用户id做offset,如果用户今天登录了。那么在对应的offset值为1,这样如果要统计一段时间的日活量的话,直接把这一段时间的bitmap按位与或操作即可。 redis的持久化 RDB（快照） AOF（写日志） 实际应用时会结合二者一起使用，定期RDB，持续AOF redis的网路IO模型（IO多路复用） 1、什么是IO多路复用？ IO 多路复用是一种同步IO模型，实现一个线程可以监视多个文件句柄； 一旦某个文件句柄就绪，就能够通知应用程序进行相应的读写操作； 没有文件句柄就绪就会阻塞应用程序，交出CPU。
+2、IO多路复用有几种模型，有什么区别？ select、poll、epoll1)select缺点select本质上是通过设置或者检查存放fd标志位的数据结构来进行下一步处理。这样所带来的缺点是：单个进程所打开的FD是有限制的，通过 FD_SETSIZE 设置，默认1024 ;每次调用 select，都需要把 fd 集合从用户态拷贝到内核态，这个开销在 fd 很多时会很大；对 socket 扫描时是线性扫描，采用轮询的方法，效率较低（高并发）2）pollpoll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态， 但是它没有最大连接数的限制，原因是它是基于链表来存储的.3）epollepoll中只会把活跃的事件放在双链表中(活跃的事件会callback自己注册到队列里)，不活跃的事件放在红黑树中，只会轮询双链表中的事件epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll会把哪个流发生了怎样的I/O事件通知我们。所以我们说epoll实际上是事件驱动（每个事件关联上fd）的，此时我们对这些流的操作都是有意义的。（复杂度降低到了O(1)） 3、为什么redis6.0改成多线程？ 瓶颈在于网络和IO，多线程来处理数据的读写和协议解析，执行命令还是使用单线程。 这样做的目的是因为redis的性能瓶颈在于网络IO而非CPU，使用多线程能提升IO读写的效率，从而整体提高redis的性能。
+缓存问题 缓存穿透 定义：查一些数据不存在的值（大量请求穿透缓存到数据库）解决办法：缓存空值，bloom过滤 缓存击穿 定义：热点数据过期（大量请求瞬间到数据库）解决办法：加锁（第一个拿到锁的人先去数据库拿值更新缓存，其他人等待）、热点数据不过期 缓存雪崩 定义：大量数据同一时间过期解决办法:过期时间进行离散化处理 缓存和数据库（mysql）一致性 首先，对于一致性和实时性要求高的数据就别存缓存，直接查数据库就好了。如果可以忍受短时间的不一致，符合最终一致性的要求。可以如下处理（缓存有过期时间，最终系统会保证最终一致性）1、跟新完数据库，删除缓存2、删缓存，更新数据库，删缓存 如何实现分布式id 数据库自增id 利用数据单机自增，不能抗高并发，可能重复 数据库水平拆分，设置初始值和相同的自增步长 「数据库水平拆分，设置初始值和相同的自增步长」是指在DB集群的环境下，将数据库进行水平划分，然后每个数据库设置「不同的初始值」和「相同的步长」，这样就能避免ID重复的情况。确定：不能抗高并发，可能会用完 批量申请自增ID 「批量申请自增ID」的解决方案可以解决无ID可分的问题，它的原理就是一次性给对应的数据库上分配一批的id值进行消费，使用完了，再回来申请。 UUID生成 第四种方式是使用「UUID生成」的方式生成分布式ID，UUID的核心思想是使用「机器的网卡、当地时间、一个随机数」来生成UUID。并且UUID生成的无序的字符串，查询效率低下，没有实际的业务含义，不具备自增特性，所以都不会使用UUID作为分布式ID来使用。 Redis的方式 集群模式（就是数据库水平拆分中把数据库换成redis）https://juejin.</description>
+    </item>
+    
+  </channel>
+</rss>

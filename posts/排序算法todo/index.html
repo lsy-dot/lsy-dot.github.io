@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>排序算法学习笔记</title>
+    <meta name="description" content="排序算法">
+    <meta name="keywords" content='数据结构与算法'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="排序算法学习笔记">
+    <meta property="og:description" content="排序算法">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="排序算法学习笔记">
+    <meta name="twitter:description" content="排序算法">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>排序算法学习笔记</h1>
+        <small role="doc-subtitle">排序算法</small>
+        <p class="post-date">
+            September 7, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95">数据结构与算法</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>自信即巅峰</strong></p>
+<h1 id="参考链接和资料">参考链接和资料</h1>
+<h1 id="快速排序">快速排序</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">//快速排序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> Random random <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Random<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">quickSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> l<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> r<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l<span style="color:#f92672">&gt;=</span>r<span style="color:#f92672">)</span><span style="color:#66d9ef">return</span> nums<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pos<span style="color:#f92672">=</span>quickSortOne<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>l<span style="color:#f92672">,</span>r<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    quickSort<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>l<span style="color:#f92672">,</span>pos<span style="color:#f92672">-</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    quickSort<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>pos<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span>r<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> nums<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">quickSortOne</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> l<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> r<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//加入随机
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> pos<span style="color:#f92672">=</span>random<span style="color:#f92672">.</span><span style="color:#a6e22e">nextInt</span><span style="color:#f92672">(</span>r<span style="color:#f92672">-</span>l<span style="color:#f92672">+</span>1<span style="color:#f92672">)+</span>l<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    swap<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>l<span style="color:#f92672">,</span>pos<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> pivot<span style="color:#f92672">=</span>nums<span style="color:#f92672">[</span>l<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>l<span style="color:#f92672">&lt;</span>r<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>l<span style="color:#f92672">&lt;</span>r<span style="color:#f92672">&amp;&amp;</span>nums<span style="color:#f92672">[</span>r<span style="color:#f92672">]&gt;=</span>pivot<span style="color:#f92672">)</span>r<span style="color:#f92672">--;</span>
+</span></span><span style="display:flex;"><span>        nums<span style="color:#f92672">[</span>l<span style="color:#f92672">]=</span>nums<span style="color:#f92672">[</span>r<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>l<span style="color:#f92672">&lt;</span>r<span style="color:#f92672">&amp;&amp;</span>nums<span style="color:#f92672">[</span>l<span style="color:#f92672">]&lt;</span>pivot<span style="color:#f92672">)</span>l<span style="color:#f92672">++;</span>
+</span></span><span style="display:flex;"><span>        nums<span style="color:#f92672">[</span>r<span style="color:#f92672">]=</span>nums<span style="color:#f92672">[</span>l<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    nums<span style="color:#f92672">[</span>l<span style="color:#f92672">]=</span>pivot<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> l<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> p<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> q<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> temp<span style="color:#f92672">=</span>nums<span style="color:#f92672">[</span>p<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>    nums<span style="color:#f92672">[</span>p<span style="color:#f92672">]=</span>nums<span style="color:#f92672">[</span>q<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>    nums<span style="color:#f92672">[</span>q<span style="color:#f92672">]=</span>temp<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h1 id="堆排序">堆排序</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">//heap sort
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">adjust</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> len<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> index<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//  &lt;&lt; 要加括号，不然运算符优先级不够
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> l<span style="color:#f92672">=(</span>index<span style="color:#f92672">&lt;&lt;</span>1<span style="color:#f92672">)+</span>1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> r<span style="color:#f92672">=(</span>index<span style="color:#f92672">&lt;&lt;</span>1<span style="color:#f92672">)+</span>2<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> maxIndex<span style="color:#f92672">=</span>index<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//这里记住比较的是nums[maxIndex] 而不是 nums[index]
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l<span style="color:#f92672">&lt;</span>len<span style="color:#f92672">&amp;&amp;</span>nums<span style="color:#f92672">[</span>l<span style="color:#f92672">]&gt;</span>nums<span style="color:#f92672">[</span>maxIndex<span style="color:#f92672">])</span>maxIndex<span style="color:#f92672">=</span>l<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>r<span style="color:#f92672">&lt;</span>len<span style="color:#f92672">&amp;&amp;</span>nums<span style="color:#f92672">[</span>r<span style="color:#f92672">]&gt;</span>nums<span style="color:#f92672">[</span>maxIndex<span style="color:#f92672">])</span>maxIndex<span style="color:#f92672">=</span>r<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>maxIndex<span style="color:#f92672">!=</span>index<span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>        swap<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>index<span style="color:#f92672">,</span>maxIndex<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        adjust<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>len<span style="color:#f92672">,</span>maxIndex<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">heapSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//这里的长度是nums.length/2-1,调整非子结点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">/</span>2<span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>i<span style="color:#f92672">&gt;=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">--)</span>
+</span></span><span style="display:flex;"><span>        adjust<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">,</span>i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>i<span style="color:#f92672">&gt;=</span>1<span style="color:#f92672">;</span>i<span style="color:#f92672">--)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//调整子节点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        swap<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>0<span style="color:#f92672">,</span>i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        adjust<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>i<span style="color:#f92672">,</span>0<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> nums<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h1 id="归并排序">归并排序</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#75715e">//归并排序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">public</span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mergeSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> l<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> r<span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>l<span style="color:#f92672">&gt;=</span>r<span style="color:#f92672">)</span><span style="color:#66d9ef">return</span> <span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">//int mid=(l+r)&gt;&gt;1;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">//这里必须加括号   话说&gt;&gt;的优先级也太低了吧
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> mid<span style="color:#f92672">=</span>l<span style="color:#f92672">+((</span>r<span style="color:#f92672">-</span>l<span style="color:#f92672">)&gt;&gt;</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        mergeSort<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>l<span style="color:#f92672">,</span>mid<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        mergeSort<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>mid<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span>r<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        mergeSortInorder<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>l<span style="color:#f92672">,</span>mid<span style="color:#f92672">,</span>r<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mergeSortInorder</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> l<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> m<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> r<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> temps<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>r<span style="color:#f92672">-</span>l<span style="color:#f92672">+</span>1<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> k<span style="color:#f92672">=</span>0<span style="color:#f92672">,</span>s1<span style="color:#f92672">=</span>l<span style="color:#f92672">,</span>s2<span style="color:#f92672">=</span>m<span style="color:#f92672">+</span>1<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>s1<span style="color:#f92672">&lt;=</span>m<span style="color:#f92672">&amp;&amp;</span>s2<span style="color:#f92672">&lt;=</span>r<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">[</span>s1<span style="color:#f92672">]&lt;</span>nums<span style="color:#f92672">[</span>s2<span style="color:#f92672">])</span>temps<span style="color:#f92672">[</span>k<span style="color:#f92672">++]=</span>nums<span style="color:#f92672">[</span>s1<span style="color:#f92672">++];</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> temps<span style="color:#f92672">[</span>k<span style="color:#f92672">++]=</span>nums<span style="color:#f92672">[</span>s2<span style="color:#f92672">++];</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>s1<span style="color:#f92672">&lt;=</span>m<span style="color:#f92672">)</span>temps<span style="color:#f92672">[</span>k<span style="color:#f92672">++]=</span>nums<span style="color:#f92672">[</span>s1<span style="color:#f92672">++];</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>s2<span style="color:#f92672">&lt;=</span>r<span style="color:#f92672">)</span>temps<span style="color:#f92672">[</span>k<span style="color:#f92672">++]=</span>nums<span style="color:#f92672">[</span>s2<span style="color:#f92672">++];</span>
+</span></span><span style="display:flex;"><span>        k<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>l<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;=</span>r<span style="color:#f92672">;</span>i<span style="color:#f92672">++)</span>nums<span style="color:#f92672">[</span>i<span style="color:#f92672">]=</span>temps<span style="color:#f92672">[</span>k<span style="color:#f92672">++];</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span></code></pre></div><h1 id="选择排序">选择排序</h1>
+<h1 id="冒泡排序">冒泡排序</h1>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span> <span style="color:#75715e">//冒泡排序
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bubbleSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> nums<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n<span style="color:#f92672">=</span>nums<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>i<span style="color:#f92672">++)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">boolean</span> flag<span style="color:#f92672">=</span><span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>j<span style="color:#f92672">&gt;</span>i<span style="color:#f92672">;</span>j<span style="color:#f92672">--)</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>nums<span style="color:#f92672">[</span>j<span style="color:#f92672">]&lt;</span>nums<span style="color:#f92672">[</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">]){</span>
+</span></span><span style="display:flex;"><span>                    swap<span style="color:#f92672">(</span>nums<span style="color:#f92672">,</span>j<span style="color:#f92672">,</span>j<span style="color:#f92672">-</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                    flag<span style="color:#f92672">=</span><span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(!</span>flag<span style="color:#f92672">)</span><span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span></code></pre></div><h1 id="插入排序">插入排序</h1>
+<h1 id="桶排序">桶排序</h1>
+<h1 id="基数排序">基数排序</h1>
+<h1 id="对比">对比</h1>
+<h2 id="稳定性">稳定性</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">不稳定的排序：堆排序，快速排序，希尔排序，选择排序。
+稳定的排序：冒泡排序，插入排序，归并排序，基数排序。
+</code></pre>
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接和资料">参考链接和资料</a></li>
+    <li><a href="#快速排序">快速排序</a></li>
+    <li><a href="#堆排序">堆排序</a></li>
+    <li><a href="#归并排序">归并排序</a></li>
+    <li><a href="#选择排序">选择排序</a></li>
+    <li><a href="#冒泡排序">冒泡排序</a></li>
+    <li><a href="#插入排序">插入排序</a></li>
+    <li><a href="#桶排序">桶排序</a></li>
+    <li><a href="#基数排序">基数排序</a></li>
+    <li><a href="#对比">对比</a>
+      <ul>
+        <li><a href="#稳定性">稳定性</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>

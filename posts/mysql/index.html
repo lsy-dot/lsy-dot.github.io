@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>mysql学习笔记</title>
+    <meta name="description" content="关于mysql学习的一些笔记">
+    <meta name="keywords" content='数据库'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/mysql/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="mysql学习笔记">
+    <meta property="og:description" content="关于mysql学习的一些笔记">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="mysql学习笔记">
+    <meta name="twitter:description" content="关于mysql学习的一些笔记">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/mysql/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/mysql/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/mysql/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>mysql学习笔记</h1>
+        <small role="doc-subtitle">关于mysql学习的一些笔记</small>
+        <p class="post-date">
+            September 7, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>种一棵树最好的时间就是十年前，或者是现在。</strong></p>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://www.cnblogs.com/jessy/p/3525419.html">sql(join on 和where的执行顺序）</a></li>
+<li><a href="https://blog.csdn.net/qq_38774523/article/details/124335214">关于SQL语句的执行顺序</a></li>
+<li><a href="https://blog.csdn.net/qq_43459116/article/details/124135318">详细介绍MySQL中的数据类型</a></li>
+<li><a href="https://segmentfault.com/a/1190000039032584">详解MySQL执行事务的语法和流程</a></li>
+<li><a href="https://blog.csdn.net/qq_44377709/article/details/122076072">如何设计索引？</a></li>
+<li><a href="https://blog.csdn.net/weixin_44390164/article/details/119101611">为什么InnoDB使用B+树而不是B树</a></li>
+<li><a href="https://juejin.cn/post/6844903955470745614#heading-6">4种MySQL分页查询优化的方法，你知道几个？</a></li>
+</ul>
+<h1 id="mysql语法">mysql语法</h1>
+<h2 id="常用的关键字">常用的关键字</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">select,from,where,and,or   [基本]
+left join,inner join,on,using [多表查询]
+group by[分组],order by[排序]
+max,avg,min,count[聚合函数]
+year,mouth,day,sub [日期函数]
+union all
+</code></pre><h2 id="常见问题">常见问题</h2>
+<h3 id="left-joinright-join-join的区别">left join,right join, join的区别</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">一、基表不同
+1、left join：left join以左数据表为基表。
+2、right join：right join以右数据表为基表。
+二、操作不同
+1、left join：left join会把左表中的全部信息输出，然后搜索右表中符合条件的记录。
+2、right join：right join会把右表中的全部信息输出，然后左搜索表中符合条件的记录。
+三、结果不同
+1、left join：left join查出来的结果是左边的所有数据和与左边有交集部分的数据。
+2、right join：right join查出来的结果是右边的所有数据和与右边有交集部分的数据。
+</code></pre><h3 id="sql语句的执行顺序">sql语句的执行顺序</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">from&gt;(如果有join会先执行join)where&gt;group by&gt;having&gt;select&gt;order by&gt;limit
+</code></pre><h3 id="常见sql语句错误和一些小技巧">常见sql语句错误和一些小技巧</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、Mysql中在用连接查询的时候，若两个表的连接字段名完全相同，则可以使用join using来简化join on
+简化前
+select * 
+from 
+	question_practice_detail 
+    inner join question_detail 
+    on question_practice_detail.question_id = question_detail.question_id；
+简化后
+select * 
+from 
+	question_practice_detail 
+    inner join question_detail 
+    using(question_id)
+2、where和having的区别
+SQL89 计算总和
+select order_num, sum(item_price*quantity) as total_price
+from OrderItems
+# where sum(item_price*quantity)&gt;=1000 不起作用因为where是基于行过滤
+group by order_num
+having total_price&gt;=1000 #having是基于分组过滤
+order by order_num
+</code></pre><h1 id="mysql数据类型">mysql数据类型</h1>
+<pre tabindex="0"><code class="language-a" data-lang="a">整数、
+浮点数（float、double小数不精确）、定点数（decimal小数是精确的）
+位
+日期[year-&gt;年,time-&gt;时分秒,date-&gt;年月日,datetime-&gt;date+time,timestamp-&gt;带时区的datetime]
+文本[char-&gt;固定,varchar-&gt;可变,tinytext,text,mediumtext,longtext]
+枚举enum、集合set
+二进制[binary,varbinary,tinyblob,blob,mediumblob,longblob]
+json
+空间数据
+
+参考如下阿里巴巴的《Java开发手册》规范
+1、任何字段如果为非负数，必须是 UNSIGNED
+2、【 强制 】小数类型为 DECIMAL，禁止使用 FLOAT 和 DOUBLE。
+说明：在存储的时候，FLOAT 和 DOUBLE 都存在精度损失的问题，很可能在比较值的候，得到不正确的结果。如果存储的数据范围超过 DECIMAL 的范围，建议将数据拆成整数和小数并分开存储。
+3、【 强制 】如果存储的字符串长度几乎相等，使用 CHAR 定长字符串类型。
+【 强制 】VARCHAR 是可变长字符串，不预先分配存储空间，长度不要超过 5000。如果存储长度大于此值，定义字段类型为 TEXT，独立出来一张表，用主键来对应，避免影响其它字段索引效率。
+</code></pre><h1 id="mysql事务">mysql事务</h1>
+<h2 id="基础知识">基础知识</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">基本语法
+begin/START TRANSACTION  开始事务
+COMMIT 提交事务
+rollback 回滚事务
+
+支持的引擎： InnoDB 和 BDB其中，InnoDB 存储引擎事务主要通过 UNDO 日志和 REDO 日志实现，MyISAM 存储引擎不支持事务。
+
+ACID
+原子性:要么全部提交，要么全部失败回滚
+一致性:跟具体的业务有关。
+隔离性:即一个事务内部的操作及使用的数据对并发的其他事务是隔离的，
+持久性:一个事务一旦被提交，它对数据库中数据的改变就是永久性的
+
+
+数据并发问题
+脏写:事务Session A 修改了 另一个 未提交 事务Session B 修改过 的数 据，
+脏读:Session A 读取 了已经被 Session B 更新 但还 没有被提交 的字段。
+不可重复读:Session A 读取了一个字段，然后 Session B 更新 了该字段。 之后 Session A 再次读取 同一个字段， 值就不同了。
+幻读:Session A 从一个表中 读取了一个字段, 然后 Session B 在该表中 插 入 了一些新的行。 之后, 如果 Session A 再次读取 同一个表, 就会多出几行。
+
+
+
+SQL中的四种隔离级别
+READ UNCOMMITTED ：所有事务都可以看到其他未提交事务的执行结果。
+READ COMMITTED：一个事务只能看见已经提交事务所做 的改变。可以避免脏读
+REPEATABLE READ：此时事务B对该数据进行了修改并提 交，那么事务A再读该数据，读到的还是原来的内容。可以避免脏读、不可重复读
+SERIALIZABLE ：禁止 其他事务对该表执行插入、更新和删除操作。所有的并发问题都可以避免
+</code></pre><h2 id="日志">日志</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">事务的隔离性由 锁机制 实现。
+redo日志保证持久性
+undo日志保证原子性、一致性
+
+redo日志
+原理：做了修改，直接刷磁盘太慢，只需要把 修改 了哪些东西 记录一下就好。降低了刷盘频率，占用的空间非常小，
+
+undo日志
+原理：记录了回滚指针，用来做数据回滚以及实现MVCC。
+
+redo日志用来做备份（事务一旦提交就永久）
+undo则是用来回滚。
+</code></pre><h1 id="mysql锁">mysql锁</h1>
+<h2 id="常见的锁">常见的锁</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">并发问题的解决方案
+1、读操作利用多版本并发控制，写操作进行 加锁 。
+2、读、写操作都采用 加锁 的方式。
+
+分类方式
+数据操作：读锁、写锁
+操作粒度：表级锁、页级锁、行锁
+加锁态度：乐观锁、悲观锁
+
+扩展（表级锁、行锁）
+意向锁：如果我们给某一行数据加上了排他锁，数据库会自动给更大一级的空间（页或者表）加上意向锁，告诉其他人这个数据表已经有人上过排他锁了（而不是一行一行去遍历）。
+
+行锁
+间隙锁：锁的是一个区间（左开右开）
+临键锁：锁的是一个区间（左开右闭）
+</code></pre><h2 id="mvcc多版本并发控制">MVCC（多版本并发控制）</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">快照读：快照读可能读到的并不一定是数据的最新版本，而有可能是之前的历史版本。
+当前读：读取的是记录的最新版本（最新数据，而不是历史版本的数据），
+
+
+
+MVCC 的实现依赖于：隐藏字段、Undo Log、Read View。
+隐藏字段：trx_id（事务id）、roll_pointer（回滚指针）
+核心问题就是需要判断一下版本链中的哪个版本是当前事务可见的
+
+
+
+ReadView中主要包含4个比较重要的内容：
+creator_trx_id ，创建这个 Read View 的事务 ID。
+trx_ids ，表示在生成ReadView时当前系统中活跃的读写事务的事务id列表 。（还未提交的事务）
+up_limit_id ，活跃的事务中最小的事务 ID。（已经提交的事务）
+low_limit_id ，表示生成ReadView时系统中应该分配给下一个事务的 id 值。low_limit_id 是系统最大的事务id值，这里要注意是系统中的事务id，需要区别于正在活跃的事务ID。（还未提交的事务）
+
+
+
+判断规则
+如果被访问版本的trx_id属性值与ReadView中的 creator_trx_id 值相同，意味着当前事务在访问它自己修改过的记录，所以该版本可以被当前事务访问。
+如果被访问版本的trx_id属性值小于ReadView中的 up_limit_id 值，表明生成该版本的事务在当事务生成ReadView前已经提交，所以该版本可以被当前事务访问。
+如果被访问版本的trx_id属性值大于或等于ReadView中的 low_limit_id 值，表明生成该版本的事务在当前事务生成ReadView后才开启，所以该版本不可以被当前事务访问。 
+如果被访问版本的trx_id属性值在ReadView的 up_limit_id 和 low_limit_id 之间，那就需要判 断一下trx_id属性值是不是在 trx_ids 列表中。 
+
+​ 如果在，说明创建ReadView时生成该版本的事务还是活跃的，该版本不可以被访问。
+​ 如果不在，说明创建ReadView时生成该版本的事务已经被提交，该版本可以被访问
+
+
+
+READ COMMITTED ：每次读取数据前都生成一个ReadView。
+REPEATABLE READ ：只会在第一次执行查询语句时生成一个 ReadView ，之后的查询就不会重复生成了。
+</code></pre><h1 id="mysql索引">mysql索引</h1>
+<h2 id="实现原理">实现原理</h2>
+<h3 id="b树和b树的区别">B+树和B树的区别</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">常见的两种引擎MyISAM 与 InnoDB的索引都是基于B+树的，本质就是二分查找。
+B树的特性(M阶)
+1、根节点的儿子数的范围是 [2,M]。
+2、每个中间节点包含 k-1 个关键字和 k 个孩子，孩子的数量 = 关键字的数量 +1，k 的取值范围为 [ceil(M/2), M]。
+3、叶子节点包括 k-1 个关键字（叶子节点没有孩子），k 的取值范围为 [ceil(M/2), M]。
+
+B+树vsB树
+1、有 k 个孩子的节点就有 k 个关键字。也就是孩子数量 = 关键字数，而 B 树中，孩子数量 = 关键字数+1。
+2、非叶子节点的关键字也会同时存在在子节点中，并且是在子节点中所有关键字的最大（或最 小）。
+3、非叶子节点仅用于索引，不保存数据记录，跟记录有关的信息都放在叶子节点中。而 B 树中， 非叶子节点既保存索引，也保存数据记录 。
+4、所有关键字都在叶子节点出现，叶子节点构成一个有序链表，而且叶子节点本身按照关键字的大 小从小到大顺序链接。
+总结一下上面的话就是：
+1、B+树只有叶子结点保存数据记录，非叶子结点仅用于索引。而B树中，非叶子节点既保存索引，也保存数据记录 。
+2、B+树的叶子结点会练成一个有序链表，B树不会
+</code></pre><h3 id="myisam-与-innodb对比">MyISAM 与 InnoDB对比</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、数据格式不同，innodb数据和索引存在一起，myisam则分开存。
+innodb:
+​	.frm 表结构
+​	.bd 数据+索引
+
+myisam:
+​	.frm 表结构
+​	.MYD 数据
+​	.MYI 索引
+2、聚簇索引
+MyISAM的索引方式都是“非聚簇”的，与InnoDB包含1个聚簇索引是不同的。
+3、特性
+InnoDB  支持外键、事务、行级锁，MyIsam均不支持。但是MyISAM 只需缓存索引，节省资源
+4、MyIsam使用于读多的情况，InnoDB使用于写多的情况。
+</code></pre><h2 id="基础知识-1">基础知识</h2>
+<h3 id="数据库范式">数据库范式</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">第一范式(1st NF):1NF 告诉我们字段属性需要是原子性的，
+第二范式(2nd NF):2NF 告诉我们一张表就是一个独立的对象，一张表只 表达一个意思。保证非主属性完全依赖于候选键
+第三范式(3rd NF)：保证不存在循环依赖
+符合3NF后的数据模型通俗地讲，2NF和3NF通常以这句话概括：“每个非键属性依赖于键，依赖于 整个键，并且除了键别无他物”。
+</code></pre><h3 id="覆盖索引">覆盖索引</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">覆盖索引：一个索引包含了满足查询结果的数据就叫做覆盖索引。
+</code></pre><h3 id="索引下推">索引下推</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">索引下推：索引查出来了比先回表而是对索引种的一些字段做过滤再回表，减少和磁盘的交互。只能用于二级索引(secondary index)，并非全部where条件都可以用ICP筛选，如果where条件的字段不在索引列中，还是要读取整表的记录 到server端做where过滤。
+</code></pre><h3 id="慢查询分析">慢查询分析</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">开启慢查询日志:set global slow_query_log=&#39;ON&#39;;
+分析工具:mysqldumpslow
+分析语句:explain（估计值）
+各列作用
+table、id、select_type、
+
+type ☆：结果值从最好到最坏依次是： system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL 。SQL 性能优化的目标：至少要达到 range 级别，要求是 ref 级别，最好是 consts级别。
+possible_keys和key
+key_len ☆：使用的索引的长度
+</code></pre><h2 id="常见问题-1">常见问题</h2>
+<h3 id="索引设计原则面试常问">索引设计原则（面试常问）</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">先说索引的代价：空间代价[B+树]、时间代价[维护索引影响性能]
+索引设计原则：
+1、索引列的类型尽量小
+2、索引选择离散性高的（重复值少的）
+3、只对用于搜索、排序、分组的列建立索引
+4、主键选择少改变的列
+5、对于冗余和重复的索引要删除，比如如果一个列是PRIMARY KEY和 UNIQUE、INDEX就会创建三个一样是索引
+6、删除未使用的索引
+索引书籍  Rrelational Database Index Design and the optimizers[数据库索引设计与优化]里面有个索引的三星原则
+一星：先把where中的等值谓词的列提出来作为索引，这样可以减小后面扫面的数据。因为where已经过滤了
+二星：把order by 和group by的列加入索引，这样可以加速排序
+三星：再把select中的列加入，这样就可以不用回表了，也就是覆盖索引。
+需要看下上面这本书：数据库索引设计与优化
+</code></pre><h3 id="索引失效的场景">索引失效的场景</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">- 计算、函数、类型转换导致索引失效
+- 类型转化导致索引失效
+- 范围条件右边的列索引失效（这里的右边指的是在定义索引的时候的右边）
+- 使用不等于索引失效
+- like已%开头索引失效
+- OR条件中存在非索引的列，索引失效
+- 不同字符集进行比较前进行转换会导致索引失效
+</code></pre><h3 id="为什么innodb使用b树而不是b树">为什么InnoDB使用B+树而不是B树</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、出于对IO性能的考虑
+B树每个节点都存储数据，而B+树只有叶子节点才存储数据，所以在查询相同数据量的情况下，B树的IO会更频繁。因为索引本身存储在磁盘上，当数据量大时，就不能把整个索引全部加载到内存，只能逐一加载每一个磁盘页。更何况B树的索引中还保存了数据信息，导致B树的一个磁盘页保存的索引数量也比较少。即加载索引阶段还加载了许多用不到的数据。
+2、遍历效率更高：由于B+树的数据存储在叶子节点上，分支节点均为索引，方便扫库，只需要扫描一遍叶子即可，而且叶子节点形成链表，范围查询也比较方便。但B树在分支节点都保存着数据，要找到具体的顺序数据，就需要执行一次中序遍历来查询。
+因为B树不管叶子节点还非叶子节点，都会保存数据，这样导致了非叶子节点中能保存的指针数量就变少，指针少的情况下还要保存大量数据，就只能增加树的高度，导致IO操作变多，查询性能变低
+</code></pre><h3 id="分页查询优化">分页查询优化</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">一般的分页查询使用简单的 limit 子句就可以实现。limit 子句声明如下：
+SELECT * FROM table LIMIT [offset,] rows 
+
+1、未优化
+select * from orders_history where type=8 limit 1000,10;
+2、子查询优化（先偏移，适用于 id 递增的情况）
+select * from orders_history where type=8 and 
+id&gt;=(select id from orders_history where type=8 limit 100000,1) 
+limit 100;
+3、使用 id 限定优化(假设数据表的id是连续递增的，则我们根据查询的页数和查询的记录数可以算出查询的id的范围)
+（1）select * from orders_history where type=2 and id between 1000000 and 1000100 limit 100;
+（2）select * from orders_history where id &gt;= 1000001 limit 100;
+（3）select * from orders_history where id in
+(select order_id from trade_2 where goods = &#39;pen&#39;)
+limit 100;
+</code></pre><h1 id="mysql牛客刷题">mysql牛客刷题</h1>
+<h2 id="刷题地址">刷题地址</h2>
+<p><a href="https://www.nowcoder.com/exam/oj?page=1&amp;tab=SQL%E7%AF%87&amp;topicId=298">SQL必知必会</a></p>
+<h1 id="常见问题-2">常见问题</h1>
+<h2 id="mysql默认连接数">mysql默认连接数</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">mysql默认的最大连接数为151，上限为100000
+</code></pre><h2 id="主从复制的实现">主从复制的实现</h2>
+<h3 id="主从复制的定义">主从复制的定义</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">将主数据库中的DDL和DML操作通过二进制日志传输到从数据库上，然后将这些日志重新执行（重做）；从而使得从数据库的数据与主数据库保持一致。
+</code></pre><h3 id="模式3种">模式（3种）</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">https://segmentfault.com/a/1190000038967218
+1、Statement 基于语句，只记录对数据做了修改的SQL语句，能够有效的减少binlog的数据量，提高读取、基于binlog重放的性能
+2、Row 只记录被修改的行，所以Row记录的binlog日志量一般来说会比Statement格式要多。基于Row的binlog日志非常完整、清晰，
+记录了所有数据的变动，但是缺点是可能会非常多，例如一条update语句，有可能是所有的数据都有修改；再例如alter table之类的，
+修改了某个字段，同样的每条记录都有改动。
+3、Mixed Statement和Row的结合，怎么个结合法呢。例如像update或者alter table之类的语句修改，采用Statement格式。
+其余的对数据的修改例如update和delete采用Row格式进行记录。
+
+为什么会有这么多方式呢？因为Statement只会记录SQL语句，但是并不能保证所有情况下这些语句在从库上能够正确的被重放出来。因为可能顺序不对。
+MySQL什么时候会记录binlog呢？是在事务提交的时候，并不是按照语句的执行顺序来记录，当记录完binlog之后，
+就会通知底层的存储引擎提交事务，所以有可能因为语句顺序错误导致语句出错。
+</code></pre><h3 id="主从复制的步骤">主从复制的步骤</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">我们假设主库已经开启了binlog，并正常的记录binlog。
+1、首先从库启动I/O线程，跟主库建立客户端连接。
+2、主库启动binlog dump线程，读取主库上的binlog event发送给从库的I/O线程，
+3、I/O线程获取到binlog event之后将其写入到自己的Relay Log中。
+4、然后从库启动SQL线程，将Relay中的数据进行重放，完成从库的数据更新。
+总结来说，主库上只会有一个线程，而从库上则会有两个线程。
+</code></pre><h2 id="mysql的view-和table有什么区别">mysql的view 和table有什么区别</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">https://www.cnblogs.com/lixuwu/p/10730747.html
+mysql的view 和table有什么区别
+视图是一个虚表，他是通过执行SQL查询所产生的。视图以select命名存储于数据字典当中。
+每当SQL查询包含有视图名称的时候，数据库管理系统会执行在视图定义当中所包含的查询，
+以建立其虚拟结果表。该结果表可以当做查询其余部分的源表使用。
+视图的优点
+1、安全
+2、多视角
+缺点
+每次都创建
+
+临时表的优点
+创建一次
+缺点
+不会动态更新
+</code></pre><h2 id="mysql查询前5条数据怎么做6-10条呢">mysql查询前5条数据怎么做，6-10条呢</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">SELECT * FROM tablename LIMIT 5;
+SELECT * FROM tablename LIMIT 5,5;
+</code></pre><h2 id="一张表学生课程成绩-找出所有课程大于90分的学生">一张表：学生、课程、成绩： 找出所有课程大于90分的学生</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、select stu_name from student group by stu_name having min(score) &gt; 90 
+
+2、select distinct  stu_name from student where stu_name not in (
+select distinct stu_name from student where score &lt;= 90)
+
+3、select distinct a.stu_name from student  a 
+left join (select distinct stu_name from student where score &lt;= 90)  b  on a.stu_name = b.stu_name 
+where b.stu_name is null
+
+4、select distinct a.stu_name from student  a where not exists 
+(select stu_name from student  where score &lt;= 90 and stu_name = a.stu_name)
+
+
+
+https://blog.csdn.net/qq_35890572/article/details/121662427
+</code></pre><h1 id="学习路线todo">学习路线(todo)</h1>
+
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#mysql语法">mysql语法</a>
+      <ul>
+        <li><a href="#常用的关键字">常用的关键字</a></li>
+        <li><a href="#常见问题">常见问题</a>
+          <ul>
+            <li><a href="#left-joinright-join-join的区别">left join,right join, join的区别</a></li>
+            <li><a href="#sql语句的执行顺序">sql语句的执行顺序</a></li>
+            <li><a href="#常见sql语句错误和一些小技巧">常见sql语句错误和一些小技巧</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#mysql数据类型">mysql数据类型</a></li>
+    <li><a href="#mysql事务">mysql事务</a>
+      <ul>
+        <li><a href="#基础知识">基础知识</a></li>
+        <li><a href="#日志">日志</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql锁">mysql锁</a>
+      <ul>
+        <li><a href="#常见的锁">常见的锁</a></li>
+        <li><a href="#mvcc多版本并发控制">MVCC（多版本并发控制）</a></li>
+      </ul>
+    </li>
+    <li><a href="#mysql索引">mysql索引</a>
+      <ul>
+        <li><a href="#实现原理">实现原理</a>
+          <ul>
+            <li><a href="#b树和b树的区别">B+树和B树的区别</a></li>
+            <li><a href="#myisam-与-innodb对比">MyISAM 与 InnoDB对比</a></li>
+          </ul>
+        </li>
+        <li><a href="#基础知识-1">基础知识</a>
+          <ul>
+            <li><a href="#数据库范式">数据库范式</a></li>
+            <li><a href="#覆盖索引">覆盖索引</a></li>
+            <li><a href="#索引下推">索引下推</a></li>
+            <li><a href="#慢查询分析">慢查询分析</a></li>
+          </ul>
+        </li>
+        <li><a href="#常见问题-1">常见问题</a>
+          <ul>
+            <li><a href="#索引设计原则面试常问">索引设计原则（面试常问）</a></li>
+            <li><a href="#索引失效的场景">索引失效的场景</a></li>
+            <li><a href="#为什么innodb使用b树而不是b树">为什么InnoDB使用B+树而不是B树</a></li>
+            <li><a href="#分页查询优化">分页查询优化</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#mysql牛客刷题">mysql牛客刷题</a>
+      <ul>
+        <li><a href="#刷题地址">刷题地址</a></li>
+      </ul>
+    </li>
+    <li><a href="#常见问题-2">常见问题</a>
+      <ul>
+        <li><a href="#mysql默认连接数">mysql默认连接数</a></li>
+        <li><a href="#主从复制的实现">主从复制的实现</a>
+          <ul>
+            <li><a href="#主从复制的定义">主从复制的定义</a></li>
+            <li><a href="#模式3种">模式（3种）</a></li>
+            <li><a href="#主从复制的步骤">主从复制的步骤</a></li>
+          </ul>
+        </li>
+        <li><a href="#mysql的view-和table有什么区别">mysql的view 和table有什么区别</a></li>
+        <li><a href="#mysql查询前5条数据怎么做6-10条呢">mysql查询前5条数据怎么做，6-10条呢</a></li>
+        <li><a href="#一张表学生课程成绩-找出所有课程大于90分的学生">一张表：学生、课程、成绩： 找出所有课程大于90分的学生</a></li>
+      </ul>
+    </li>
+    <li><a href="#学习路线todo">学习路线(todo)</a></li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>

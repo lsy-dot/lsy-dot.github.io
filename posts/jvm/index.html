@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>jvm学习笔记</title>
+    <meta name="description" content="关于jvm学习的一些笔记">
+    <meta name="keywords" content='jvm'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/jvm/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="jvm学习笔记">
+    <meta property="og:description" content="关于jvm学习的一些笔记">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="jvm学习笔记">
+    <meta name="twitter:description" content="关于jvm学习的一些笔记">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/jvm/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/jvm/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/jvm/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>jvm学习笔记</h1>
+        <small role="doc-subtitle">关于jvm学习的一些笔记</small>
+        <p class="post-date">
+            September 8, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/jvm">jvm</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>种一棵树最好的时间就是十年前，或者是现在。</strong></p>
+<h1 id="参考链接">参考链接</h1>
+<ul>
+<li><a href="https://www.zhihu.com/question/459592503/answer/2273267716">学习路线</a></li>
+<li><a href="https://www.jianshu.com/p/6590aaad82f7">关于CMS 浮动垃圾的一些理解</a></li>
+<li>深入理解java虚拟机</li>
+<li><a href="https://www.jianshu.com/p/46b42f7f593c">高级开发必须理解的Java中SPI机制</a></li>
+<li><a href="https://www.bilibili.com/video/BV1RY4y1v7mN">10分钟让你彻底明白Java SPI，附实例代码演示#安员外很有码</a></li>
+<li><a href=""></a></li>
+</ul>
+<h1 id="基础知识">基础知识</h1>
+<h2 id="类加载">类加载</h2>
+<h3 id="类的生命周期">类的生命周期</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">太长不看版：加载、验证、准备、解析、初始化   、 使用、卸载
+
+1、加载，是指查找字节流，并且据此创建类的过程。
+
+2、验证的目标是确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，
+
+3、类变量是被 static 修饰的变量，准备阶段为 static 变量
+在方法区分配内存并初始化为默认值，使用的是方法区的内存。
+[假设一个类变量的定义为：public static int value = 3； 
+那么变量 value 在准备阶段过后的初始值为 0，而不是 3，
+因为这时候尚未开始执行任何 Java 方法，而把 value 赋值为 3 
+的public static指令是在程序编译后，存放于类构造器（）方法
+之中的，所以把 value 赋值为 3 的动作将在初始化阶段才会执行。]
+
+4、解析阶段目标是将常量池的符号引用替换为直接引用的过程
+
+5、为类的静态变量赋予正确的初始值，JVM 负责对类进行初始化，主要对类变量进行初始化
+。
+</code></pre><h3 id="类加载器">类加载器</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">bootstrap、ext、app
+
+1、bootstrap即启动类加载器 ，负责加载 JVM 自身工作所需要的类
+2、ExtClassLoader 负责将 &lt;JAVA_HOME&gt;\lib\ext 或者被 java.ext.dir 系统变量所指定路径中的所有类库加载到内存中，开发者可以直接使用扩展类加载器
+。
+3、AppClassLoader 负责加载用户类路径（即 classpath）上所指定的类库
+</code></pre><h3 id="类加载方式">类加载方式</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、命令行启动应用时候由 JVM 初始化加载
+2、通过 Class.forName() 方法动态加载
+（可以控制是否执行static中的内容，默认会执行）
+3、通过 ClassLoader.loadClass() 方法动态加载
+（只会加载到jvm中，不执行static块，只有在newInstance才会执行static块。）
+</code></pre><h3 id="双亲委派机制">双亲委派机制</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">双亲委派机制存在的意义：(防止内存出现重复代码)
+防止内存中出现多份同样的字节码比如两个类A和类B都要加载System类：
+如果不用委托而是自己加载自己的，那么类A就会加载一份System字节码，
+然后类B又会加载一份System字节码，这样内存中就出现了两份System字节码。
+如果使用委托机制，会递归的向父类查找，也就是首选用Bootstrap尝试加载，
+如果找不到再向下。这里的System就能Bootstrap中找到然后加载，
+如果此时类B也要加载System，也从Bootstrap开始，
+此时Bootstrap发现已经加载过了System那么
+直接返回内存中的System即可而不需要重新加载，
+这样内存中就只有一份System的字节码了。
+</code></pre><h3 id="双亲委派机制为什么要打破举一些例子">双亲委派机制为什么要打破，举一些例子</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">双亲委派机制为什么要打破
+列举一些你知道的打破双亲委派机制的例子，为什么要打破？
+为了实现定制的功能
+1、tomcat
+每个web应用都自己先加载自己的jar包资源，对于公共资源才去双亲委派
+2、jdbc
+线程上下文里设置加载器，而不是双亲委派
+</code></pre><h2 id="内存结构和对象分配">内存结构和对象分配</h2>
+<h3 id="jvm内存模型">jvm内存模型</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">程序计数器、本地方法栈、虚拟机栈、java堆、方法区
+
+这里解释下为什么1.8取消了永久代，改用元空间，因为不论是永久代
+还是元空间，都是用来存类的元信息的，但是之前的永久代的大小受限于堆内存的
+大小导致不能加载太多的类，而元空间的大小是放在堆外的，
+不受限制。
+
+1、程序计数器:当前线程所执行的字节码的行号指示器
+2、本地方法栈（Native Method Stack）与虚拟机栈的作用相似。
+3、虚拟机栈 ：管理方法的运行
+4、Java 堆（Java Heap） 的作用就是存放对象实例，
+几乎所有的对象实例都是在这里分配内存。
+虚拟机把 Java 堆分成以下三块：
+新生代、老年代、永久代,当一个对象被创建时，它首先进入新生代，
+之后有可能被转移到老年代中。新生代存放着大量的生命很短的对象，
+因此新生代在三个区域中垃圾回收的频率最高。
+5、方法区（Method Area）也被称为永久代。
+方法区用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。
+方法区（Method Area）也被称为永久代。
+方法区用于存放已被加载的类信息、常量、静态变量、即时编译器编译后的代码等数据。
+JDK 1.7 之前，HotSpot 虚拟机把它当成永久代来进行垃圾回收。
+可通过参数 -XX:PermSize 和 -XX:MaxPermSize 设置。 
+JDK 1.8 之后，取消了永久代，用 metaspace（元数据）区替代。可通过参数 -XX:MaxMetaspaceSize 设置。
+</code></pre><h3 id="方法区和本地方法栈的理解">方法区和本地方法栈的理解</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">方法区
+https://juejin.cn/post/7086113214236196894
+存储了每个类的信息（包括类的名称、方法信息、字段信息）、静态变量、常量以及编译器编译后的代码等。
+在jdk7及之前，习惯上把方法区称为永久代。从jdk8开始，使用元空间取代了永久代。
+从jdk7开始，静态变量和字符串常量池被移出永久代，并放入堆空间中。
+本地方法栈
+非java方法执行时的栈
+</code></pre><h3 id="虚拟机栈是执行一个方法就一个栈帧吗方法套方法呢">虚拟机栈是执行一个方法就一个栈帧吗，方法套方法呢</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">https://blog.csdn.net/jerry11112/article/details/113524101
+每个方法都各自对应一个栈帧（Stack Frame）一个方法的执行就是代表栈帧的入栈，
+一个方法执行完（return或者异常，抛出异常是抛到main方法）就代表一个栈帧的出栈。
+</code></pre><h2 id="垃圾回收">垃圾回收</h2>
+<h3 id="何为垃圾">何为垃圾</h3>
+<ul>
+<li>引用计数法</li>
+<li>可达性分析</li>
+</ul>
+<pre tabindex="0"><code class="language-a" data-lang="a">通过GC root去遍历，看能否可达，不可达就是垃圾。
+GC root：栈（本地方法和虚拟机栈）上的变量、
+方法区中常量引用的对象和类静态属性引用的对象
+</code></pre><h3 id="垃圾回收算法">垃圾回收算法</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">标记-清除（内存碎片化）、
+标记复制（划分成两块大小一样的空间）、
+标记整理（先标记，再挪到一边、清除）
+</code></pre><h3 id="minor-gc和full-gc的执行流程">minor GC和full GC的执行流程</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">我的理解：
+首先，对象进来先放在新生代eden，
+	如果放的下，分配内存
+	如果放不下，Minor GC一下。
+		如果新生代eden放的下，分配内存
+		如果放不下，full GC一下
+			如果放的下，分配内存
+			如果放不下，OOM
+
+Minor GC的流程
+	Survivor放的下，放在S0/S1区
+	Survivor放不下，升至Old
+		对象存活超过阈值，升至Old
+
+minor GC：在新生代，分成1：1：8（from:to:survior），标记复制算法。
+full GC：
+1、 调用 System.gc() 
+2、老年代空间不足  
+3、空间分配担保失败  
+4、JDK 1.7 及以前的永久代空间不足  
+5、Concurrent Mode Failure
+</code></pre><p><strong>GC图示</strong>
+<img src="/images/jvm_gc1.png" alt="GC图示">
+<strong>GC流程</strong>
+<img src="/images/jvm_gc2.png" alt="GC流程"></p>
+<h3 id="垃圾收集器">垃圾收集器</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">垃圾收集器：
+1、Serial收集器：单线程收集器
+2、ParNew收集器：Serial的多线程版本
+3、Parallel Scavenge：关注点是吞吐量而非停顿时间
+4、Serial Old：Serial的老年代版本，使用标记-整理算法
+5、Parallel Old：Parallel Scavenge收集器的老年代版本，使用标记-整理算法
+6、CMS收集器
+7、Garbage First收集器
+8、Shenandoah收集器
+9、ZGC
+</code></pre><h3 id="cms的浮动垃圾问题">CMS的浮动垃圾问题</h3>
+<pre tabindex="0"><code>复习一下CMS的流程
+初始标记（initial mark） 
+并发标记（concurrent mark） 
+重新标记（remark） 
+并发清除（concurrent sweep）
+
+我的理解:
+问题就出在并发标记完，重新标记的时候.
+原来可达的结点，被删除了引用，实际上变成了不可达也就是垃圾，
+但是jvm没法感知到，认为还是可达的，就不会删除它。
+
+因为是并发的，所以gc线程需要知道上一次到哪里了，方便接着上次的进度继续跑，
+那么就需要一个东西记录上次运行到哪里了，
+这个状态就是“颜色”， 黑色、灰色、白色，三种，是存在java对象头里的
+黑色，并发标记扫描到了这个节点，且所有的子节点全部找到了，就把这个节点标记为黑色
+灰色，并发标记扫描到了这个节点，但是子节点还没有开始找，
+或者没有找完，此时是灰度（流程大概是gc扫描的时候一上来就设置灰色，
+只有找完了才设置黑色，找完之前线程切走了，所以节点颜色是灰色的）
+白色，所有节点初始化颜色都是白色，表示还没有开始遍历、处理
+
+写屏障+增量更新
+Write barriers + Incremental Update
+为了解决引用变化导致的一些问题，cms 用的是写屏障+增量更新 技术，
+这个选择有点小问题 引用变化分成三种，新增、删除、更新，
+但是更新可以被新增和删除包含，暂时认为只有两种：新增和删除
+新增
+如果新增黑色到白色的引用，那么jvm会通过写屏障，来把黑色置为灰色
+删除
+如果删除引用，jvm什么都不会做，这个导致了浮动垃圾
+
+就是之前被gc 标记为 可达对象，也就是 存活对象，
+在两次gc线程之间被业务线程删除了引用，那么颜色不会更改，
+还是之前的颜色（黑色or灰色），但是其实是白色
+，所以这一次gc 无法对其回收，需要等下一次gc初始标记启动才会被刷成白色
+</code></pre><h3 id="g1的优点">G1的优点</h3>
+<p>G1：分region、贪心选择收益高的region、整体|标记-整理，局部|标记-清除</p>
+<h1 id="常见问题todo">常见问题(todo)</h1>
+<h2 id="为什么说java-spi破坏双亲委派模型">为什么说java spi破坏双亲委派模型？</h2>
+<h3 id="spi的定义">SPI的定义</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">简单来说，就是我们定义一个标准的接口，然后第三方的库里面可以实现这个接口。
+那么，程序在运行的时候，会根据配置信息动态加载第三方实现的类，
+从而完成功能动态扩展的机制。
+SPI(Service  Provider Interface) 基于classloader 来发现并加载服务的机制,
+</code></pre><h3 id="spi的应用场景">SPI的应用场景</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">SPI的主要作用是解耦。
+适用于调用者根据实际使用需要，启用、扩展、或者替换框架的实现策略。
+在Java中，SPI机制有一个非常典型的实现案例，就是数据库驱动java.jdbc.Driver
+</code></pre><h3 id="为什么说java-spi破坏双亲委派模型-1">为什么说java spi破坏双亲委派模型？</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">双亲委派模型是为了防止内存中出现自定义核心类库的情况
+提供了三种类加载器，
+
+一个类在同一个类加载器中具有唯一性(Uniqueness)，
+而不同类加载器中是允许同名类存在的，这里的同名是指全限定名相同。
+但是在整个JVM里，纵然全限定名相同，若类加载器不同，则仍然不算作是同一个类，
+无法通过 instanceOf 、equals 等方式的校验。
+由于唯一性的存在，Class 被替换就有可能了，
+而双亲委派模型定义了一套类加载的优先层级，很好的防止核心类库被恶意替换。
+毕竟核心类库是 bootstrap classloader 加载的，而 bootstrap 是内嵌于JVM的，
+在双亲委派模型基础上，任何类加载任务都会交由 bootstrap classloader 这位大佬经手过目一次，只要是核心类库中的类，都会被 bootstrap classloader 加载，
+间接确保核心类库不被其他类加载器加载。
+换言之，在遵循了双亲委派模型的规则之下，是不允许出现核心类库被替换或取代的可能，
+即不能在自己的 classpath 定义 java.lang.*之类的Class去替换JRE 中的Class。
+作者：ZeaTalk
+链接：https://www.zhihu.com/question/49667892/answer/690161827
+
+java.sql.Driver 是最为典型的 SPI 接口，java.sql.DriverManager 通过扫包的方式拿到指定的实现类，完成 DriverManager的初始化。等等，似乎有什么不对，根据双亲委派的可见性原则，启动类加载器 加载的 DriverManager 是不可能拿到 系统应用类加载器 加载的实现类 ，这似乎通过某种机制打破了双亲委派模型。通过从线程上下文（ThreadContext）获取 classloader ，借助这个classloader 可以拿到实现类的 Class。（源码上讲，这里是通过 Class.forName 配合 classloader拿到的）线程上下文 classloader并非具体的某个loader，一般情况下是 application classloader， 但也可以通过 java.lang.Thread#setContextClassLoader 这个方法指定 classloader。
+
+总结下上面这段话就是：
+本来加载类应该是自己找不到就让parent递归向上找，但这里的问题是自己传了
+一个class loader进去让他load，所以就从某种意义上破坏了。
+</code></pre><h1 id="jvm内存调优结合压测">jvm内存调优（结合压测）</h1>
+<h2 id="工具">工具</h2>
+<ul>
+<li>jconsole：用于对 JVM 中的内存、线程和类等进行监控；</li>
+<li>jvisualvm：JDK 自带的全能分析工具，可以分析：内存快照、线程快照、程序死锁、监控内存的变化、gc 变化等。</li>
+<li>jmeter: 压力测试</li>
+</ul>
+<h2 id="常用的-jvm-调优的参数都有哪些">常用的 JVM 调优的参数都有哪些？</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">通过jvisualvm观察gc的时间，如果频繁GC，可以适当调整堆的大小，
+比如调大新生代的大小，调大老年代的大小。
+-Xms2g：初始化推大小为 2g；
+-Xmx2g：堆最大内存为 2g；
+-XX:NewRatio=4：设置年轻的和老年代的内存比例为 1:4；
+-XX:SurvivorRatio=8：设置新生代 Eden 和 Survivor 比例为 8:2；
+–XX:+UseParNewGC：指定使用 ParNew + Serial Old 垃圾回收器组合；
+-XX:+UseParallelOldGC：指定使用 ParNew + ParNew Old 垃圾回收器组合；
+-XX:+UseConcMarkSweepGC：指定使用 CMS + Serial Old 垃圾回收器组合；
+-XX:+PrintGC：开启打印 gc 信息；
+-XX:+PrintGCDetails：打印 gc 详细信息。
+</code></pre><h1 id="学习路线todo">学习路线（todo）</h1>
+
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#基础知识">基础知识</a>
+      <ul>
+        <li><a href="#类加载">类加载</a>
+          <ul>
+            <li><a href="#类的生命周期">类的生命周期</a></li>
+            <li><a href="#类加载器">类加载器</a></li>
+            <li><a href="#类加载方式">类加载方式</a></li>
+            <li><a href="#双亲委派机制">双亲委派机制</a></li>
+            <li><a href="#双亲委派机制为什么要打破举一些例子">双亲委派机制为什么要打破，举一些例子</a></li>
+          </ul>
+        </li>
+        <li><a href="#内存结构和对象分配">内存结构和对象分配</a>
+          <ul>
+            <li><a href="#jvm内存模型">jvm内存模型</a></li>
+            <li><a href="#方法区和本地方法栈的理解">方法区和本地方法栈的理解</a></li>
+            <li><a href="#虚拟机栈是执行一个方法就一个栈帧吗方法套方法呢">虚拟机栈是执行一个方法就一个栈帧吗，方法套方法呢</a></li>
+          </ul>
+        </li>
+        <li><a href="#垃圾回收">垃圾回收</a>
+          <ul>
+            <li><a href="#何为垃圾">何为垃圾</a></li>
+            <li><a href="#垃圾回收算法">垃圾回收算法</a></li>
+            <li><a href="#minor-gc和full-gc的执行流程">minor GC和full GC的执行流程</a></li>
+            <li><a href="#垃圾收集器">垃圾收集器</a></li>
+            <li><a href="#cms的浮动垃圾问题">CMS的浮动垃圾问题</a></li>
+            <li><a href="#g1的优点">G1的优点</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#常见问题todo">常见问题(todo)</a>
+      <ul>
+        <li><a href="#为什么说java-spi破坏双亲委派模型">为什么说java spi破坏双亲委派模型？</a>
+          <ul>
+            <li><a href="#spi的定义">SPI的定义</a></li>
+            <li><a href="#spi的应用场景">SPI的应用场景</a></li>
+            <li><a href="#为什么说java-spi破坏双亲委派模型-1">为什么说java spi破坏双亲委派模型？</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#jvm内存调优结合压测">jvm内存调优（结合压测）</a>
+      <ul>
+        <li><a href="#工具">工具</a></li>
+        <li><a href="#常用的-jvm-调优的参数都有哪些">常用的 JVM 调优的参数都有哪些？</a></li>
+      </ul>
+    </li>
+    <li><a href="#学习路线todo">学习路线（todo）</a></li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>

@@ -6,7 +6,128 @@
     <description>Recent content on lsy-dot</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java并发</title>
+      <link>https://lsy-dot.github.io/posts/java%E5%B9%B6%E5%8F%91todo/</link>
+      <pubDate>Sun, 11 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/java%E5%B9%B6%E5%8F%91todo/</guid>
+      <description>quote 难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗
+参考链接 [从ReentrantLock的实现看AQS的原理及应用]
+(九)深入分析AQS实现原理
+基本概念 并行和并发 并发指的是多个任务交替进行，而并行则是指真正意义上的“同时进行”。 进程和线程 同步和异步 同步方法调用一开始，调用者必须等待被调用的方法结束后，调用者后面的代码才能执行。而异步调用，指的是，调用者不用管被调用方法是否完成，都会继续执行后面的代码，当被调用的方法完成后会通知调用者。 java线程 进程:分配资源最小的单位线程:调度的最小单位1、包含关系：进程基本上相互独立的，而线程存在于进程内，是进程的一个子集2、资源共享：进程拥有共享的资源，如内存空间等，供其内部的线程共享3、通信：进程间通信较为复杂,线程通信相对简单，因为它们共享进程内的内存，一个例子是多个线程可以访问同一个共享变量4、体量：线程更轻量，线程上下文切换成本一般上要比进程上下文切换低 状态 定义 javaNewRunnable,blocked waiting,time-waitingTerminatedos操作系统初始状态可运行状态阻塞状态运行状态终止状态 线程何时出现blocked的状态 synchronized 修饰的方法、代码块同一时刻只允许一个线程执行，其他线程只能等待，等待的线程会从 RUNNABLE 转变到 BLOCKED 状态。https://www.javanav.com/interview/991455b7c5174aa8b3f820388c1138fc.html NEW 到 RUNNABLE 状态 从 NEW 状态转变到 RUNNABLE 状态调用线程对象的 start() 方法就可以了 RUNNABLE 与 WAITING 的状态转变 调用 Object.notify()、Object.notifyAll() 方法，线程可能从 WAITING 转变到 RUNNABLE 状态。当调用 t.join() 的时候，执行代码的线程的状态会从 RUNNABLE 转变到 WAITING调用 LockSupport.</description>
+    </item>
+    
+    <item>
+      <title>待解决的问题</title>
+      <link>https://lsy-dot.github.io/posts/%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Sun, 11 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/%E5%BE%85%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <description>quote 难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗
+参考链接 计算机网络 注册发现原理，服务宕机如何处理。 </description>
+    </item>
+    
+    <item>
+      <title>待阅读的</title>
+      <link>https://lsy-dot.github.io/posts/%E5%BE%85%E9%98%85%E8%AF%BB%E7%9A%84/</link>
+      <pubDate>Sun, 11 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/%E5%BE%85%E9%98%85%E8%AF%BB%E7%9A%84/</guid>
+      <description>quote 难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗
+参考链接 计算机网络 第21章 TCP的超时与重传</description>
+    </item>
+    
+    <item>
+      <title>计算机网络</title>
+      <link>https://lsy-dot.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+      <pubDate>Sun, 11 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
+      <description>quote 难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗
+参考链接 拥塞控制 流量控制 UDP的首部格式 HTTP的POST与PUT的区别（幂等性） 重定向和转发的区别 什么是队头阻塞以及如何解决 基础知识 架构分层 TCP/IP 应用层:完成不同主机进程间的通信[DNS、HTTP]运输层:完成不同主机间的通信，提供通用的数据传输服务[TCP、UDP]网络层:选择合适的网间路由，交换结点，确保数据的及时传递[IP]数据链路层:完成点到点通信，使接收端明白一个帧的起始和结束物理层:相邻结点比特流的透明传输，屏蔽物理设备、传输介质的差异 ISO 应用层:完成不同主机进程间的通信[DNS、HTTP]#多了这两层表示层:不同机器上的用户之间建立会话[SSL、TLS、RPC]会话层:信息的语法语义以及他们的关联，如加密压缩、转换翻译[LPP、XDP]运输层:完成不同主机间的通信，提供通用的数据传输服务[TCP、UDP]网络层:选择合适的网间路由，交换结点，确保数据的及时传递[IP]数据链路层:完成点到点通信，使接收端明白一个帧的起始和结束物理层:相邻结点比特流的透明传输，屏蔽物理设备、传输介质的差异 重要协议 TCP 首部字段 总结：一共20byte前12byte[2byte+2byte]端口=源端口+目的端口[4byte]序号[4byte]确认号后8byte[4bit]数据偏移[6bit]保留[6bit]标志位(URG、ACK、PSH、SYN、FIN、RST)[2byte]窗口[2byte]校验和[2byte]紧急指针[最大可达40byte]可选字段1.源端口和目的端口，各占2个字节。2.序号：占4个字节，序号范围为0到2的32次方-1，序号增加到2的32次方-1之后，下一个序号变为0，在一个TCP连接中传送的字节流中的每一个字节都按顺序编号。首部中的序号字段值指的是本报文段所发送的数据的第一个字节的序号。可对4GB的数据进行编号。在一般情况下可保证当序号重复使用时，旧序号的数据早已通过网络到达终点了。3.确认号：占4字节，是期望收到对方下一个报文段的第一个数据字节的序号。记住：若确认号是N，则表明：到序号N-1为止的所有数据都已正确收到。4.数据偏移：占4位，它指出TCP报文段的数据起始处距离TCP报文段的起始处有多远，这个字段实际上是指出TCP报文段的首部长度。6.保留：占6位。保留为今后使用，目前置为07.紧急URG（URGent）：当URG=1时，表明紧急字段有效，告诉系统此报文中有紧急数据，应尽快传送。于是发送方TCP就把紧急数据插入到本报文段数据的最前面，而在紧急数据后面的数据仍是普通数据。这时要与首部中紧急指针字段配合使用。8.确认ACK（ACKnowlegment）仅当ACK=1时确认号字段才有效，TCP规定，连接建立后所有传送的报文段都必须把ACK置1.9.推送PSH（PuSH）：当两个应用进程进行交互式的通信时，有时在一端的应用进程希望在键入一个命令后立即就能收到对方的响应。在这种情况下，TCP就可以使用推送操作。10.复位RST（ReSeT）:当RST=1时，表明TCP连接中出现严重错误，必须释放连接，然后再重新建立运输连接。11.同步SYN，在连接建立时用来同步序号，当SYN=1而ACK=0时，表明这是一个连接请求报文段。对方若同意时，则应在响应的报文段中使SYN=1和ACK=1，因此，SYN置1就表示这是一个连接请求或连接接受报文。12.终止FIN，用来释放一个连接，当FIN=1时，表示此报文段的发送方的数据已发送完毕，并要求释放运输连接。13.窗口，占2个字节，窗口指的是发送本报文段的一方的接收窗口，不是自己的发送窗口，告诉对方：从本报文段首部中的确认号算起，接收方目前允许对方发送的数据量。窗口值作为接受方让发送方设置其发送窗口的依据。14.校验和，占2字节。校验和字段检验的范围包括首部和数据这两部分。15.紧急指针：占2个字节，紧急指针仅在URG=1时才有意义，它指出本报文段中的紧急数据的字节数。当所有紧急数据处理完毕时，TCP就告诉应用程序恢复到正常操作。值得注意的是，即使窗口为0时也可发送紧急数据。15.选项：长度可变，最长可达40字节，当没有选项时，TCP的首部长度是20字节。最大报文段长度MSS，MSS是指每一个TCP报文段中的数据字段的最大长度。 三次握手 第一次握手syn：接收方确认了自己的接收和发送方的发送是没问题的 第二次握手syn/ack：发送方确认了自己的发送和接收和发送方的发送是没问题的第三次握手ack：接收方确认了自己的发送和发送方的接收是没问题的第三次的作用是为了防止第一次失效连接的捣乱。 四次挥手 finackfinack为什么中间要分开来，是因为接收方可能还有要发送的数据。 为什么最后发完ack要等待2msl，因为ack可能丢失，丢失要重发，还能利用存活时间清除丢失的包 可靠传输 1、数据分块，编号，接收排序，组装2、校验和3、流量控制（滑动窗口）4、停止等待ARQ（确认，超时重传）5、拥塞控制（拥塞窗口cwnd） 拥塞控制和流量控制 拥塞控制（针对整个网络而言）1、慢开始:当主机开始发送数据时，由于并不清楚网路的负荷情况，所以如果立即把大量数据字节注入到网络，那么就有可能引发网络发生拥塞。所以最好的方法是先探测一下，即由小到大逐渐增大发送窗口，也就是说，由小到达逐渐增大拥塞窗口值。总结:窗口指数上升，探测网络的上限2、拥塞避免:为了防止拥塞窗口cwnd增长过大引起网络拥塞，还需要设置一个慢开始门限ssthresh状态变量，总结:达到上限，开始线性指数上升。3、快重传和快恢复:为什么要？(避免个别报文的丢失造成误认为拥塞从而导致慢开始降低传输效率)有时，个别报文段会在网络中丢失，但实际上网络并未发生拥塞，如果发送方迟迟收不到确认，就会产生超时，就会误认为网络发生了拥塞，就导致了上图中重新开始了慢开始，将拥塞窗口cwnd又设置为1，因而降低了传输效率。执行流程：快重传算法规定，发送方只要一连收到3个重复确认，就知道接收方确实没有收到报文段，那么开始快恢复算法，总结:3个重复确认，窗口减半，开始拥塞避免。流量控制（针对端到端而言）TCP头部字段设置发送窗口的大小，TCP发送方的发送窗口 = min{ 自身拥塞窗口，TCP接收方的接收窗口 } UDP 首部字段 总结:这里的伪首部只是为了计算校验和[2byte]源端口号[2byte]目标端口号[]包长度[]校验和UDP用户数据报首部中检验和的计算方法很特殊。在计算检验和时，要在UDP用户数据报之前增加12个字节的伪首部。所谓“伪首部”是因为这种伪首部并不是UDP用户数据报的真正的首部。只是在计算检验和时临时添加在UDP用户数据报前面，得到一个临时的UDP用户数据报。检验和就是按照这个临时的UDP用户数据报来计算的。伪首部既不向下传送也不向上递交，而仅仅是为了计算检验和。源端口号：表示发送端端口号，字段长16位。该字段是可选项，有时可能不会设置源端口号。没有源端口号的时候该字段的设置为0。可用于不需要返回的通信中。目标端口号：表示接收端端口，字段长度16位。包长度：该字段保存了UDP首部的长度跟数据的长度之和。单位为字节。校验和：校验和是为了提供可靠的UDP首部和数据而设计的。 和TCP的对比 TCP:面向连接,可靠交付,面向字节流,一对一,首部20字节必选，40字节可选UDP:无连接,最大努力交付,面向报文,一对一、一对多、多对一、多对多,8字节，源端口、目的端口、长度、检验和 http 端口 服务端：80 客户端：动态分配 报文结构 报文首部请求行[方法、URI、HTTP版本]首部字段请求首部字段通用首部字段实体首部字段其他空行报文主体 请求方式 http1.</description>
+    </item>
+    
+    <item>
+      <title>项目(BBS&#43;open-falcon)</title>
+      <link>https://lsy-dot.github.io/posts/%E9%A1%B9%E7%9B%AEbbs&#43;open-falcon/</link>
+      <pubDate>Sun, 11 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/%E9%A1%B9%E7%9B%AEbbs&#43;open-falcon/</guid>
+      <description>quote 难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗
+参考链接 BBS 简单介绍 功能 这是一个基于SpringBoot的论坛项目，主要实现了用户的登录、注册、关注帖子的发布、删除、加精、置顶、检索系统的通知评论的点赞热帖排行榜等功能 技术栈 技术栈方面主要是SpringBoot+Mybatis做了一个基本的功能实现在这个基础上引入了redis来缓存一些访问比较密集的数据，比如点赞的数量和关注的用户列表引入了定时任务Quartz来实现热帖排行榜引入了ES做帖子的内容检索 数据库表 用户表id username password salt emailtype 超管 版主 普通用户status 未激活 已激活activattion_code header_url create_timediscuss 帖子表id user_id title contenttype 普通 置顶status 正常 精华 置顶create_time comment_count scorecomment 评论表id user_identity_type 帖子的评论 评论的评论entity_id 评论的idtarget_id 评论目标的idcontent statuscreate_timemessage 消息表（私信消息、系统通知）idfrom_id 发送方to_id 接受方conversation_id from_id+to_idcontent create_timestatus 未读 已读 删除 亮点和挑战 亮点 从整个项目来说，我觉得我在登录上花的精力比较多版本1：数据库表login_ticket缺点:频繁访问数据库版本2:存redistoken采用jwt但是引入jwt需要考虑他的失效，考虑加了黑名单，设置了过期时间。使用了redis的的hyperlog和bitmap统计DAU、UV事务注册时，写入数据库和发邮件扯一下Spring的事务 压测调优 讲下压测工具，流程数据库调优查帖子对应的评论加上索引，加快查询。说下索引的三星原则where 过滤排序 select 覆盖索引分页查询limit先偏移再查jvm调优讲下gc的流程把堆的大小调大一些。threadlocal用完要remove扯一扯线程池 redis相关问题 点赞 维护key-value 实体-点赞实体（人）的id 用户-用户获得的点赞数量关注 维护key-value 用户+实体类型-实体id（用户关注了那些实体） 实体id+实体类型-用户id（实体被那些用户关注了）redis持久化问题 改进方向 改成分布式，用SpringCloud微服务nginx+gateway，nginx负载均衡的三种方式轮询、权重、ip_hashmysql改成主从架构，主从复制，读写分离 open-falcon 简单介绍 任务 1，消息队列的监控告警，主要是监控每个队列里消息情况，包括空闲，消息积压，消费者列表，也可以涵盖消息队列的性能监控。监控指标整体单实例 rabbitmq问题 基础架构producer-&amp;gt;exchange-&amp;gt;queue-&amp;gt;consumerMQ的模式1、简单模式[一个生产者一个消费者]2、work模式[一个生产者多个消费者]3、订阅模式[work模式中间加个交换机]4、路由模式[交换机加上一个key进行匹配才发送消息]5、Topic模式[key变成topic进行模糊匹配]6、RPC4种类型的Exchange1、direct（精确匹配）2、fanout（广播）3、topic（通配符）4、headers（设置头部属性）1、如何确保消息不丢失先说哪里可能丢失消息，无非三个地方生产者-&amp;gt;队列-&amp;gt;消费者手段就是开启消息确认机制，和持久化机制。2、如何处理消息积压多开机器、先把消息存数据库再慢慢消化3、rabbtimq如何实现延迟队列、死信队列？延迟队列：见上文，一个是用TTL参数+DLX，一个是delay_que死信队列：自带DLX4、消息队列如何限流？（https://segmentfault.</description>
+    </item>
+    
+    <item>
+      <title>java基础</title>
+      <link>https://lsy-dot.github.io/posts/java%E5%9F%BA%E7%A1%80/</link>
+      <pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/java%E5%9F%BA%E7%A1%80/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 java IO流
+单例模式安全之反射攻击
+Java——反射的意义及优缺点
+Java反射机制与安全问题
+ArrayList源码扩容机制分析
+Java集合篇：HashMap 与 ConcurrentHashMap 原理总结
+常见问题 小问题 JDK，JRE，JVM的关系 JDK包含JRE JRE包含JVM
+常见关键字 native 本地方法，用c++实现或者其他语言实现synchronizesynchronize与锁升级1、最初直接加重量级锁，需要在用户态和内核态进行切换，耗费大量资源2、jdk1.6之后采用 无锁-&amp;gt;偏向锁(单个线程)-&amp;gt;轻量级锁(少量线程)-&amp;gt;重量级锁(大量线程) 升级的过程进行优化，使得对于锁的获取释放变得更快。transient 字段不参与序列化volatile 保证可见性，不保证原子性 重载和重写 我的理解：重载就是对于不同的情况写不同的方法。 重写就是具体的实现类对于父类的该方法实现不满意，需要自己在写一个满足于自己要求的方法。重写的要求比重载更加苛刻java中的重载与重写的区别：1、重载发生在本类，重写发生在父类与子类之间；（最明显的区别）2、重载的方法名必须相同，重写的方法名相同且返回值类型必须相同；3、重载的参数列表不同，重写的参数列表必须相同。重载发生在本类,方法名相同,参数列表不同,与返回值无关,只和方法名,参数列表,参数的类型有关.重载（Overload）:首先是位于一个类之中或者其子类中，具有相同的方法名， 但是方法的参数不同，返回值类型可以相同也可以不同。（1）：方法名必须相同（最重要的重载特征）（2）：方法的参数列表一定不一样。（3）：访问修饰符和返回值类型可以相同也可以不同。其实简单而言：重载就是对于不同的情况写不同的方法。 比如，同一个类中，写不同的构造函数用于初始化不同的参数。重写（Overriding）重写发生在父类子类之间,比如所有类都是继承与Object类的,Object类中本身就有equals,hashcode,toString方法等.在任意子类中定义了重名和同样的参数列表就构成方法重写.重写（override）：一般都是表示子类和父类之间的关系，其主要的特征是：方法名相同，参数相同，但是具体的实现不同。重写的特征：（1）：方法名必须相同，返回值类型必须相同（2）：参数列表必须相同（3）：访问权限不能比父类中被重写的方法的访问权限更低。例如：如果父类的一个方法被声明为public，那么在子类中重写该方法就不能声明为protected。（4）：子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为private和final的方法。（5）：构造方法不能被重写，简单而言：就是具体的实现类对于父类的该方法实现不满意，需要自己在写一个满足于自己要求的方法。 == vs equals == 基本类型：值对象：引用地址equals重写：自定义未重写：引用地址 面向对象三大特征 1、封装2、继承注意：子类拥有父类的private，但需通过父类方法访问3、多态父类引用指向子类实例 深拷贝vs浅拷贝 深拷贝:会在内存中再复制一份对象然后指向它浅拷贝:对象只拷贝引用 String StringBuffer StringBuilder StringBuilder -----&amp;gt;StringBuffer -----&amp;gt;String (快-----&amp;gt;慢);StringBuilder线程不安全，没加锁，轻量级。StringBuffer线程安全String 用+=每次循环都创建一个StringBuilder 异常体系 throwableErrorExceptionIoException(checked)[io,class not found]RuntimeException(unchecked)[空指针,越界,算术] finally finally中的return会优先于try中的return执行 代理模式 静态代理动态代理JDK动态代理为什么要实现同一个接口？因为代理类和被代理类要建立关系，要么继承要么接口，而代理类需要继承Proxy，所以只能接口了JDK动态代理类实现InvocationHandler接口cglib代理类(不可以声明为final)因为要通过继承的方式原理:定义拦截器 java获取class对象的4种方式 类名.</description>
+    </item>
+    
+    <item>
+      <title>jvm学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/jvm/</link>
+      <pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/jvm/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 学习路线 关于CMS 浮动垃圾的一些理解 深入理解java虚拟机 高级开发必须理解的Java中SPI机制 10分钟让你彻底明白Java SPI，附实例代码演示#安员外很有码 基础知识 类加载 类的生命周期 太长不看版：加载、验证、准备、解析、初始化 、 使用、卸载1、加载，是指查找字节流，并且据此创建类的过程。2、验证的目标是确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，3、类变量是被 static 修饰的变量，准备阶段为 static 变量在方法区分配内存并初始化为默认值，使用的是方法区的内存。[假设一个类变量的定义为：public static int value = 3； 那么变量 value 在准备阶段过后的初始值为 0，而不是 3，因为这时候尚未开始执行任何 Java 方法，而把 value 赋值为 3 的public static指令是在程序编译后，存放于类构造器（）方法之中的，所以把 value 赋值为 3 的动作将在初始化阶段才会执行。]4、解析阶段目标是将常量池的符号引用替换为直接引用的过程5、为类的静态变量赋予正确的初始值，JVM 负责对类进行初始化，主要对类变量进行初始化。 类加载器 bootstrap、ext、app1、bootstrap即启动类加载器 ，负责加载 JVM 自身工作所需要的类2、ExtClassLoader 负责将 &amp;lt;JAVA_HOME&amp;gt;\lib\ext 或者被 java.ext.dir 系统变量所指定路径中的所有类库加载到内存中，开发者可以直接使用扩展类加载器。3、AppClassLoader 负责加载用户类路径（即 classpath）上所指定的类库 类加载方式 1、命令行启动应用时候由 JVM 初始化加载2、通过 Class.</description>
+    </item>
+    
+    <item>
+      <title>mysql学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/mysql/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/mysql/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 sql(join on 和where的执行顺序） 关于SQL语句的执行顺序 详细介绍MySQL中的数据类型 详解MySQL执行事务的语法和流程 如何设计索引？ 为什么InnoDB使用B+树而不是B树 4种MySQL分页查询优化的方法，你知道几个？ mysql语法 常用的关键字 select,from,where,and,or [基本]left join,inner join,on,using [多表查询]group by[分组],order by[排序]max,avg,min,count[聚合函数]year,mouth,day,sub [日期函数]union all 常见问题 left join,right join, join的区别 一、基表不同1、left join：left join以左数据表为基表。2、right join：right join以右数据表为基表。二、操作不同1、left join：left join会把左表中的全部信息输出，然后搜索右表中符合条件的记录。2、right join：right join会把右表中的全部信息输出，然后左搜索表中符合条件的记录。三、结果不同1、left join：left join查出来的结果是左边的所有数据和与左边有交集部分的数据。2、right join：right join查出来的结果是右边的所有数据和与右边有交集部分的数据。 sql语句的执行顺序 from&amp;gt;(如果有join会先执行join)where&amp;gt;group by&amp;gt;having&amp;gt;select&amp;gt;order by&amp;gt;limit 常见sql语句错误和一些小技巧 1、Mysql中在用连接查询的时候，若两个表的连接字段名完全相同，则可以使用join using来简化join on简化前select * from question_practice_detail inner join question_detail on question_practice_detail.</description>
+    </item>
+    
+    <item>
+      <title>redis学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/redis/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/redis/</guid>
+      <description>quote 君子不立危墙之下
+参考链接和资料 redis 设计与实现 杀穿面试官-深入Redis分布式锁 Redis 在使用中会遇到哪些坑？如何规避？ 分布式id生成策略，我和面试官扯了一个半小时 多时钟解决雪花算法的时间回拨问题 redis基础知识 redis的基本数据结构 redis的数据都是key-value的形式，key是一个字符串value可以是字符串、hash、list、set、zset（有序的set）这五种value的数据量小的时候redis做了一些优化，比如list使用了压缩列表进行压缩降低存储空间，具体可以看redis 设计与实现里面的细节，zset是基于跳表这种数据结构来设计的。 redis的特殊数据结构 bitmap统计dau https://segmentfault.com/a/1190000023704266每天开一个bitmap,用用户id做offset,如果用户今天登录了。那么在对应的offset值为1,这样如果要统计一段时间的日活量的话,直接把这一段时间的bitmap按位与或操作即可。 redis的持久化 RDB（快照） AOF（写日志） 实际应用时会结合二者一起使用，定期RDB，持续AOF redis的网路IO模型（IO多路复用） 1、什么是IO多路复用？ IO 多路复用是一种同步IO模型，实现一个线程可以监视多个文件句柄； 一旦某个文件句柄就绪，就能够通知应用程序进行相应的读写操作； 没有文件句柄就绪就会阻塞应用程序，交出CPU。
+2、IO多路复用有几种模型，有什么区别？ select、poll、epoll1)select缺点select本质上是通过设置或者检查存放fd标志位的数据结构来进行下一步处理。这样所带来的缺点是：单个进程所打开的FD是有限制的，通过 FD_SETSIZE 设置，默认1024 ;每次调用 select，都需要把 fd 集合从用户态拷贝到内核态，这个开销在 fd 很多时会很大；对 socket 扫描时是线性扫描，采用轮询的方法，效率较低（高并发）2）pollpoll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，然后查询每个fd对应的设备状态， 但是它没有最大连接数的限制，原因是它是基于链表来存储的.3）epollepoll中只会把活跃的事件放在双链表中(活跃的事件会callback自己注册到队列里)，不活跃的事件放在红黑树中，只会轮询双链表中的事件epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll会把哪个流发生了怎样的I/O事件通知我们。所以我们说epoll实际上是事件驱动（每个事件关联上fd）的，此时我们对这些流的操作都是有意义的。（复杂度降低到了O(1)） 3、为什么redis6.0改成多线程？ 瓶颈在于网络和IO，多线程来处理数据的读写和协议解析，执行命令还是使用单线程。 这样做的目的是因为redis的性能瓶颈在于网络IO而非CPU，使用多线程能提升IO读写的效率，从而整体提高redis的性能。
+缓存问题 缓存穿透 定义：查一些数据不存在的值（大量请求穿透缓存到数据库）解决办法：缓存空值，bloom过滤 缓存击穿 定义：热点数据过期（大量请求瞬间到数据库）解决办法：加锁（第一个拿到锁的人先去数据库拿值更新缓存，其他人等待）、热点数据不过期 缓存雪崩 定义：大量数据同一时间过期解决办法:过期时间进行离散化处理 缓存和数据库（mysql）一致性 首先，对于一致性和实时性要求高的数据就别存缓存，直接查数据库就好了。如果可以忍受短时间的不一致，符合最终一致性的要求。可以如下处理（缓存有过期时间，最终系统会保证最终一致性）1、跟新完数据库，删除缓存2、删缓存，更新数据库，删缓存 如何实现分布式id 数据库自增id 利用数据单机自增，不能抗高并发，可能重复 数据库水平拆分，设置初始值和相同的自增步长 「数据库水平拆分，设置初始值和相同的自增步长」是指在DB集群的环境下，将数据库进行水平划分，然后每个数据库设置「不同的初始值」和「相同的步长」，这样就能避免ID重复的情况。确定：不能抗高并发，可能会用完 批量申请自增ID 「批量申请自增ID」的解决方案可以解决无ID可分的问题，它的原理就是一次性给对应的数据库上分配一批的id值进行消费，使用完了，再回来申请。 UUID生成 第四种方式是使用「UUID生成」的方式生成分布式ID，UUID的核心思想是使用「机器的网卡、当地时间、一个随机数」来生成UUID。并且UUID生成的无序的字符串，查询效率低下，没有实际的业务含义，不具备自增特性，所以都不会使用UUID作为分布式ID来使用。 Redis的方式 集群模式（就是数据库水平拆分中把数据库换成redis）https://juejin.</description>
+    </item>
+    
+    <item>
+      <title>Spring学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/spring/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/spring/</guid>
+      <description>quote 君子不立危墙之下
+参考链接和资料 SpringBoot 配置文件加载优先级 SpringBoot - 配置文件加载位置与优先级 Spring实战（第4版） Spring实现AOP的三大方式 3.1 @Controller注解 SpringBoot 对 controller 层捕获全局异常并处理的方法（@ControllerAdvice 和 @ExceptionHandler） B站目前讲的最透彻的SpringBoot自动配置，大厂面试必备知识点 Spring基础知识 AOP和IOC 最重要的两个概念：IOC和AOPIOC是一种思想，将创建对象的权力交给容器，从而对程序进行解耦AOP将系统中重复的代码进行封装（日志、权限管理），解耦方便后续程序进行扩展 Spring AOP使用方式 1、注解2、xml(使用Spring原生api[继承接口]，自定义切面类)使用过程:1、编写业务类2、写切面类，可以自定义，或者继承使用Spring apy3、编写切点表达式[指定要织入的类和方法，同时指定何时织入]一些专业术语Aspect(切面):通常是一个类，里面可以定义切入点和通知Advice(通知):AOP在特定的切入点上执行的增强处理，有before(前置),after(后置),afterReturning(最终),afterThrowing(异常),around(环绕)Pointcut(切入点):就是带有通知的连接点，在程序中主要体现为书写切入点表达式Spring AOP和AspectJ的区别Spring AOP 属于运行时增强（动态代理），而 AspectJ 是编译时增强（静态编译）。Spring AOP 基于代理(Proxying)，而 AspectJ 基于字节码操作(Bytecode Manipulation)。 Spring的组件有哪些？ Spring core、context：核心容器Spring AOP：面向切面的编程Spring ORM：数据访问和集成Spring web、MVC：web和远程调用Spring test：测试推荐阅读书籍：Spring实战（第4版） bean的生命周期 bean的生存周期简单版：实例化、属性注入、初始化、销毁 bean的生存周期 循环依赖（三级缓存） 循环依赖解决办法：三级缓存（1、成熟对象，2、半成品对象[为了性能]，3、工厂[为了代理]） 事务 事务隔离级别:read uncommitted,read committed,repeatable read,searialize事务传播行为：require,support,mandatory,require_new,,not_support,never,nested事务传播行为：需要事务,有无就行,一定要有,一定要新,不需要事务,一定不要,嵌套 Spring中存在的设计模式 工厂模式[beanfactory],单例模式[bean默认单例],代理模式[AOP],委派模式[dispatcher servlet] interceptor和filter的区别 1、从外到内：tomcat-&amp;gt;filter-&amp;gt;servlet-&amp;gt;interceptor-&amp;gt;controller2、filter拦截request、response，interceptor可以访问spring中的的资源也即，filter是属于servlet，而interceptor是属于spring的3、filter基于函数回调，interceptor基于反射生成动态代理对象。 SpringBoot @SpringBootApplication哪几部分组成 @SpringBootApplication哪几部分组成1、@SpringBootConfiguration：组合了 @Configuration 注解，实现配置文件的功能。2、@EnableAutoConfiguration：打开自动配置的功能，也可以关闭某个自动配置的选项，如关闭数据源自动配置功能： @SpringBootApplication(exclude = { DataSourceAutoConfiguration.</description>
+    </item>
+    
+    <item>
+      <title>排序算法学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95todo/</guid>
+      <description>quote 自信即巅峰
+参考链接和资料 快速排序 //快速排序 public static Random random = new Random(); public int[] quickSort(int[] nums,int l,int r) { if(l&amp;gt;=r)return nums; int pos=quickSortOne(nums,l,r); quickSort(nums,l,pos-1); quickSort(nums,pos+1,r); return nums; } public int quickSortOne(int[] nums,int l,int r) { //加入随机 int pos=random.nextInt(r-l+1)+l; swap(nums,l,pos); int pivot=nums[l]; while(l&amp;lt;r) { while(l&amp;lt;r&amp;amp;&amp;amp;nums[r]&amp;gt;=pivot)r--; nums[l]=nums[r]; while(l&amp;lt;r&amp;amp;&amp;amp;nums[l]&amp;lt;pivot)l++; nums[r]=nums[l]; } nums[l]=pivot; return l; } public void swap(int[] nums,int p,int q) { int temp=nums[p]; nums[p]=nums[q]; nums[q]=temp; } 堆排序 //heap sort public void adjust(int[] nums,int len,int index) { // &amp;lt;&amp;lt; 要加括号，不然运算符优先级不够 int l=(index&amp;lt;&amp;lt;1)+1; int r=(index&amp;lt;&amp;lt;1)+2; int maxIndex=index; //这里记住比较的是nums[maxIndex] 而不是 nums[index] if(l&amp;lt;len&amp;amp;&amp;amp;nums[l]&amp;gt;nums[maxIndex])maxIndex=l; if(r&amp;lt;len&amp;amp;&amp;amp;nums[r]&amp;gt;nums[maxIndex])maxIndex=r; if(maxIndex!</description>
+    </item>
+    
     <item>
       <title>github&#43;hugo搭建blog</title>
       <link>https://lsy-dot.github.io/posts/github&#43;hugo%E6%90%AD%E5%BB%BAblog/</link>
@@ -15,7 +136,7 @@
       <guid>https://lsy-dot.github.io/posts/github&#43;hugo%E6%90%AD%E5%BB%BAblog/</guid>
       <description>参考链接 用 Hugo 和 Github Pages 构建个人博客 Install Hugo hugo 模板basic 模板davantage [hugo github] (https://github.com/gohugoio/hugo/releases) github pages quickstart 创建github账号和设置repository 如果没有github账号，你得先去注册一个github账号
 然后创建一个仓库(repository), 选择settings下面的pages，按照官方文档进行操作，这里建议可以下载一个github-destktop进行操作，比命令行要方便些
-在仓库新建一个index.html,随便写一点东西看看，访问 https://.github.io 看看是否能够访问成功(这里会有个延时，github才会更新你的提交，要等待一会) 下载hugo，初始化site 安装hugo,我这里的话是直接在github上找到exe文件下载就可以了，其他安装方式可以参照官网，安装好以后再配置下环境变量即可 初始化 hugo new site blog # 进入blog目录以后可以看到如下结构 config.toml: 我们需要更改的配置文件 content: 存放所有的博客文章 static: 存储静态文件，例如背景图片，徽标，CSS，JS 等。此目录中的文件将直接复制到 /public 中。该文件夹的优先级高于主题下的 /static。 themes: 存放下载的主题 archetypes: 存储的.md 模板文件，其优先级高于 theme 文件下的 /archetypes 文件。 layouts: 存放 .html 模板，优先级高于 theme 文件夹下的 /layouts 文件夹 public: 在执行 hugo 命令后，生成的静态文件存放的目录 选择theme主题 进入hugo官网选在一个自己喜欢的主题，然后按照里面的提示把主题下载到themes文件夹里面，然后可以按照模板里面的文档配置下config.toml，这里我选择的模板是 模板地址
+在仓库新建一个index.html,随便写一点东西看看，访问 https://.github.io 看看是否能够访问成功(这里会有个延时，github才会更新你的提交，要等待一会) 下载hugo，初始化site 安装hugo,我这里的话是直接在github上找到exe文件下载就可以了，其他安装方式可以参照官网，安装好以后再配置下环境变量即可 初始化 hugo new site blog# 进入blog目录以后可以看到如下结构config.toml: 我们需要更改的配置文件content: 存放所有的博客文章static: 存储静态文件，例如背景图片，徽标，CSS，JS 等。此目录中的文件将直接复制到 /public 中。该文件夹的优先级高于主题下的 /static。themes: 存放下载的主题archetypes: 存储的.md 模板文件，其优先级高于 theme 文件下的 /archetypes 文件。layouts: 存放 .html 模板，优先级高于 theme 文件夹下的 /layouts 文件夹public: 在执行 hugo 命令后，生成的静态文件存放的目录 选择theme主题 进入hugo官网选在一个自己喜欢的主题，然后按照里面的提示把主题下载到themes文件夹里面，然后可以按照模板里面的文档配置下config.toml，这里我选择的模板是 模板地址
 新建md文档，提交 按照模板给出的文档，在content目录下新建posts，然后在这里面写md文档，按照他的格式来，有两种，</description>
     </item>
     

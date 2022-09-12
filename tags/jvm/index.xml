@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jvm on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/jvm/</link>
+    <description>Recent content in jvm on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/jvm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>jvm学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/jvm/</link>
+      <pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/jvm/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 学习路线 关于CMS 浮动垃圾的一些理解 深入理解java虚拟机 高级开发必须理解的Java中SPI机制 10分钟让你彻底明白Java SPI，附实例代码演示#安员外很有码 基础知识 类加载 类的生命周期 太长不看版：加载、验证、准备、解析、初始化 、 使用、卸载1、加载，是指查找字节流，并且据此创建类的过程。2、验证的目标是确保 Class 文件的字节流中包含的信息符合当前虚拟机的要求，3、类变量是被 static 修饰的变量，准备阶段为 static 变量在方法区分配内存并初始化为默认值，使用的是方法区的内存。[假设一个类变量的定义为：public static int value = 3； 那么变量 value 在准备阶段过后的初始值为 0，而不是 3，因为这时候尚未开始执行任何 Java 方法，而把 value 赋值为 3 的public static指令是在程序编译后，存放于类构造器（）方法之中的，所以把 value 赋值为 3 的动作将在初始化阶段才会执行。]4、解析阶段目标是将常量池的符号引用替换为直接引用的过程5、为类的静态变量赋予正确的初始值，JVM 负责对类进行初始化，主要对类变量进行初始化。 类加载器 bootstrap、ext、app1、bootstrap即启动类加载器 ，负责加载 JVM 自身工作所需要的类2、ExtClassLoader 负责将 &amp;lt;JAVA_HOME&amp;gt;\lib\ext 或者被 java.ext.dir 系统变量所指定路径中的所有类库加载到内存中，开发者可以直接使用扩展类加载器。3、AppClassLoader 负责加载用户类路径（即 classpath）上所指定的类库 类加载方式 1、命令行启动应用时候由 JVM 初始化加载2、通过 Class.</description>
+    </item>
+    
+  </channel>
+</rss>

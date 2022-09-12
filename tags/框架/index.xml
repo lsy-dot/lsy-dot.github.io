@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>框架 on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/%E6%A1%86%E6%9E%B6/</link>
+    <description>Recent content in 框架 on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 07 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Spring学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/spring/</link>
+      <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/spring/</guid>
+      <description>quote 君子不立危墙之下
+参考链接和资料 SpringBoot 配置文件加载优先级 SpringBoot - 配置文件加载位置与优先级 Spring实战（第4版） Spring实现AOP的三大方式 3.1 @Controller注解 SpringBoot 对 controller 层捕获全局异常并处理的方法（@ControllerAdvice 和 @ExceptionHandler） B站目前讲的最透彻的SpringBoot自动配置，大厂面试必备知识点 Spring基础知识 AOP和IOC 最重要的两个概念：IOC和AOPIOC是一种思想，将创建对象的权力交给容器，从而对程序进行解耦AOP将系统中重复的代码进行封装（日志、权限管理），解耦方便后续程序进行扩展 Spring AOP使用方式 1、注解2、xml(使用Spring原生api[继承接口]，自定义切面类)使用过程:1、编写业务类2、写切面类，可以自定义，或者继承使用Spring apy3、编写切点表达式[指定要织入的类和方法，同时指定何时织入]一些专业术语Aspect(切面):通常是一个类，里面可以定义切入点和通知Advice(通知):AOP在特定的切入点上执行的增强处理，有before(前置),after(后置),afterReturning(最终),afterThrowing(异常),around(环绕)Pointcut(切入点):就是带有通知的连接点，在程序中主要体现为书写切入点表达式Spring AOP和AspectJ的区别Spring AOP 属于运行时增强（动态代理），而 AspectJ 是编译时增强（静态编译）。Spring AOP 基于代理(Proxying)，而 AspectJ 基于字节码操作(Bytecode Manipulation)。 Spring的组件有哪些？ Spring core、context：核心容器Spring AOP：面向切面的编程Spring ORM：数据访问和集成Spring web、MVC：web和远程调用Spring test：测试推荐阅读书籍：Spring实战（第4版） bean的生命周期 bean的生存周期简单版：实例化、属性注入、初始化、销毁 bean的生存周期 循环依赖（三级缓存） 循环依赖解决办法：三级缓存（1、成熟对象，2、半成品对象[为了性能]，3、工厂[为了代理]） 事务 事务隔离级别:read uncommitted,read committed,repeatable read,searialize事务传播行为：require,support,mandatory,require_new,,not_support,never,nested事务传播行为：需要事务,有无就行,一定要有,一定要新,不需要事务,一定不要,嵌套 Spring中存在的设计模式 工厂模式[beanfactory],单例模式[bean默认单例],代理模式[AOP],委派模式[dispatcher servlet] interceptor和filter的区别 1、从外到内：tomcat-&amp;gt;filter-&amp;gt;servlet-&amp;gt;interceptor-&amp;gt;controller2、filter拦截request、response，interceptor可以访问spring中的的资源也即，filter是属于servlet，而interceptor是属于spring的3、filter基于函数回调，interceptor基于反射生成动态代理对象。 SpringBoot @SpringBootApplication哪几部分组成 @SpringBootApplication哪几部分组成1、@SpringBootConfiguration：组合了 @Configuration 注解，实现配置文件的功能。2、@EnableAutoConfiguration：打开自动配置的功能，也可以关闭某个自动配置的选项，如关闭数据源自动配置功能： @SpringBootApplication(exclude = { DataSourceAutoConfiguration.</description>
+    </item>
+    
+  </channel>
+</rss>

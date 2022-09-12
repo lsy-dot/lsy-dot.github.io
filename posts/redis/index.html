@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>redis学习笔记</title>
+    <meta name="description" content="关于redis学习的一些笔记">
+    <meta name="keywords" content='数据库'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/redis/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="redis学习笔记">
+    <meta property="og:description" content="关于redis学习的一些笔记">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="redis学习笔记">
+    <meta name="twitter:description" content="关于redis学习的一些笔记">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/redis/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/redis/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/redis/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>redis学习笔记</h1>
+        <small role="doc-subtitle">关于redis学习的一些笔记</small>
+        <p class="post-date">
+            September 7, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93">数据库</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>君子不立危墙之下</strong></p>
+<h1 id="参考链接和资料">参考链接和资料</h1>
+<ul>
+<li>redis 设计与实现</li>
+<li><a href="https://www.bilibili.com/video/BV1pY4y167Dc">杀穿面试官-深入Redis分布式锁</a></li>
+<li><a href="https://www.zhihu.com/question/57045322/answer/1931497548">Redis 在使用中会遇到哪些坑？如何规避？</a></li>
+<li><a href="https://mp.weixin.qq.com/s/yIE5NOj7nqCu2AnWCte1Rg">分布式id生成策略，我和面试官扯了一个半小时</a></li>
+<li><a href="https://blog.hackerpie.com/posts/algorithms/snowflake/multiple-clocks-snowflake/">多时钟解决雪花算法的时间回拨问题</a></li>
+</ul>
+<h1 id="redis基础知识">redis基础知识</h1>
+<h2 id="redis的基本数据结构">redis的基本数据结构</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">redis的数据都是key-value的形式，key是一个字符串
+value可以是字符串、hash、list、set、zset（有序的set）
+这五种value的数据量小的时候redis做了一些优化，
+比如list使用了压缩列表进行压缩降低存储空间，
+具体可以看redis 设计与实现里面的细节，
+zset是基于跳表这种数据结构来设计的。
+</code></pre><h2 id="redis的特殊数据结构">redis的特殊数据结构</h2>
+<h3 id="bitmap统计dau">bitmap统计dau</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">https://segmentfault.com/a/1190000023704266
+每天开一个bitmap,用用户id做offset,如果用户今天登录了。
+那么在对应的offset值为1,这样如果要统计一段时间的日活量的话,
+直接把这一段时间的bitmap按位与或操作即可。
+</code></pre><h2 id="redis的持久化">redis的持久化</h2>
+<ul>
+<li>RDB（快照）</li>
+<li>AOF（写日志）
+实际应用时会结合二者一起使用，定期RDB，持续AOF</li>
+</ul>
+<h2 id="redis的网路io模型io多路复用">redis的网路IO模型（IO多路复用）</h2>
+<h3 id="1什么是io多路复用">1、什么是IO多路复用？</h3>
+<p>IO 多路复用是一种同步IO模型，实现一个线程可以监视多个文件句柄；
+一旦某个文件句柄就绪，就能够通知应用程序进行相应的读写操作；
+没有文件句柄就绪就会阻塞应用程序，交出CPU。</p>
+<h3 id="2io多路复用有几种模型有什么区别">2、IO多路复用有几种模型，有什么区别？</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">select、poll、epoll
+1)select缺点
+select本质上是通过设置或者
+检查存放fd标志位的数据结构来进行下一步处理。这样所带来的缺点是：
+单个进程所打开的FD是有限制的，通过 FD_SETSIZE 设置，默认1024 ;
+每次调用 select，都需要把 fd 集合从用户态拷贝到内核态，
+这个开销在 fd 很多时会很大；对 socket 扫描时是线性扫描，
+采用轮询的方法，效率较低（高并发）
+2）poll
+poll本质上和select没有区别，它将用户传入的数组拷贝到内核空间，
+然后查询每个fd对应的设备状态， 
+但是它没有最大连接数的限制，原因是它是基于链表来存储的.
+3）epoll
+epoll中只会把活跃的事件放在双链表中(活跃的事件会callback自己注册到队列里)，
+不活跃的事件放在红黑树中，只会轮询双链表中的事件
+epoll可以理解为event poll，不同于忙轮询和无差别轮询，
+epoll会把哪个流发生了怎样的I/O事件通知我们。
+所以我们说epoll实际上是事件驱动（每个事件关联上fd）的，
+此时我们对这些流的操作都是有意义的。（复杂度降低到了O(1)）
+</code></pre><h3 id="3为什么redis60改成多线程">3、为什么redis6.0改成多线程？</h3>
+<p>瓶颈在于网络和IO，多线程来处理数据的读写和协议解析，执行命令还是使用单线程。
+这样做的目的是因为redis的性能瓶颈在于网络IO而非CPU，使用多线程能提升IO读写的效率，从而整体提高redis的性能。</p>
+<h2 id="缓存问题">缓存问题</h2>
+<h3 id="缓存穿透">缓存穿透</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义：查一些数据不存在的值（大量请求穿透缓存到数据库）
+解决办法：缓存空值，bloom过滤
+</code></pre><h3 id="缓存击穿">缓存击穿</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义：热点数据过期（大量请求瞬间到数据库）
+解决办法：加锁（第一个拿到锁的人先去数据库拿值更新缓存，其他人等待）、热点数据不过期
+</code></pre><h3 id="缓存雪崩">缓存雪崩</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义：大量数据同一时间过期
+解决办法:过期时间进行离散化处理
+</code></pre><h3 id="缓存和数据库mysql一致性">缓存和数据库（mysql）一致性</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">首先，对于一致性和实时性要求高的数据就别存缓存，
+直接查数据库就好了。
+如果可以忍受短时间的不一致，符合最终一致性的要求。
+可以如下处理（缓存有过期时间，最终系统会保证最终一致性）
+1、跟新完数据库，删除缓存
+2、删缓存，更新数据库，删缓存
+</code></pre><h2 id="如何实现分布式id">如何实现分布式id</h2>
+<h3 id="数据库自增id">数据库自增id</h3>
+<pre tabindex="0"><code>利用数据单机自增，
+不能抗高并发，可能重复
+</code></pre><h3 id="数据库水平拆分设置初始值和相同的自增步长">数据库水平拆分，设置初始值和相同的自增步长</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">「数据库水平拆分，设置初始值和相同的自增步长」是指在DB集群的环境下，将数据库进行水平划分，
+然后每个数据库设置「不同的初始值」和「相同的步长」，这样就能避免ID重复的情况。
+
+确定：不能抗高并发，可能会用完
+</code></pre><p><img src="https://mmbiz.qpic.cn/mmbiz_png/IJUXwBNpKliaS7HIzyelGqic3oUZP5CtdOZLPGicnk3BEOn4HbAnF6ngkt2oddpNshMic6eYWqqRmdqk5NvGFce51Q/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt=""></p>
+<h3 id="批量申请自增id">批量申请自增ID</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">「批量申请自增ID」的解决方案可以解决无ID可分的问题，它的原理就是一次性给对应的数据库上分配一批的id值进行消费，使用完了，再回来申请。
+</code></pre><h3 id="uuid生成">UUID生成</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">第四种方式是使用「UUID生成」的方式生成分布式ID，UUID的核心思想是使用「机器的网卡、当地时间、一个随机数」来生成UUID。
+并且UUID生成的无序的字符串，查询效率低下，没有实际的业务含义，不具备自增特性，所以都不会使用UUID作为分布式ID来使用。
+</code></pre><h3 id="redis的方式">Redis的方式</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">集群模式（就是数据库水平拆分中把数据库换成redis）
+https://juejin.cn/post/6844904014740635662#heading-4
+</code></pre><h3 id="雪花算法">雪花算法</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">时间戳+机房id+机器id+序列号（自增）
+确定:依赖时间，时钟不对，会重复
+
+时间回拨问题
+1、回拨时间小的时候，不生成 ID，循环等待到时间点到达。
+2、上面的方案只适合时钟回拨较小的，如果间隔过大，阻塞等待，肯定是不可取的，因此要么超过一定大小的回拨直接报错，
+拒绝服务，或者有一种方案是利用拓展位，回拨之后在拓展位上加1就可以了，这样ID依然可以保持唯一。
+但是这个要求我们提前预留出位数，要么从机器id中，要么从序列号中，腾出一定的位，在时间回拨的时候，这个位置 +1。
+
+Snowflake 是 Twitter 开源的分布式 ID 生成算法。Snowflake 由 64 bit 的二进制数字组成，
+这 64bit 的二进制被分成了几部分，每一部分存储的数据都有特定的含义：
+第 0 位： 符号位（标识正负），始终为 0，没有用，不用管。
+第 1~41 位 ：一共 41 位，用来表示时间戳，单位是毫秒，可以支撑 2 ^41 毫秒（约 69 年）
+第 42~52 位 ：一共 10 位，一般来说，前 5 位表示机房 ID，后 5 位表示机器 ID（实际项目中可以根据实际情况调整）。这样就可以区分不同集群/机房的节点。
+第 53~64 位 ：一共 12 位，用来表示序列号。 序列号为自增值，代表单台机器每毫秒能够产生的最大 ID 数(2^12 = 4096),也就是说单台机器每毫秒最多可以生成 4096 个 唯一 ID。
+作者：JavaGuide
+链接：https://juejin.cn/post/6977712719075999780
+</code></pre><h3 id="百度uidgeneratortodo">百度UIDGenerator（todo）</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">https://github.com/baidu/uid-generator/blob/master/README.zh_cn.md
+</code></pre><h3 id="美团leaf-todo">美团Leaf （todo）</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">https://tech.meituan.com/2019/03/07/open-source-project-leaf.html
+</code></pre><h1 id="redis分布式锁">redis分布式锁</h1>
+<h2 id="为什么要分布式锁">为什么要分布式锁</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">为什么要分布式锁，用syncronize和reentranlock不能
+保证分布式情况下锁住,因为每台机器都有一个不同的对象
+</code></pre><h2 id="分布式锁的进化">分布式锁的进化</h2>
+<h3 id="直接使用setnx命令uuid">直接使用setnx命令+uuid</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">setnx：Redis Setnx（SET if Not eXists） 
+命令在指定的 key 不存在时，为 key 设置指定的值。
+key就是你定义一个字符串，比如锁某个资源，可以在java
+里定义一个常量，然后value的话可以uuid设置一个随机
+字符串，解锁的时候用uuid作为当前线程局部变量的标志
+</code></pre><h3 id="解决死锁">解决死锁</h3>
+<p>加超时时间</p>
+<h3 id="保证原子性">保证原子性</h3>
+<p>用lua表达式</p>
+<h3 id="解决宕机终极解决办法">解决宕机（终极解决办法）</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">redisson解决措施（watch dog机制）：卡顿时续期，宕机时不续期
+redisson还提供了一些的分布式容器，比如分布式的
+HashMap，对标java本地内存中的ConcurrentHashMap
+</code></pre><h1 id="redis使用过程遇到的问题坑">redis使用过程遇到的问题（坑）</h1>
+<h2 id="常见命令">常见命令</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">set命令之前设置了过期时间，后面set的时候不加上过期时间参数的话会把过期时间擦除
+如果你要删除的是一个非 String 类型的 key，这个 key 的元素越多，那么在执行 DEL 时耗时就越久！
+randomkey命令可能存在死循环，如果存在大量过期的命令，那么其会一直循环
+setbit命令会导致oom，如果设置的长度过大的话
+执行monitor可能会导致oom，因为要先输出命令到缓冲区，会占用内存
+</code></pre><h2 id="数据持久化">数据持久化</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">master宕机，如果配置的策略是重启master的话，而且master没有开启持久化的话，那么master一旦重启就会导致slave的数据也清空
+AOF everysec在io资源比较紧张的时候也会存在阻塞线程的情况
+AOF everysec可能会丢失2秒的数据
+RDB和AOF rewrite的时候，因为采用copy on write的方法处理，因此会可能复制过多的数据导致oom
+</code></pre><h2 id="主从复制">主从复制</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">主从复制可能会丢数据
+这里我们先小结一下，slave 查询过期 key，经历了 3 个阶段：
+3.2 以下版本，key 过期未被清理，无论哪个命令，查询 slave，均正常返回 value
+3.2 - 4.0.11 版本，查询数据返回 NULL，但 EXISTS 依旧返回 true
+4.0.11 以上版本，所有命令均已修复，过期 key 在 slave 上查询，均返回「不存在」
+无论是 master 还是 slave，在判断一个 key 是否过期时，都是基于「本机时钟」来判断的。
+如果 slave 的机器时钟比 master 走得「快」，那就会导致，即使这个 key 还未过期，
+但以 slave 上视角来看，这个 key 其实已经过期了，那客户端在 slave 上查询时，就会返回 NULL。
+master和slave的时钟不一致会导致缓存雪崩
+</code></pre><h1 id="redis学习路线todo">redis学习路线(todo)</h1>
+
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接和资料">参考链接和资料</a></li>
+    <li><a href="#redis基础知识">redis基础知识</a>
+      <ul>
+        <li><a href="#redis的基本数据结构">redis的基本数据结构</a></li>
+        <li><a href="#redis的特殊数据结构">redis的特殊数据结构</a>
+          <ul>
+            <li><a href="#bitmap统计dau">bitmap统计dau</a></li>
+          </ul>
+        </li>
+        <li><a href="#redis的持久化">redis的持久化</a></li>
+        <li><a href="#redis的网路io模型io多路复用">redis的网路IO模型（IO多路复用）</a>
+          <ul>
+            <li><a href="#1什么是io多路复用">1、什么是IO多路复用？</a></li>
+            <li><a href="#2io多路复用有几种模型有什么区别">2、IO多路复用有几种模型，有什么区别？</a></li>
+            <li><a href="#3为什么redis60改成多线程">3、为什么redis6.0改成多线程？</a></li>
+          </ul>
+        </li>
+        <li><a href="#缓存问题">缓存问题</a>
+          <ul>
+            <li><a href="#缓存穿透">缓存穿透</a></li>
+            <li><a href="#缓存击穿">缓存击穿</a></li>
+            <li><a href="#缓存雪崩">缓存雪崩</a></li>
+            <li><a href="#缓存和数据库mysql一致性">缓存和数据库（mysql）一致性</a></li>
+          </ul>
+        </li>
+        <li><a href="#如何实现分布式id">如何实现分布式id</a>
+          <ul>
+            <li><a href="#数据库自增id">数据库自增id</a></li>
+            <li><a href="#数据库水平拆分设置初始值和相同的自增步长">数据库水平拆分，设置初始值和相同的自增步长</a></li>
+            <li><a href="#批量申请自增id">批量申请自增ID</a></li>
+            <li><a href="#uuid生成">UUID生成</a></li>
+            <li><a href="#redis的方式">Redis的方式</a></li>
+            <li><a href="#雪花算法">雪花算法</a></li>
+            <li><a href="#百度uidgeneratortodo">百度UIDGenerator（todo）</a></li>
+            <li><a href="#美团leaf-todo">美团Leaf （todo）</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#redis分布式锁">redis分布式锁</a>
+      <ul>
+        <li><a href="#为什么要分布式锁">为什么要分布式锁</a></li>
+        <li><a href="#分布式锁的进化">分布式锁的进化</a>
+          <ul>
+            <li><a href="#直接使用setnx命令uuid">直接使用setnx命令+uuid</a></li>
+            <li><a href="#解决死锁">解决死锁</a></li>
+            <li><a href="#保证原子性">保证原子性</a></li>
+            <li><a href="#解决宕机终极解决办法">解决宕机（终极解决办法）</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#redis使用过程遇到的问题坑">redis使用过程遇到的问题（坑）</a>
+      <ul>
+        <li><a href="#常见命令">常见命令</a></li>
+        <li><a href="#数据持久化">数据持久化</a></li>
+        <li><a href="#主从复制">主从复制</a></li>
+      </ul>
+    </li>
+    <li><a href="#redis学习路线todo">redis学习路线(todo)</a></li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>
