@@ -151,14 +151,42 @@
 <li><a href="https://blueblue233.github.io/blog/a4fd15ac/">3.1 @Controller注解</a></li>
 <li><a href="https://blog.csdn.net/Colton_Null/article/details/84592748">SpringBoot 对 controller 层捕获全局异常并处理的方法（@ControllerAdvice 和 @ExceptionHandler）</a></li>
 <li><a href="https://www.bilibili.com/video/BV1NY411P7VX">B站目前讲的最透彻的SpringBoot自动配置，大厂面试必备知识点</a></li>
+<li><a href="https://segmentfault.com/a/1190000022521844#item-11">接近8000字的Spring/SpringBoot常用注解总结！安排！</a></li>
 </ul>
 <h1 id="spring基础知识">Spring基础知识</h1>
-<h2 id="aop和ioc">AOP和IOC</h2>
+<h2 id="aop和ioc简单版">AOP和IOC（简单版）</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">最重要的两个概念：IOC和AOP
 IOC是一种思想，将创建对象的权力交给容器，
 从而对程序进行解耦
 AOP将系统中重复的代码进行封装（日志、权限管理），
 解耦方便后续程序进行扩展
+</code></pre><h2 id="什么是ioc">什么是IOC？</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">IOC全名控制反转[名字]
+它是一种编程原则[定位，是一种理论]
+它的设计和架构可以实现组件间的解耦[好处]
+核心思想是将控制权交出去[核心]
+</code></pre><h2 id="ioc与di的区别">IOC与DI的区别</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读:https://juejin.cn/post/6844904161775976456#heading-4
+
+DI（依赖注入）是IOC的一种实现
+
+IOC的实现有
+	DI	
+	依赖查找 [依赖 IOC 框架的 API（必须操纵容器的 API ）]
+
+依赖注入的方式
+	不可变
+		构造器注入  [4.0.3之后推荐]
+			构造器注入的依赖是不可变的、完全初始化好的，且可以保证不为 null 
+			如果参数列表过长，考虑是否是bean的职责过多
+		参数注入
+	可变
+		setter注入 [SpringFramework 4.0.2之前推荐，可以避免参数列表过长的问题]
+
+多个相同类型Bean如果解决注入
+	@Resource [根据名称指定注入的 Bean]
+	@Qualifier [配合 @Autowired 注解使用]
+	@Primary: [优先注入]
 </code></pre><h2 id="spring-aop使用方式">Spring AOP使用方式</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">1、注解
 2、xml(使用Spring原生api[继承接口]，自定义切面类)
@@ -257,6 +285,77 @@ jar包同目录下的application.properties 和 application.yaml
 只要定义一个全局异常处理类即可
 类上用ControllerAdvice 注解标明这是一个全局异常处理配置类，
 方法上用ExceptionHandler指定要处理的异常。
+</code></pre><h2 id="springboot常用注解">SpringBoot常用注解</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">SpringBootApplication
+Spring Bean 相关
+	@Autowired
+	@Component,@Repository,@Service, @Controller
+	@RestController[@Controller+@ResponseBody]
+	@Scope[声明 Spring Bean 的作用域]
+		singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。
+		prototype : 每次请求都会创建一个新的 bean 实例。
+		request : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。
+		session : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。
+	@Configuration
+处理常见的 HTTP 请求类型
+	@GetMapping
+	@PostMapping
+	@PutMapping
+	@DeleteMapping
+	@PatchMapping[部分更新]
+前后端传值
+	@PathVariable[用于获取路径参数][/klasses/{123456}/teachers?type=web  获取123456]
+	@RequestParam[获取查询参数][获取type=web]
+	@RequestBody[读取request请求的body部分将content-type为json格式的数据自动绑定到java对象上]
+读取配置信息	
+	@value[绑定配置信息到变量]
+	@ConfigurationProperties[绑定配置信息到bean]
+	@PropertySource[读取指定 properties 文件]
+参数校验（JSR 注解）
+	常用字段验证
+		@NotEmpty [被注释的字符串的不能为 null 也不能为空]
+        @NotBlank [被注释的字符串非 null，并且必须包含一个非空白字符]
+        @Null [被注释的元素必须为 null]
+        @NotNull [被注释的元素必须不为 null]
+       	...
+	       	
+	@Valid [加在请求体参数上声明这个参数需要校验]
+	@Validated [加载方法上和Valid搭配使用]
+全局处理 Controller 层异常
+	@ControllerAdvice[注解定义全局异常处理类]
+	@ExceptionHandler[注解声明异常处理方法]
+JPA 相关
+	@Entity[声明一个类对应一个数据库实体]
+	@Table [设置表]
+	@Id [声明一个字段为主键]
+	@GeneratedValue[指定主键策略]
+事务
+	 @Transactional
+	 失效场景
+	 	@Transactional 应用在非 public 修饰的方法上
+	 	@Transactional 注解属性 propagation 设置错误(不发生回滚)
+	 		PROPAGATION_SUPPORTS[如果当前没有事务，则以非事务的方式继续运行]
+	 		PROPAGATION_NOT_SUPPORTED[以非事务方式运行，如果当前存在事务，则把当前事务挂起]
+	 		PROPAGATION_NEVER[以非事务方式运行，如果当前存在事务，则抛出异常]
+	 	@Transactional  注解属性 rollbackFor设置错误
+	 		默认Error和RuntimeException才会回滚，可以指定
+	 		如果抛出未指定的异常，则不会回滚
+	 	同一个类中方法调用，导致@Transactional失效
+	 		类Test有方法A和B,A未申明事务，B声明事务
+	 		A调用B，B的事务不起作用
+	 		Spring 中只有跨类的方法调用才会生成代理对象管理，才会AOP
+	 	异常被你的 catch“吃了”导致@Transactional失效
+	 	数据库引擎不支持事务
+json
+	@JsonIgnoreProperties 
+测试
+	@Test
+</code></pre><h2 id="框架的缺点">框架的缺点</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">Spring
+	依赖反射，影响性能
+	大而全，对于只是想要快速开发来说，不适合
+SpringBoot
+	简单背后蕴藏了巨大的学习曲线
 </code></pre><h1 id="spring-security">Spring Security</h1>
 <h2 id="尚硅谷springsecurity框架教程-总结">尚硅谷SpringSecurity框架教程 总结</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">官方文档
@@ -381,7 +480,9 @@ Sentinel支持Spring cloud gateway
     <li><a href="#参考链接和资料">参考链接和资料</a></li>
     <li><a href="#spring基础知识">Spring基础知识</a>
       <ul>
-        <li><a href="#aop和ioc">AOP和IOC</a></li>
+        <li><a href="#aop和ioc简单版">AOP和IOC（简单版）</a></li>
+        <li><a href="#什么是ioc">什么是IOC？</a></li>
+        <li><a href="#ioc与di的区别">IOC与DI的区别</a></li>
         <li><a href="#spring-aop使用方式">Spring AOP使用方式</a></li>
         <li><a href="#spring的组件有哪些">Spring的组件有哪些？</a></li>
         <li><a href="#bean的生命周期">bean的生命周期</a></li>
@@ -397,6 +498,8 @@ Sentinel支持Spring cloud gateway
             <li><a href="#异常细化处理">异常细化处理</a></li>
           </ul>
         </li>
+        <li><a href="#springboot常用注解">SpringBoot常用注解</a></li>
+        <li><a href="#框架的缺点">框架的缺点</a></li>
       </ul>
     </li>
     <li><a href="#spring-security">Spring Security</a>

@@ -144,11 +144,15 @@
 <p><strong>君子不立危墙之下</strong></p>
 <h1 id="参考链接和资料">参考链接和资料</h1>
 <ul>
+<li><a href="https://redis.io/commands/">redis官网</a></li>
 <li>redis 设计与实现</li>
 <li><a href="https://www.bilibili.com/video/BV1pY4y167Dc">杀穿面试官-深入Redis分布式锁</a></li>
 <li><a href="https://www.zhihu.com/question/57045322/answer/1931497548">Redis 在使用中会遇到哪些坑？如何规避？</a></li>
 <li><a href="https://mp.weixin.qq.com/s/yIE5NOj7nqCu2AnWCte1Rg">分布式id生成策略，我和面试官扯了一个半小时</a></li>
 <li><a href="https://blog.hackerpie.com/posts/algorithms/snowflake/multiple-clocks-snowflake/">多时钟解决雪花算法的时间回拨问题</a></li>
+<li><a href="https://juejin.cn/post/6844904082860146695#comment">细说Redis分布式锁🔒</a></li>
+<li><a href="https://juejin.cn/post/6844903506998984711">Redis RedLock 完美的分布式锁么？</a></li>
+<li><a href="https://juejin.cn/post/6976538149904678925">Redis Redlock 的争论</a></li>
 </ul>
 <h1 id="redis基础知识">redis基础知识</h1>
 <h2 id="redis的基本数据结构">redis的基本数据结构</h2>
@@ -255,11 +259,16 @@ Snowflake 是 Twitter 开源的分布式 ID 生成算法。Snowflake 由 64 bit 
 <pre tabindex="0"><code class="language-a" data-lang="a">https://github.com/baidu/uid-generator/blob/master/README.zh_cn.md
 </code></pre><h3 id="美团leaf-todo">美团Leaf （todo）</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">https://tech.meituan.com/2019/03/07/open-source-project-leaf.html
+</code></pre><h1 id="redis-并发">redis 并发</h1>
+<h2 id="redis并发上限压测">redis并发上限（压测）</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">http://www.redis.cn/topics/benchmarks.html
+
+50000-100000
 </code></pre><h1 id="redis分布式锁">redis分布式锁</h1>
 <h2 id="为什么要分布式锁">为什么要分布式锁</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">为什么要分布式锁，用syncronize和reentranlock不能
 保证分布式情况下锁住,因为每台机器都有一个不同的对象
-</code></pre><h2 id="分布式锁的进化">分布式锁的进化</h2>
+</code></pre><h2 id="分布式锁的进化单机">分布式锁的进化（单机）</h2>
 <h3 id="直接使用setnx命令uuid">直接使用setnx命令+uuid</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">setnx：Redis Setnx（SET if Not eXists） 
 命令在指定的 key 不存在时，为 key 设置指定的值。
@@ -274,7 +283,32 @@ key就是你定义一个字符串，比如锁某个资源，可以在java
 <pre tabindex="0"><code class="language-a" data-lang="a">redisson解决措施（watch dog机制）：卡顿时续期，宕机时不续期
 redisson还提供了一些的分布式容器，比如分布式的
 HashMap，对标java本地内存中的ConcurrentHashMap
-</code></pre><h1 id="redis使用过程遇到的问题坑">redis使用过程遇到的问题（坑）</h1>
+</code></pre><h2 id="redlock分布式锁redis官方实现">redlock（分布式锁redis官方实现）</h2>
+<h3 id="算法流程">算法流程</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">加锁
+假设有5个结点，超过(5+1)/2=3个结点加锁成功就通过
+1、获取开始时间
+2、去各个节点获取锁
+3、再次获取时间。
+4、计算获取锁的时间，检查获取锁的时间是否小于获取锁的时间。
+5、持有锁，该干啥干啥去
+
+解锁
+一个一个解锁就好了
+</code></pre><h3 id="存在问题">存在问题</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、效率[多个结点通信太麻烦]
+2、正确性不一定保证
+	依赖时钟[需要运维保障]
+	存在极端情况[第4步阻塞之后没法感知]
+</code></pre><h3 id="分布式专家-martin-对于-relock-的质疑">分布式专家 Martin 对于 Relock 的质疑</h3>
+<ul>
+<li><a href="https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html">https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html</a></li>
+<li><a href="https://juejin.cn/post/6976538149904678925#heading-0">https://juejin.cn/post/6976538149904678925#heading-0</a></li>
+<li><a href="https://juejin.cn/post/6844903506998984711">https://juejin.cn/post/6844903506998984711</a></li>
+<li><a href="https://juejin.cn/post/6927204732704391175#comment">https://juejin.cn/post/6927204732704391175#comment</a></li>
+<li><a href="https://juejin.cn/post/6844904082860146695#comment">https://juejin.cn/post/6844904082860146695#comment</a></li>
+</ul>
+<h1 id="redis使用过程遇到的问题坑">redis使用过程遇到的问题（坑）</h1>
 <h2 id="常见命令">常见命令</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">set命令之前设置了过期时间，后面set的时候不加上过期时间参数的话会把过期时间擦除
 如果你要删除的是一个非 String 类型的 key，这个 key 的元素越多，那么在执行 DEL 时耗时就越久！
@@ -346,15 +380,27 @@ master和slave的时钟不一致会导致缓存雪崩
         </li>
       </ul>
     </li>
+    <li><a href="#redis-并发">redis 并发</a>
+      <ul>
+        <li><a href="#redis并发上限压测">redis并发上限（压测）</a></li>
+      </ul>
+    </li>
     <li><a href="#redis分布式锁">redis分布式锁</a>
       <ul>
         <li><a href="#为什么要分布式锁">为什么要分布式锁</a></li>
-        <li><a href="#分布式锁的进化">分布式锁的进化</a>
+        <li><a href="#分布式锁的进化单机">分布式锁的进化（单机）</a>
           <ul>
             <li><a href="#直接使用setnx命令uuid">直接使用setnx命令+uuid</a></li>
             <li><a href="#解决死锁">解决死锁</a></li>
             <li><a href="#保证原子性">保证原子性</a></li>
             <li><a href="#解决宕机终极解决办法">解决宕机（终极解决办法）</a></li>
+          </ul>
+        </li>
+        <li><a href="#redlock分布式锁redis官方实现">redlock（分布式锁redis官方实现）</a>
+          <ul>
+            <li><a href="#算法流程">算法流程</a></li>
+            <li><a href="#存在问题">存在问题</a></li>
+            <li><a href="#分布式专家-martin-对于-relock-的质疑">分布式专家 Martin 对于 Relock 的质疑</a></li>
           </ul>
         </li>
       </ul>

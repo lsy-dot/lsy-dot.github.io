@@ -381,6 +381,13 @@ java.sql.Driver 是最为典型的 SPI 接口，java.sql.DriverManager 通过扫
 -XX:+UseConcMarkSweepGC：指定使用 CMS + Serial Old 垃圾回收器组合；
 -XX:+PrintGC：开启打印 gc 信息；
 -XX:+PrintGCDetails：打印 gc 详细信息。
+</code></pre><h2 id="基本原则">基本原则</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读：https://blog.csdn.net/javalingyu/article/details/124587666
+代码层面
+	减少创建对象的数量
+	减少使用全局变量和大对象
+	优先架构调优和代码调优，JVM优化是不得已的手段
+	分析GC情况优化代码比优化JVM参数更好
 </code></pre><h1 id="学习路线todo">学习路线（todo）</h1>
 
         </p>
@@ -438,6 +445,7 @@ java.sql.Driver 是最为典型的 SPI 接口，java.sql.DriverManager 通过扫
       <ul>
         <li><a href="#工具">工具</a></li>
         <li><a href="#常用的-jvm-调优的参数都有哪些">常用的 JVM 调优的参数都有哪些？</a></li>
+        <li><a href="#基本原则">基本原则</a></li>
       </ul>
     </li>
     <li><a href="#学习路线todo">学习路线（todo）</a></li>

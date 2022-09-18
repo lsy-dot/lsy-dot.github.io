@@ -240,10 +240,11 @@ StringBuffer线程安全
 String 用+=每次循环都创建一个StringBuilder
 </code></pre><h3 id="异常体系">异常体系</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">throwable
-	Error
+	Error  [OutOfMemoryError,StackOverFlowError]
 	Exception
 		IoException(checked)[io,class not found]
 		RuntimeException(unchecked)[空指针,越界,算术]
+		
 </code></pre><h3 id="finally">finally</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">finally中的return会优先于try中的return执行
 </code></pre><h3 id="代理模式">代理模式</h3>
@@ -263,12 +264,6 @@ String 用+=每次循环都创建一个StringBuilder
 class.forname
 实例.getClass
 xxxClassloader.loadClass
-</code></pre><h3 id="io">IO</h3>
-<pre tabindex="0"><code class="language-a" data-lang="a">同步阻塞IO:每次都要开多线程
-同步非阻塞IO:要轮询
-IO多路复用:事件驱动
-信号驱动IO:信号机制
-异步IO:读写数据时可以干别的事情
 </code></pre><h3 id="io流api">IO流（API）</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">1、	    字节流、字符流
 输入流   字节输入流 InputStream      字符输入流 Reader
@@ -278,6 +273,20 @@ IO多路复用:事件驱动
 3、转换流   字符和字节之间通过不同的编码方式进行转化
 4、序列化流 对象序列化
 5、打印流  打印到文件或者控制台。
+</code></pre><h3 id="file类常用api">File类常用api</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">创建
+	File(File parent, String child)
+	File(String pathname)
+	File(String parent, String child)
+	File(URI uri)
+常用api
+	exists()
+	isDirectory()
+	isFile()
+	delete()
+	mkdir()
+	mkdirs()
+一般用法是创建file之后传给一个字节流进行后续操作
 </code></pre><h3 id="arraylist扩容机制">arraylist扩容机制</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">当我们使用默认的构造器是实例化ArrayList时，数组大小经过种种判断扩容为10。
 使用默认构造器实例化的ArrayList，在第一次添加元素和第11次添加元素时才会触发扩容。也就是第一次时，和超过数组容量时添加才触发扩容。
@@ -305,6 +314,15 @@ finally块：无论是否捕获或处理异常，finally块中的代码都会被
 <pre tabindex="0"><code class="language-a" data-lang="a">https://blog.csdn.net/DragonGirI/article/details/81587525
 java里a=a+1会自动转型成int，如果不进行显示转换，而是将int强转short就会报错.
 隐式类型转换可以从小到大自动转，即byte→short→int→long；如果反过来会丢失精度，必须进行显示类型转换
+</code></pre><h3 id="int-和-integer-区别联系">int 和 Integer 区别联系</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读:https://blog.csdn.net/chenliguan/article/details/53888018
+基本区别
+	[Integer][int]
+	[包装类][基本数据类型]
+	[存的是引用][存的是数值]
+	[默认null][默认0]
+深入对比
+	两个new的Integer不会相等，但是非new的会相等[存在常量池(-128-127)里面了]
 </code></pre><h2 id="问题">问题</h2>
 <h3 id="为什么重写equals要重写hashcode">为什么重写equals要重写hashcode</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">这里明确一点，
@@ -397,6 +415,44 @@ Stream api
 localdatetime
 
 https://blog.csdn.net/fanghuainihao/article/details/123682021
+</code></pre><h3 id="python和java的区别java有什么优势和劣势">python和Java的区别，Java有什么优势和劣势</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">java的优势
+	严谨、健壮、不容易出错
+		自动垃圾回收
+		抛弃无符号类型
+		安全的枚举
+		编译期泛型检查
+		强制的异常处理
+	标准库设计很规范 [用了大量的设计模式]
+java的劣势
+	代码好多
+python的优势
+	python语法简单，第三方库很多
+	一些都是对象[类也是]
+python的劣势
+	慢
+	动态语言不好重构 [写testcase]
+</code></pre><h3 id="idea常用插件">IDEA常用插件</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读：https://developer.aliyun.com/article/803464
+操作
+	Key Promoter X [IDEA快捷键提示 用快捷键代替鼠标操作]
+	Translation [翻译]
+格式
+	Save Actions [格式自动化]
+文档
+    Javadoc [Javadoc生成插件]
+    Easy Javadoc [Javadoc生成插件]
+自动编码
+	Codota AI Autocomplete [代码自动提示和推荐]
+	Auto filling Java call arguments [自动填充调用方法参数] 
+    GenerateAllSetter [自动生成调用对象的set方法]
+    GenerateO2O [自动生成对象之前的传输方法]
+	Squaretest [自动生成单元测试]
+代码分析
+	SequenceDiagram [方法调的深度，生产时序图]
+    Maven Helper [Maven依赖分析工具]
+    FindBugs-IDEA [代码质量扫描检查工具]
+    CheckStyle-IDEA [编码风格扫描检查工具]
 </code></pre><h1 id="数据结构">数据结构</h1>
 <h2 id="二叉树">二叉树</h2>
 <h3 id="满二叉树和完全二叉树">满二叉树和完全二叉树</h3>
@@ -414,6 +470,43 @@ https://blog.csdn.net/fanghuainihao/article/details/123682021
 性质6. 每次新插入的节点都必须是红色（why）
 红黑树最终是为了解决二叉查找树性能退化成链表的问题，
 对2-3树的2标记成红色，单节点标记成黑色。
+</code></pre><h1 id="操作系统">操作系统</h1>
+<h2 id="io">IO</h2>
+<h3 id="推荐阅读">推荐阅读</h3>
+<ul>
+<li><a href="https://juejin.cn/post/7130952602350534693">https://juejin.cn/post/7130952602350534693</a></li>
+</ul>
+<h3 id="分类">分类</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">工作层面
+	网络IO
+	磁盘IO
+同步
+	同步IO
+	异步IO（异步天生就是非阻塞）
+阻塞
+	阻塞IO
+	非阻塞IO
+LinuxIO模型
+    同步阻塞IO:每次都要开多线程
+    同步非阻塞IO:要轮询
+    IO多路复用:事件驱动 [读写还是需要自己来弄，会阻塞](select,poll,epoll 见redis笔记)
+    信号驱动IO:信号机制 [读写还是需要自己来弄，会阻塞]
+    异步IO:读写数据时可以干别的事情
+Java
+	BIO [阻塞IO]
+	NIO [非阻塞IO，基于多路复用实现]
+		Buffer
+		Channel
+		Selector
+	AIO [订阅通知，底层基于epoll实现]
+		
+</code></pre><h3 id="nioaio的区别">NIO、AIO的区别</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">NIO 基于Reacot模式构建，
+	Reacot负责事件的注册、监听、派发工作[selector]
+	触发事件之后自己负责读取数据
+AIO 基于Proactor
+	Proactor负责异步IO的回调工作派发 [AsynchronousChannelGroup]
+	回调之后OS负责读取数据，读取好了之后再通知线程
 </code></pre>
         </p>
     </div>
@@ -440,12 +533,13 @@ https://blog.csdn.net/fanghuainihao/article/details/123682021
             <li><a href="#finally">finally</a></li>
             <li><a href="#代理模式">代理模式</a></li>
             <li><a href="#java获取class对象的4种方式">java获取class对象的4种方式</a></li>
-            <li><a href="#io">IO</a></li>
             <li><a href="#io流api">IO流（API）</a></li>
+            <li><a href="#file类常用api">File类常用api</a></li>
             <li><a href="#arraylist扩容机制">arraylist扩容机制</a></li>
             <li><a href="#java序列化id的作用">java序列化id的作用</a></li>
             <li><a href="#try-catch-finally-的return执行顺序">try catch finally 的return执行顺序</a></li>
             <li><a href="#short-a-1aa1-运行结果原理">short a =1;a=a+1 运行结果，原理</a></li>
+            <li><a href="#int-和-integer-区别联系">int 和 Integer 区别联系</a></li>
           </ul>
         </li>
         <li><a href="#问题">问题</a>
@@ -455,6 +549,8 @@ https://blog.csdn.net/fanghuainihao/article/details/123682021
             <li><a href="#hashmap-与-concurrenthashmap-原理总结">HashMap 与 ConcurrentHashMap 原理总结</a></li>
             <li><a href="#threadlocal">Threadlocal</a></li>
             <li><a href="#jdk18新特性">jdk1.8新特性</a></li>
+            <li><a href="#python和java的区别java有什么优势和劣势">python和Java的区别，Java有什么优势和劣势</a></li>
+            <li><a href="#idea常用插件">IDEA常用插件</a></li>
           </ul>
         </li>
       </ul>
@@ -465,6 +561,17 @@ https://blog.csdn.net/fanghuainihao/article/details/123682021
           <ul>
             <li><a href="#满二叉树和完全二叉树">满二叉树和完全二叉树</a></li>
             <li><a href="#平衡二叉树有什么应用红黑树">平衡二叉树有什么应用(红黑树)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#操作系统">操作系统</a>
+      <ul>
+        <li><a href="#io">IO</a>
+          <ul>
+            <li><a href="#推荐阅读">推荐阅读</a></li>
+            <li><a href="#分类">分类</a></li>
+            <li><a href="#nioaio的区别">NIO、AIO的区别</a></li>
           </ul>
         </li>
       </ul>
