@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>acwing算法基础课 on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/acwing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/</link>
+    <description>Recent content in acwing算法基础课 on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/acwing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>acwing-动态规划</title>
+      <link>https://lsy-dot.github.io/posts/acwing-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
+      <pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/acwing-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 背包问题 01背包 几个关键的点1、初始化f[n]如果全部初始化为0，那么f[n]表示的是背包体积小于等于n的最大价值f[n]如果f[0]=0f[其他]=-inf那么f[n]表示的是背包体积恰好等于n的最大价值，为-inf表示不可达2、内层循环的执行顺序顺序执行，那么需要二维数组逆序执行，可以压缩二维数组为一维 完全背包 和01背包的区别在于通过改变顺序为顺序从而使得可以选取多件物品 多重背包 1、朴素版直接在01背包的最内层加一层循环2、二进制优化通过二进制枚举优化可以加快第三层的循环 分组背包 每组背包只能选一个，因此可以转换成有s+1种决策的01背包 线性dp https://www.acwing.com/activity/content/11/</description>
+    </item>
+    
+  </channel>
+</rss>

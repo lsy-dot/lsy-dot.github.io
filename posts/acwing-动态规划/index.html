@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>acwing-动态规划</title>
+    <meta name="description" content="关于acwing 动态规划的的一些笔记">
+    <meta name="keywords" content='acwing算法基础课'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/acwing-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="acwing-动态规划">
+    <meta property="og:description" content="关于acwing 动态规划的的一些笔记">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="acwing-动态规划">
+    <meta name="twitter:description" content="关于acwing 动态规划的的一些笔记">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/acwing-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/acwing-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/acwing-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>acwing-动态规划</h1>
+        <small role="doc-subtitle">关于acwing 动态规划的的一些笔记</small>
+        <p class="post-date">
+            September 8, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/acwing%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80%E8%AF%BE">acwing算法基础课</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>种一棵树最好的时间就是十年前，或者是现在。</strong></p>
+<h1 id="参考链接">参考链接</h1>
+<h1 id="背包问题">背包问题</h1>
+<h2 id="01背包">01背包</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">几个关键的点
+1、初始化
+f[n]如果全部初始化为0，那么f[n]表示的是背包体积小于等于n的最大价值
+f[n]如果
+	f[0]=0
+	f[其他]=-inf
+	那么f[n]表示的是背包体积恰好等于n的最大价值，为-inf表示不可达
+2、内层循环的执行顺序
+顺序执行，那么需要二维数组
+逆序执行，可以压缩二维数组为一维
+</code></pre><h2 id="完全背包">完全背包</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">和01背包的区别在于通过改变顺序为顺序从而使得可以选取多件物品
+</code></pre><h2 id="多重背包">多重背包</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、朴素版
+直接在01背包的最内层加一层循环
+2、二进制优化
+通过二进制枚举优化可以加快第三层的循环
+</code></pre><h2 id="分组背包">分组背包</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">每组背包只能选一个，因此可以转换成有s+1种决策的01背包
+</code></pre><h1 id="线性dp">线性dp</h1>
+<p><a href="https://www.acwing.com/activity/content/11/">https://www.acwing.com/activity/content/11/</a></p>
+
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接">参考链接</a></li>
+    <li><a href="#背包问题">背包问题</a>
+      <ul>
+        <li><a href="#01背包">01背包</a></li>
+        <li><a href="#完全背包">完全背包</a></li>
+        <li><a href="#多重背包">多重背包</a></li>
+        <li><a href="#分组背包">分组背包</a></li>
+      </ul>
+    </li>
+    <li><a href="#线性dp">线性dp</a></li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>

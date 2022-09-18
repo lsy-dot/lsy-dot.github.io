@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>工具 on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/%E5%B7%A5%E5%85%B7/</link>
+    <description>Recent content in 工具 on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 15 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>maven的学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/maven%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/maven%E4%BD%BF%E7%94%A8/</guid>
+      <description>quote 难道向上攀爬的过程不比站在顶峰更让人热血澎湃吗
+参考链接 maven的使用 超级详细的Maven使用教程 Maven的常用命令 </description>
+    </item>
+    
+  </channel>
+</rss>

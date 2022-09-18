@@ -463,6 +463,10 @@ where b.stu_name is null
 
 
 https://blog.csdn.net/qq_35890572/article/details/121662427
+</code></pre><h2 id="数据库大表分表思路">数据库大表分表思路</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">1、读写分离
+2、水平分离（把字段分到不同的表）
+3、垂直切分（对id取模分到不同的表里面，查询时也根据取模的结果去查对应的表）
 </code></pre><h1 id="学习路线todo">学习路线(todo)</h1>
 
         </p>
@@ -544,6 +548,7 @@ https://blog.csdn.net/qq_35890572/article/details/121662427
         <li><a href="#mysql的view-和table有什么区别">mysql的view 和table有什么区别</a></li>
         <li><a href="#mysql查询前5条数据怎么做6-10条呢">mysql查询前5条数据怎么做，6-10条呢</a></li>
         <li><a href="#一张表学生课程成绩-找出所有课程大于90分的学生">一张表：学生、课程、成绩： 找出所有课程大于90分的学生</a></li>
+        <li><a href="#数据库大表分表思路">数据库大表分表思路</a></li>
       </ul>
     </li>
     <li><a href="#学习路线todo">学习路线(todo)</a></li>

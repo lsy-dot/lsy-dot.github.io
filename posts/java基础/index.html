@@ -389,6 +389,14 @@ Object（类型）是ThreadLocalMap的value，它是强引用
 当ThreadLocal不再被需要时，下次GC可以直接回收他
 但是对于周期比较长的线程，用完变量之后，要主动调用ThreadLocalMap#remove()主动清理
 不然会由于value是强引用出现内存泄漏。
+</code></pre><h3 id="jdk18新特性">jdk1.8新特性</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">lambda表达式
+	接口default
+方法引用
+Stream api
+localdatetime
+
+https://blog.csdn.net/fanghuainihao/article/details/123682021
 </code></pre><h1 id="数据结构">数据结构</h1>
 <h2 id="二叉树">二叉树</h2>
 <h3 id="满二叉树和完全二叉树">满二叉树和完全二叉树</h3>
@@ -446,6 +454,7 @@ Object（类型）是ThreadLocalMap的value，它是强引用
             <li><a href="#反射的优缺点以及如何安全防范">反射的优缺点以及如何安全防范</a></li>
             <li><a href="#hashmap-与-concurrenthashmap-原理总结">HashMap 与 ConcurrentHashMap 原理总结</a></li>
             <li><a href="#threadlocal">Threadlocal</a></li>
+            <li><a href="#jdk18新特性">jdk1.8新特性</a></li>
           </ul>
         </li>
       </ul>

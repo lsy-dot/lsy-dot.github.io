@@ -231,7 +231,17 @@ nginx负载均衡的三种方式
 轮询、权重、ip_hash
 
 mysql改成主从架构，主从复制，读写分离
-</code></pre><h1 id="open-falcon">open-falcon</h1>
+</code></pre><h2 id="相关问题">相关问题</h2>
+<h3 id="项目里登录用到的threadlocal存user对象在什么时候调用remove方法清除合适啊">项目里登录用到的threadlocal存user对象，在什么时候调用remove方法清除合适啊。</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">在页面拦截器的三个方法中的第三个方法中就释放了
+afterCompletion方法中就清掉了
+
+https://blog.csdn.net/m0_68092999/article/details/126087674
+调用前提：preHandle返回true
+调用时间：DispatcherServlet进行视图的渲染之后
+多用于清理资源
+</code></pre><p><img src="/images/threadlocal_remove.png" alt="Markdowm Image"></p>
+<h1 id="open-falcon">open-falcon</h1>
 <h2 id="简单介绍-1">简单介绍</h2>
 <h3 id="任务">任务</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">1，消息队列的监控告警，主要是监控每个队列里消息情况，包括空闲，消息积压，消费者列表，也可以涵盖消息队列的性能监控。
@@ -366,6 +376,11 @@ uic:用户信息管理(web)
           </ul>
         </li>
         <li><a href="#改进方向">改进方向</a></li>
+        <li><a href="#相关问题">相关问题</a>
+          <ul>
+            <li><a href="#项目里登录用到的threadlocal存user对象在什么时候调用remove方法清除合适啊">项目里登录用到的threadlocal存user对象，在什么时候调用remove方法清除合适啊。</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#open-falcon">open-falcon</a>
