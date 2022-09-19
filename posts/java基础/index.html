@@ -165,7 +165,21 @@
 </ul>
 <h1 id="常见问题">常见问题</h1>
 <h2 id="小问题">小问题</h2>
-<h3 id="jdkjrejvm的关系">JDK，JRE，JVM的关系</h3>
+<h3 id="java基本数据类型">java基本数据类型</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">数字  [字节数](取值范围)
+	整数
+		byte [1] (-128 ~ 127)
+		short [2] (-32768 ~ 32767)
+		int [4] (-2147483648 ~ 2147483647)
+		long [8] (-9223372036854775808 ~ 9223372036854775807)
+	浮点数
+		float [4] 
+		double [8]
+	字符
+		char [2]
+	布尔
+		boolean [1]
+</code></pre><h3 id="jdkjrejvm的关系">JDK，JRE，JVM的关系</h3>
 <p>JDK包含JRE JRE包含JVM</p>
 <h3 id="常见关键字">常见关键字</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">native 本地方法，用c++实现或者其他语言实现
@@ -224,12 +238,18 @@ java中的重载与重写的区别：
 equals
 重写：自定义
 未重写：引用地址
-</code></pre><h3 id="面向对象三大特征">面向对象三大特征</h3>
-<pre tabindex="0"><code class="language-a" data-lang="a">1、封装
-2、继承
-注意：子类拥有父类的private，但需通过父类方法访问
-3、多态
-父类引用指向子类实例
+</code></pre><h3 id="面向对象">面向对象</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">三大特征
+    1、封装
+    2、继承
+    注意：子类拥有父类的private，但需通过父类方法访问
+    3、多态
+    父类引用指向子类实例
+ 好处
+ 	容易维护
+ 	容易扩展
+ 	效率高
+ 	质量高
 </code></pre><h3 id="深拷贝vs浅拷贝">深拷贝vs浅拷贝</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">深拷贝:会在内存中再复制一份对象然后指向它
 浅拷贝:对象只拷贝引用
@@ -353,6 +373,36 @@ jdk8,数组+链表+红黑树（链表转换为红黑树是在单个链表长度�
 4、Fail-Fast 机制
 多线程修改时根据modCount看修改次数避免多线程，直接抛异常
 
+
+为什么在长度是8的时候转红黑树
+推荐阅读:https://www.jianshu.com/p/fdf3d24fe3e8
+官方文档如下
+In usages with well-distributed user hashCodes, tree bins 
+are rarely used.  Ideally, under random hashCodes, the 
+frequency of nodes in bins follows a Poisson distribution 
+(http://en.wikipedia.org/wiki/Poisson_distribution) with a 
+parameter of about 0.5 on average for the default resizing 
+threshold of 0.75, although with a large variance because 
+of resizing granularity. Ignoring variance, the expected 
+occurrences of list size k are (exp(-0.5) * pow(0.5, k) / 
+factorial(k)). The first values are:
+ 
+ 0:    0.60653066
+ 1:    0.30326533
+ 2:    0.07581633
+ 3:    0.01263606
+ 4:    0.00157952
+ 5:    0.00015795
+ 6:    0.00001316
+ 7:    0.00000094
+ 8:    0.00000006
+ more: less than 1 in ten million
+ 解释一下:
+ 	如果hashcode设计的很好的话，链表长度的概率如上图
+ 	长度为8时的概率只有千分之一，也就是说不怎么会出现红黑树
+ 	但是如果用户自己定义一些垃圾的hashcode算法就没法保障了
+ 	这也是这个红黑树优化的作用。
+
 HashMap 的 put() 方法添加元素的过程：
 1、计算hash值
 2、hash和数组长度进行与运算，计算存储的下标
@@ -470,43 +520,6 @@ python的劣势
 性质6. 每次新插入的节点都必须是红色（why）
 红黑树最终是为了解决二叉查找树性能退化成链表的问题，
 对2-3树的2标记成红色，单节点标记成黑色。
-</code></pre><h1 id="操作系统">操作系统</h1>
-<h2 id="io">IO</h2>
-<h3 id="推荐阅读">推荐阅读</h3>
-<ul>
-<li><a href="https://juejin.cn/post/7130952602350534693">https://juejin.cn/post/7130952602350534693</a></li>
-</ul>
-<h3 id="分类">分类</h3>
-<pre tabindex="0"><code class="language-a" data-lang="a">工作层面
-	网络IO
-	磁盘IO
-同步
-	同步IO
-	异步IO（异步天生就是非阻塞）
-阻塞
-	阻塞IO
-	非阻塞IO
-LinuxIO模型
-    同步阻塞IO:每次都要开多线程
-    同步非阻塞IO:要轮询
-    IO多路复用:事件驱动 [读写还是需要自己来弄，会阻塞](select,poll,epoll 见redis笔记)
-    信号驱动IO:信号机制 [读写还是需要自己来弄，会阻塞]
-    异步IO:读写数据时可以干别的事情
-Java
-	BIO [阻塞IO]
-	NIO [非阻塞IO，基于多路复用实现]
-		Buffer
-		Channel
-		Selector
-	AIO [订阅通知，底层基于epoll实现]
-		
-</code></pre><h3 id="nioaio的区别">NIO、AIO的区别</h3>
-<pre tabindex="0"><code class="language-a" data-lang="a">NIO 基于Reacot模式构建，
-	Reacot负责事件的注册、监听、派发工作[selector]
-	触发事件之后自己负责读取数据
-AIO 基于Proactor
-	Proactor负责异步IO的回调工作派发 [AsynchronousChannelGroup]
-	回调之后OS负责读取数据，读取好了之后再通知线程
 </code></pre>
         </p>
     </div>
@@ -522,11 +535,12 @@ AIO 基于Proactor
       <ul>
         <li><a href="#小问题">小问题</a>
           <ul>
+            <li><a href="#java基本数据类型">java基本数据类型</a></li>
             <li><a href="#jdkjrejvm的关系">JDK，JRE，JVM的关系</a></li>
             <li><a href="#常见关键字">常见关键字</a></li>
             <li><a href="#重载和重写">重载和重写</a></li>
             <li><a href="#-vs-equals">== vs equals</a></li>
-            <li><a href="#面向对象三大特征">面向对象三大特征</a></li>
+            <li><a href="#面向对象">面向对象</a></li>
             <li><a href="#深拷贝vs浅拷贝">深拷贝vs浅拷贝</a></li>
             <li><a href="#string-stringbuffer-stringbuilder">String StringBuffer StringBuilder</a></li>
             <li><a href="#异常体系">异常体系</a></li>
@@ -561,17 +575,6 @@ AIO 基于Proactor
           <ul>
             <li><a href="#满二叉树和完全二叉树">满二叉树和完全二叉树</a></li>
             <li><a href="#平衡二叉树有什么应用红黑树">平衡二叉树有什么应用(红黑树)</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#操作系统">操作系统</a>
-      <ul>
-        <li><a href="#io">IO</a>
-          <ul>
-            <li><a href="#推荐阅读">推荐阅读</a></li>
-            <li><a href="#分类">分类</a></li>
-            <li><a href="#nioaio的区别">NIO、AIO的区别</a></li>
           </ul>
         </li>
       </ul>

@@ -431,7 +431,56 @@ https://segmentfault.com/a/1190000022361169
 缺点
 (1)依赖sql
 (2)依赖数据库，数据库的移植性不高
-</code></pre><h1 id="spring-cloud">Spring Cloud</h1>
+</code></pre><h2 id="mybatis的数据源和连接池">mybatis的数据源和连接池</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读:https://segmentfault.com/a/1190000038338294
+
+连接池 vs 线程池
+	连接池
+		1、连接池是面向数据库连接的
+        2、连接池是为了优化数据库连接资源
+        3、连接池有点类似在客户端做优化
+	线程池
+    	1、线程池是面向后台程序的
+        2、线程池是是为了提高内存和CPU效率
+        3、线程池有点类似于在服务端做优化
+        
+数据源
+    UNPOOLED 不使用连接池的数据源
+    POOLED 使用连接池的数据源
+    JNDI 使用JNDI实现的数据源
+
+流程
+	创建SqlSessionFactory对象
+	创建SqlSession对象
+	执行sql语句
+		创建Connection（延迟加载）
+		执行sql语句
+	根据代理增强的对象，不销毁Connection，放回连接池
+</code></pre><h2 id="mybatis的二级缓存">mybatis的二级缓存</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读:https://tech.meituan.com/2018/01/19/mybatis-cache.html
+
+
+
+
+一级缓存
+	实现了SqlSession之间缓存数据的共享
+	多个SqlSession或者分布式的环境下，数据库写操作会引起脏数据，建议设定缓存级别为Statement
+二级缓存
+	能够到namespace级别
+	但是不同表之间连表（namespace）操作会引发脏数据
+建议
+	MyBatis缓存特性在生产环境中进行关闭
+	单纯作为一个ORM框架使用可能更为合适
+
+缓存级别
+	statement [每次都不查缓存]
+	session  [一级缓存]
+	namespace  [二级缓存]
+	自定义缓存
+		新建一个类实现Cache接口
+		重写putObject等方法
+</code></pre><p><img src="/images/mybatis_cache.png" alt="Markdowm Image"></p>
+<h1 id="spring-cloud">Spring Cloud</h1>
 <h2 id="gateway">gateway</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">核心概念
 1、路由=id+目标uri+一组断言+一组过滤器
@@ -524,6 +573,8 @@ Sentinel支持Spring cloud gateway
           </ul>
         </li>
         <li><a href="#mybatis的优势">mybatis的优势</a></li>
+        <li><a href="#mybatis的数据源和连接池">mybatis的数据源和连接池</a></li>
+        <li><a href="#mybatis的二级缓存">mybatis的二级缓存</a></li>
       </ul>
     </li>
     <li><a href="#spring-cloud">Spring Cloud</a>

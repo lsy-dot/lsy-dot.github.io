@@ -366,6 +366,10 @@ key_len ☆：使用的索引的长度
 4、主键选择少改变的列
 5、对于冗余和重复的索引要删除，比如如果一个列是PRIMARY KEY和 UNIQUE、INDEX就会创建三个一样是索引
 6、删除未使用的索引
+
+单表索引数量:最好不超过5个
+单索引字段数量:最好不超过5个
+
 索引书籍  Rrelational Database Index Design and the optimizers[数据库索引设计与优化]里面有个索引的三星原则
 一星：先把where中的等值谓词的列提出来作为索引，这样可以减小后面扫面的数据。因为where已经过滤了
 二星：把order by 和group by的列加入索引，这样可以加速排序
@@ -467,6 +471,14 @@ https://blog.csdn.net/qq_35890572/article/details/121662427
 <pre tabindex="0"><code class="language-a" data-lang="a">1、读写分离
 2、水平分离（把字段分到不同的表）
 3、垂直切分（对id取模分到不同的表里面，查询时也根据取模的结果去查对应的表）
+</code></pre><h2 id="数据库添加索引一般在多少数据量">数据库添加索引一般在多少数据量</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读:https://blog.csdn.net/crxk_/article/details/103213009
+数据量:提升倍数
+1万:提升忽略不计
+10万:提升8倍
+100万:71倍
+3000万:1411倍
+在几十万的时候，索引效果就比较显著了
 </code></pre><h1 id="学习路线todo">学习路线(todo)</h1>
 
         </p>
@@ -549,6 +561,7 @@ https://blog.csdn.net/qq_35890572/article/details/121662427
         <li><a href="#mysql查询前5条数据怎么做6-10条呢">mysql查询前5条数据怎么做，6-10条呢</a></li>
         <li><a href="#一张表学生课程成绩-找出所有课程大于90分的学生">一张表：学生、课程、成绩： 找出所有课程大于90分的学生</a></li>
         <li><a href="#数据库大表分表思路">数据库大表分表思路</a></li>
+        <li><a href="#数据库添加索引一般在多少数据量">数据库添加索引一般在多少数据量</a></li>
       </ul>
     </li>
     <li><a href="#学习路线todo">学习路线(todo)</a></li>

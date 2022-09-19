@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>netty on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/netty/</link>
+    <description>Recent content in netty on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/netty/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>netty学习笔记</title>
+      <link>https://lsy-dot.github.io/posts/netty/</link>
+      <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/netty/</guid>
+      <description>quote 君子不立危墙之下
+参考链接和资料 https://www.yuque.com/books/share/04ac99ea-7726-4adb-8e57-bf21e2cc7183/wlr1b0#zlra8 IO 推荐阅读 https://juejin.cn/post/7130952602350534693 分类 工作层面网络IO磁盘IO同步同步IO异步IO（异步天生就是非阻塞）阻塞阻塞IO非阻塞IOLinuxIO模型同步阻塞IO:每次都要开多线程同步非阻塞IO:要轮询IO多路复用:事件驱动 [读写还是需要自己来弄，会阻塞](select,poll,epoll 见redis笔记)信号驱动IO:信号机制 [读写还是需要自己来弄，会阻塞]异步IO:读写数据时可以干别的事情JavaBIO [阻塞IO]NIO [非阻塞IO，基于多路复用实现]BufferChannelSelectorAIO [订阅通知，底层基于epoll实现]NIO、AIO的区别 NIO 基于Reacot模式构建，Reacot负责事件的注册、监听、派发工作[selector]触发事件之后自己负责读取数据AIO 基于ProactorProactor负责异步IO的回调工作派发 [AsynchronousChannelGroup]回调之后OS负责读取数据，读取好了之后再通知线程 Netty 定义 基于NIO的client-server框架简化开发网络应用程序(NIO的封装，更好用)优化了TCP和UDP套接字网络编程支持多种协议FTPHTTPSMTP 应用场景 网络通信RPC框架通信HTTP服务器即时通讯消息推送开源框架DubboRocketMQESgRPC 核心组件 Bytebuf对NIO中Bytebuf的封装Bootstrap客户端的启动引导类ServerBootstrap服务端的启动引导类Channel 网络操作抽象类EventLoop[负责监听网络事件并调用事件处理器进行I/O操作处理]EventloopGroup [多个EventLoop的组合]ChannelHandler [消息的具体处理器]ChannelPipeline [多个ChannelHandler的集合]ChannleFuture [操作执行结果]Thread:EventLoop = 1 : 1 [保障线程安全] 流程图 NioEventloopGroup默认线程数 指定 未指定(CPU核心数*2) 启动过程 服务端 创建两个NioEventloopGroup 线程组bossGroup [用于处理客户端的TCP的连接请求]workerGroup [负责每一条连接的具体读写数据的处理逻辑，将IO操作交由对应的handler处理]创建服务端启动引导类ServerBootstrap通过.</description>
+    </item>
+    
+  </channel>
+</rss>

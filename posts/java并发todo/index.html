@@ -299,6 +299,13 @@ http://guanzhou.pub/2020/03/04/Sync-and-lock/
 1.某个线程在等待一个锁的控制权的这段时间需要中断 
 2.需要分开处理一些wait-notify，ReentrantLock里面的Condition应用，能够控制notify哪个线程 
 3.具有公平锁功能，每个到来的线程都将排队等候
+</code></pre><h2 id="objectwaitnotify-vs-lockconditionawaitconditionsignal">Object(wait&amp;notify) vs Lock(Condition.await&amp;Condition.signal)</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读:https://juejin.cn/post/6906295656520876039
+
+Object(wait&amp;notify)
+	唤醒等待机制不能划分集合，会出现线程假死情况[唤醒了一个线程，它阻塞了]
+Lock(Condition.await&amp;Condition.signal)
+	唤醒等待机制可以划分不同的Condition
 </code></pre><h1 id="java-内存模型">java 内存模型</h1>
 <h2 id="可见性">可见性</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">定义：保证指令不会受 cpu 缓存的影响
@@ -457,6 +464,7 @@ head,tail  队列头尾结点[存放正在等待的线程]
         <li><a href="#reentranlock">ReentranLock</a></li>
         <li><a href="#无锁">无锁</a></li>
         <li><a href="#synchronize和lock适用的场景分别是">synchronize和lock适用的场景分别是？</a></li>
+        <li><a href="#objectwaitnotify-vs-lockconditionawaitconditionsignal">Object(wait&amp;notify) vs Lock(Condition.await&amp;Condition.signal)</a></li>
       </ul>
     </li>
     <li><a href="#java-内存模型">java 内存模型</a>

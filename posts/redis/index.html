@@ -162,6 +162,42 @@ value可以是字符串、hash、list、set、zset（有序的set）
 比如list使用了压缩列表进行压缩降低存储空间，
 具体可以看redis 设计与实现里面的细节，
 zset是基于跳表这种数据结构来设计的。
+
+底层数据结构
+	String
+		简单动态字符串(会记录长度)
+	List
+		双向链表
+		压缩列表
+	Hash
+		哈希表
+		压缩列表
+	Sorted Set
+		跳表
+		压缩列表
+	Set	
+		压缩列表
+		整数数组
+
+推荐阅读:https://blog.csdn.net/yangbindxj/article/details/123482228
+压缩列表
+	字段
+		头部
+            zlbytes [记录整个压缩列表占用对内存字节数]
+            zltail  [记录压缩列表「尾部」节点距离起始地址由多少字节，也就是列表尾的偏移量]
+            zllen   [记录压缩列表包含的节点数量]
+            zlend   [标记压缩列表的结束点，固定值 0xFF（十进制255）]
+		节点(entry)
+			prevlen [记录了「前一个节点」的长度]
+			encoding [记录了当前节点实际数据的类型以及长度]
+			data [记录了当前节点的实际数据]
+	定位表头和表尾是 O(1)
+	其他位置是  O(n)
+推荐阅读:https://mp.weixin.qq.com/s?__biz=MzUxODAzNDg4NQ==&amp;mid=2247495350&amp;idx=2&amp;sn=4e121065c30e3243ea2d3c1f71466c1c&amp;scene=21#wechat_redirect
+跳表
+	链表的优化：
+		之前链表的增删需要一个一个定位
+		在链表上加索引，加的越多，越快，redis中是采用随机数的形式来做的。
 </code></pre><h2 id="redis的特殊数据结构">redis的特殊数据结构</h2>
 <h3 id="bitmap统计dau">bitmap统计dau</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">https://segmentfault.com/a/1190000023704266
@@ -308,7 +344,81 @@ HashMap，对标java本地内存中的ConcurrentHashMap
 <li><a href="https://juejin.cn/post/6927204732704391175#comment">https://juejin.cn/post/6927204732704391175#comment</a></li>
 <li><a href="https://juejin.cn/post/6844904082860146695#comment">https://juejin.cn/post/6844904082860146695#comment</a></li>
 </ul>
-<h1 id="redis使用过程遇到的问题坑">redis使用过程遇到的问题（坑）</h1>
+<h1 id="部署">部署</h1>
+<h2 id="集群哨兵">集群(哨兵)</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">推荐阅读:https://blog.csdn.net/a745233700/article/details/112451629
+
+定义
+	哨兵模式是Redis的高可用方式
+	不提供读写服务，主要用来监控redis实例节点。
+	当redis的主节点挂掉时，哨兵会第一时间感知到，并且在slave节点中重新选出来一个新的master，
+任务
+	监控：哨兵会不断地检查你的Master和Slave是否运作正常。
+	提醒：当被监控的某个Redis节点出现问题时，哨兵可以通过 API 向管理员或者其他应用程序发送通知。
+	自动故障迁移：
+		当一个Master不能正常工作时，哨兵会进行自动故障迁移操作，将失效Master的其中一个Slave升级为新的Master，
+		并让失效Master的其他Slave改为复制新的Master；当客户端试图连接失效的Master时，
+		集群也会向客户端返回新Master的地址，使得集群可以使用新Master代替失效Master。
+搭建
+	配置sentinel.conf文件，配件需要监听的主从的master节点
+		master‐name：主节点master的名字
+		quorum：哨兵集群中多少个sentinel 认为 master 失效才判定为客观下线，
+				一般配节点数/2+1，也就是说大于半数
+	如果主从master设置了密码，还需要配置：
+		sentinel auth-pass &lt;master-name&gt; &lt;password&gt;
+	修改心跳检测的主观下线时间
+		sentinel down-after-milliseconds &lt;master-name&gt; &lt;time&gt;
+	从服务器的个数配置：
+		sentinel parallel-syncs mymaster 2
+	启动指定的哨兵配置文件启动哨兵：
+		./redis-server sentinel.conf --sentinel &amp;
+	查看状态信息：
+	Java客户端连接哨兵模式，只需要配置哨兵节点即可
+工作原理
+	定义
+		哨兵是一个分布式系统，可以在一个架构中运行多个哨兵进程，
+		这些进程使用流言协议(gossip protocols)来传播Master是否下线的信息，
+		并使用投票协议(agreement protocols)来决定是否执行自动故障迁移，
+			以及选择哪个Slave作为新的Master。
+	心跳机制
+		Sentinel 与 Redis Node
+		Sentinel与Sentinel
+	判断master节点是否下线：
+		每个 sentinel 哨兵节点每隔1s 向所有的master、slave以及其他 sentinel 节点发送一个PING命令
+		如果 master 节点回复 PING 命令的时间超过 down-after-milliseconds 设定的阈值（默认30s）
+			则这个 master 会被 sentinel 标记为主观下线
+		当sentinel 哨兵节点将 master 标记为主观下线后，会向其余所有的 sentinel 
+			发送sentinel is-master-down-by-addr消息，询问其他sentinel是否同意该master下线
+		每个sentinel收到命令之后，会根据发送过来的 ip和port 检查自己判断的结果，
+			回复自己是否认为该master节点已经下线了
+		sentinel收到回复之后，如果同意master节点进入主观下线的sentinel数量大于等于quorum，
+			则master会被标记为客观下线，即认为该节点已经不可用。
+		在一般情况下，每个 Sentinel 每隔 10s 向所有的Master，Slave发送 INFO 命令。
+			当Master 被 Sentinel 标记为客观下线时，Sentinel 向下线的 Master 的所有 Slave 
+			发送 INFO 命令的频率会从 10 秒一次改为每秒一次。作用：发现最新的集群拓扑结构
+	基于Raft算法选举领头sentinel(需要一个sentinel来负责故障转移)
+		判断客观下线的sentinel节点向其他 sentinel 节点发送 
+			SENTINEL is-master-down-by-addr ip port current_epoch runid
+		目标sentinel回复是否同意master下线并选举领头sentinel，
+			选择领头sentinel的过程符合先到先得的原则。
+		当sentinel发现选自己的节点个数超过 majority 的个数的时候，自己就是领头节点
+		如果没有一个sentinel达到了majority的数量，等一段时间，重新选举
+	故障转移（到底要选择哪一个slaver节点来作为master）
+		在进行选择之前需要先剔除掉一些不满足条件的slaver，这些slaver不会作为变成master的备选
+			剔除列表中已经下线的从服务
+			剔除有5s没有回复sentinel的info命令的slave
+			剔除与已经下线的主服务连接断开时间超过 down-after-milliseconds * 10 + master宕机时长 的slaver
+		选主过程
+			选择优先级最高的节点，通过sentinel配置文件中的replica-priority配置项，
+				这个参数越小，表示优先级越高
+			如果第一步中的优先级相同，选择offset最大的，
+				offset表示主节点向从节点同步数据的偏移量，越大表示同步的数据越多
+			 如果第二步offset也相同，选择run id较小的
+	修改配置
+		领头sentinel会对选出来的从节点执行slaveof no one 命令让其成为主节点
+		领头sentinel 向别的slave发送slaveof命令，告诉他们新的master是谁谁谁，你们向这个master复制数据
+		如果之前的master重新上线时，领头sentinel同样会给起发送slaveof命令，将其变成从节点
+</code></pre><h1 id="redis使用过程遇到的问题坑">redis使用过程遇到的问题（坑）</h1>
 <h2 id="常见命令">常见命令</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">set命令之前设置了过期时间，后面set的时候不加上过期时间参数的话会把过期时间擦除
 如果你要删除的是一个非 String 类型的 key，这个 key 的元素越多，那么在执行 DEL 时耗时就越久！
@@ -403,6 +513,11 @@ master和slave的时钟不一致会导致缓存雪崩
             <li><a href="#分布式专家-martin-对于-relock-的质疑">分布式专家 Martin 对于 Relock 的质疑</a></li>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li><a href="#部署">部署</a>
+      <ul>
+        <li><a href="#集群哨兵">集群(哨兵)</a></li>
       </ul>
     </li>
     <li><a href="#redis使用过程遇到的问题坑">redis使用过程遇到的问题（坑）</a>

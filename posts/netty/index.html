@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --accent-color: #FF4D4D;
+        }
+    </style>
+
+    
+    
+    
+    
+    
+    
+
+    
+    <title>netty学习笔记</title>
+    <meta name="description" content="关于netty学习的一些笔记">
+    <meta name="keywords" content='netty'>
+
+    <meta property="og:url" content="https://lsy-dot.github.io/posts/netty/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="netty学习笔记">
+    <meta property="og:description" content="关于netty学习的一些笔记">
+    <meta property="og:image" content="../../static/images/image-20220829182427839.png">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="netty学习笔记">
+    <meta name="twitter:description" content="关于netty学习的一些笔记">
+    <meta property="twitter:domain" content="https://lsy-dot.github.io/posts/netty/">
+    <meta property="twitter:url" content="https://lsy-dot.github.io/posts/netty/">
+    <meta name="twitter:image" content="../../static/images/image-20220829182427839.png">
+
+    
+    <link rel="canonical" href="https://lsy-dot.github.io/posts/netty/" />
+
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/normalize.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" type="text/css" href="https://lsy-dot.github.io//css/main.css">
+    <link disabled id="dark-theme" rel="stylesheet" href="https://lsy-dot.github.io//css/dark.css">
+
+    <script src="https://lsy-dot.github.io//js/svg-injector.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/feather-icons.min.js"></script>
+    <script src="https://lsy-dot.github.io//js/main.js"></script>
+
+    
+    
+</head>
+<body>
+        <script type="text/javascript">
+            
+            setThemeByUserPref();
+        </script><header class="header">
+    <nav class="header-nav">
+
+        
+        <div class="avatar">
+            <a href="https://lsy-dot.github.io/">
+                <img src="https://lsy-dot.github.io/images/8531713.jpg" alt="avatar" />
+            </a>
+        </div>
+        
+
+        <div class="nav-title">
+            <a class="nav-brand" href="https://lsy-dot.github.io/">lsy-dot</a>
+        </div>
+
+        <div class="nav-links">
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+            </div>
+            
+            <div class="nav-link">
+                <a href="https://github.com"><span data-feather='github'></span>  </a>
+            </div>
+            
+
+            <span class="nav-icons-divider"></span>
+            <div class="nav-link dark-theme-toggle">
+                <span id="dark-theme-toggle-screen-reader-target" class="sr-only"></span>
+                <a>
+                    <span id="theme-toggle-icon" data-feather="moon"></span>
+                </a>
+            </div>
+
+            <div class="nav-link" id="hamburger-menu-toggle">
+                <a>
+                    <span data-feather="menu"></span>
+                </a>
+            </div>
+
+            
+            <ul class="nav-hamburger-list visibility-hidden">
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/posts/"> Posts </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://lsy-dot.github.io/tags/"> Tags </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="https://github.com"><span data-feather='github'></span>  </a>
+                </li>
+                
+                <li class="nav-item dark-theme-toggle">
+                    <span id="dark-theme-toggle-screen-reader-target" class="sr-only">theme</span>
+                    <a>
+                        <span id="theme-toggle-icon" data-feather="moon"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+<main id="content">
+    <div class="post container">
+    <div class="post-header-section">
+        <h1>netty学习笔记</h1>
+        <small role="doc-subtitle">关于netty学习的一些笔记</small>
+        <p class="post-date">
+            September 19, 2022
+        </p>
+
+        <ul class="post-tags">
+        
+            <li class="post-tag"><a href="https://lsy-dot.github.io/tags/netty">netty</a></li>
+        
+        </ul>
+    </div>
+
+    <div class="post-content">
+        <p>
+            <h1 id="quote">quote</h1>
+<p><strong>君子不立危墙之下</strong></p>
+<h1 id="参考链接和资料">参考链接和资料</h1>
+<ul>
+<li><a href="https://www.yuque.com/books/share/04ac99ea-7726-4adb-8e57-bf21e2cc7183/wlr1b0#zlra8">https://www.yuque.com/books/share/04ac99ea-7726-4adb-8e57-bf21e2cc7183/wlr1b0#zlra8</a></li>
+</ul>
+<h1 id="io">IO</h1>
+<h2 id="推荐阅读">推荐阅读</h2>
+<ul>
+<li><a href="https://juejin.cn/post/7130952602350534693">https://juejin.cn/post/7130952602350534693</a></li>
+</ul>
+<h2 id="分类">分类</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">工作层面
+	网络IO
+	磁盘IO
+同步
+	同步IO
+	异步IO（异步天生就是非阻塞）
+阻塞
+	阻塞IO
+	非阻塞IO
+LinuxIO模型
+    同步阻塞IO:每次都要开多线程
+    同步非阻塞IO:要轮询
+    IO多路复用:事件驱动 [读写还是需要自己来弄，会阻塞](select,poll,epoll 见redis笔记)
+    信号驱动IO:信号机制 [读写还是需要自己来弄，会阻塞]
+    异步IO:读写数据时可以干别的事情
+Java
+	BIO [阻塞IO]
+	NIO [非阻塞IO，基于多路复用实现]
+		Buffer
+		Channel
+		Selector
+	AIO [订阅通知，底层基于epoll实现]
+		
+</code></pre><h2 id="nioaio的区别">NIO、AIO的区别</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">NIO 基于Reacot模式构建，
+	Reacot负责事件的注册、监听、派发工作[selector]
+	触发事件之后自己负责读取数据
+AIO 基于Proactor
+	Proactor负责异步IO的回调工作派发 [AsynchronousChannelGroup]
+	回调之后OS负责读取数据，读取好了之后再通知线程
+</code></pre><h1 id="netty">Netty</h1>
+<h2 id="定义">定义</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">基于NIO的client-server框架
+	简化开发网络应用程序(NIO的封装，更好用)
+	优化了TCP和UDP套接字网络编程
+	支持多种协议
+		FTP
+		HTTP
+		SMTP
+</code></pre><h2 id="应用场景">应用场景</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">网络通信
+	RPC框架通信
+	HTTP服务器
+	即时通讯
+	消息推送
+开源框架
+	Dubbo
+	RocketMQ
+	ES
+	gRPC
+</code></pre><h2 id="核心组件">核心组件</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">Bytebuf
+	对NIO中Bytebuf的封装
+Bootstrap
+	客户端的启动引导类
+ServerBootstrap
+	服务端的启动引导类
+Channel  
+	网络操作抽象类
+EventLoop[负责监听网络事件并调用事件处理器进行I/O操作处理]
+EventloopGroup [多个EventLoop的组合]
+ChannelHandler  [消息的具体处理器]
+ChannelPipeline  [多个ChannelHandler的集合]
+ChannleFuture   [操作执行结果]
+
+
+Thread:EventLoop = 1 : 1  [保障线程安全]
+</code></pre><h2 id="流程图">流程图</h2>
+<p><img src="/images/netty_socket.png" alt="Markdowm Image"></p>
+<h2 id="nioeventloopgroup默认线程数">NioEventloopGroup默认线程数</h2>
+<ul>
+<li>指定</li>
+<li>未指定(CPU核心数*2)</li>
+</ul>
+<h2 id="启动过程">启动过程</h2>
+<h3 id="服务端">服务端</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">创建两个NioEventloopGroup 线程组
+	bossGroup [用于处理客户端的TCP的连接请求]
+	workerGroup [负责每一条连接的具体读写数据的处理逻辑，将IO操作交由对应的handler处理]
+创建服务端启动引导类ServerBootstrap
+通过.group()给ServerBootstrap配置两大线程组
+通过.channel()给ServerBootstrap指定IO模型为NIO
+通过.childHandler()给ServerBootstrap创建ChannelInitializer指定handler
+通过ServerBootstrap的bind方法绑定端口
+</code></pre><h3 id="客户端">客户端</h3>
+<pre tabindex="0"><code class="language-a" data-lang="a">创建一个NioEventloopGroup 线程组
+创建服务端启动引导类Bootstrap
+通过.group()给Bootstrap配置线程组
+通过.channel()给Bootstrap指定IO模型为NIO
+通过.childHandler()给Bootstrap创建ChannelInitializer指定handler
+调用Bootstrap的connect方法进行连接
+	参数
+		inetHost: ip地址
+		inetPort: 端口
+</code></pre><h2 id="reactor线程模型netty">Reactor线程模型(netty)</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">单线程
+	所有的 IO 操作都由同一个 NIO 线程处理。
+多线程
+	一个线程负责接受请求,一组 NIO 线程处理 IO 操作。
+主从多线程
+	一组 NIO 线程负责接受请求，一组 NIO 线程处理 IO 操作。
+</code></pre><h2 id="tcp粘包拆包">TCP粘包/拆包</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义
+	多个字符串粘在一起或被拆开
+解决办法
+	使用netty自带的解码器
+		LineBasedFrameDecoder
+		DelimiterBasedFrameDecoder
+		...
+	自定义序列化编码器
+</code></pre><h2 id="netty长连接和心跳机制">netty长连接和心跳机制</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义
+	长连接
+		client和server建立连接之后，不会主动关闭
+	心跳机制
+		为了发现对方是否在线，通过心跳保活
+好处
+	长连接
+		减少频繁的TCP握手
+	心跳机制
+		防止一直占用连接
+</code></pre><h2 id="netty的零拷贝">netty的零拷贝</h2>
+<pre tabindex="0"><code class="language-a" data-lang="a">定义
+	维基百科
+        零复制（英语：Zero-copy；也译零拷贝）技术是指计算机执行操作时，CPU 不需要先将数据从某处内存复制到另一个特定区域。
+        这种技术通常用于通过网络传输文件时节省 CPU 周期和内存带宽。
+	OS
+		避免在用户态和内核态进行来回拷贝数据
+	netty
+		CompositeByteBuf可以合并ByteBuf为一个逻辑上的ByteBuf，避免多个ByteBuf之间的拷贝
+		ByteBuf支持slice，将ByteBuf分解为多个共享同一存储区域，避免内存拷贝
+		FileChannel.tranferTo直接把内存缓冲区发送到目标channel，避免write方式导致的内存拷贝
+</code></pre>
+        </p>
+    </div>
+</div>
+
+<aside class="post-toc">
+    <nav id="toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#quote">quote</a></li>
+    <li><a href="#参考链接和资料">参考链接和资料</a></li>
+    <li><a href="#io">IO</a>
+      <ul>
+        <li><a href="#推荐阅读">推荐阅读</a></li>
+        <li><a href="#分类">分类</a></li>
+        <li><a href="#nioaio的区别">NIO、AIO的区别</a></li>
+      </ul>
+    </li>
+    <li><a href="#netty">Netty</a>
+      <ul>
+        <li><a href="#定义">定义</a></li>
+        <li><a href="#应用场景">应用场景</a></li>
+        <li><a href="#核心组件">核心组件</a></li>
+        <li><a href="#流程图">流程图</a></li>
+        <li><a href="#nioeventloopgroup默认线程数">NioEventloopGroup默认线程数</a></li>
+        <li><a href="#启动过程">启动过程</a>
+          <ul>
+            <li><a href="#服务端">服务端</a></li>
+            <li><a href="#客户端">客户端</a></li>
+          </ul>
+        </li>
+        <li><a href="#reactor线程模型netty">Reactor线程模型(netty)</a></li>
+        <li><a href="#tcp粘包拆包">TCP粘包/拆包</a></li>
+        <li><a href="#netty长连接和心跳机制">netty长连接和心跳机制</a></li>
+        <li><a href="#netty的零拷贝">netty的零拷贝</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+</aside>
+
+
+
+    
+
+        </main><footer class="footer">
+    <span>&copy; 2022 lsy-dot</span>
+    <span>
+        Made with &#10084;&#65039; using <a target="_blank" href="https://github.com/526avijitgupta/gokarna">Gokarna</a>
+    </span>
+</footer>
+</body>
+</html>

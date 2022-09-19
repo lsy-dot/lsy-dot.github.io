@@ -6,7 +6,17 @@
     <description>Recent content in java on lsy-dot</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 08 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>java集合</title>
+      <link>https://lsy-dot.github.io/posts/java%E9%9B%86%E5%90%88/</link>
+      <pubDate>Mon, 19 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/java%E9%9B%86%E5%90%88/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 常见问题 集合的底层实现 一次封装ArrayList:数组LinkedList:双向链表HashMap、HashTable:数组+链表(红黑树)LinkedHashMap:HashMap+双向链表(维护插入顺序)TreeMap:(红黑树)二次封装HashSet:HashMapLinkedHashSet:LinkedHashMapTreeSet:TreeMap </description>
+    </item>
+    
     <item>
       <title>java基础</title>
       <link>https://lsy-dot.github.io/posts/java%E5%9F%BA%E7%A1%80/</link>
@@ -20,8 +30,8 @@ Java——反射的意义及优缺点
 Java反射机制与安全问题
 ArrayList源码扩容机制分析
 Java集合篇：HashMap 与 ConcurrentHashMap 原理总结
-常见问题 小问题 JDK，JRE，JVM的关系 JDK包含JRE JRE包含JVM
-常见关键字 native 本地方法，用c++实现或者其他语言实现synchronizesynchronize与锁升级1、最初直接加重量级锁，需要在用户态和内核态进行切换，耗费大量资源2、jdk1.6之后采用 无锁-&amp;gt;偏向锁(单个线程)-&amp;gt;轻量级锁(少量线程)-&amp;gt;重量级锁(大量线程) 升级的过程进行优化，使得对于锁的获取释放变得更快。transient 字段不参与序列化volatile 保证可见性，不保证原子性 重载和重写 我的理解：重载就是对于不同的情况写不同的方法。 重写就是具体的实现类对于父类的该方法实现不满意，需要自己在写一个满足于自己要求的方法。重写的要求比重载更加苛刻java中的重载与重写的区别：1、重载发生在本类，重写发生在父类与子类之间；（最明显的区别）2、重载的方法名必须相同，重写的方法名相同且返回值类型必须相同；3、重载的参数列表不同，重写的参数列表必须相同。重载发生在本类,方法名相同,参数列表不同,与返回值无关,只和方法名,参数列表,参数的类型有关.重载（Overload）:首先是位于一个类之中或者其子类中，具有相同的方法名， 但是方法的参数不同，返回值类型可以相同也可以不同。（1）：方法名必须相同（最重要的重载特征）（2）：方法的参数列表一定不一样。（3）：访问修饰符和返回值类型可以相同也可以不同。其实简单而言：重载就是对于不同的情况写不同的方法。 比如，同一个类中，写不同的构造函数用于初始化不同的参数。重写（Overriding）重写发生在父类子类之间,比如所有类都是继承与Object类的,Object类中本身就有equals,hashcode,toString方法等.在任意子类中定义了重名和同样的参数列表就构成方法重写.重写（override）：一般都是表示子类和父类之间的关系，其主要的特征是：方法名相同，参数相同，但是具体的实现不同。重写的特征：（1）：方法名必须相同，返回值类型必须相同（2）：参数列表必须相同（3）：访问权限不能比父类中被重写的方法的访问权限更低。例如：如果父类的一个方法被声明为public，那么在子类中重写该方法就不能声明为protected。（4）：子类和父类在同一个包中，那么子类可以重写父类所有方法，除了声明为private和final的方法。（5）：构造方法不能被重写，简单而言：就是具体的实现类对于父类的该方法实现不满意，需要自己在写一个满足于自己要求的方法。 == vs equals == 基本类型：值对象：引用地址equals重写：自定义未重写：引用地址 面向对象三大特征 1、封装2、继承注意：子类拥有父类的private，但需通过父类方法访问3、多态父类引用指向子类实例 深拷贝vs浅拷贝 深拷贝:会在内存中再复制一份对象然后指向它浅拷贝:对象只拷贝引用 String StringBuffer StringBuilder StringBuilder -----&amp;gt;StringBuffer -----&amp;gt;String (快-----&amp;gt;慢);StringBuilder线程不安全，没加锁，轻量级。StringBuffer线程安全String 用+=每次循环都创建一个StringBuilder 异常体系 throwableError [OutOfMemoryError,StackOverFlowError]ExceptionIoException(checked)[io,class not found]RuntimeException(unchecked)[空指针,越界,算术]finally finally中的return会优先于try中的return执行 代理模式 静态代理动态代理JDK动态代理为什么要实现同一个接口？因为代理类和被代理类要建立关系，要么继承要么接口，而代理类需要继承Proxy，所以只能接口了JDK动态代理类实现InvocationHandler接口cglib代理类(不可以声明为final)因为要通过继承的方式原理:定义拦截器 java获取class对象的4种方式 类名.</description>
+常见问题 小问题 java基本数据类型 数字 [字节数](取值范围)整数byte [1] (-128 ~ 127)short [2] (-32768 ~ 32767)int [4] (-2147483648 ~ 2147483647)long [8] (-9223372036854775808 ~ 9223372036854775807)浮点数float [4] double [8]字符char [2]布尔boolean [1] JDK，JRE，JVM的关系 JDK包含JRE JRE包含JVM
+常见关键字 native 本地方法，用c++实现或者其他语言实现synchronizesynchronize与锁升级1、最初直接加重量级锁，需要在用户态和内核态进行切换，耗费大量资源2、jdk1.6之后采用 无锁-&amp;gt;偏向锁(单个线程)-&amp;gt;轻量级锁(少量线程)-&amp;gt;重量级锁(大量线程) 升级的过程进行优化，使得对于锁的获取释放变得更快。transient 字段不参与序列化volatile 保证可见性，不保证原子性 重载和重写 我的理解：重载就是对于不同的情况写不同的方法。 重写就是具体的实现类对于父类的该方法实现不满意，需要自己在写一个满足于自己要求的方法。重写的要求比重载更加苛刻java中的重载与重写的区别：1、重载发生在本类，重写发生在父类与子类之间；（最明显的区别）2、重载的方法名必须相同，重写的方法名相同且返回值类型必须相同；3、重载的参数列表不同，重写的参数列表必须相同。重载发生在本类,方法名相同,参数列表不同,与返回值无关,只和方法名,参数列表,参数的类型有关.</description>
     </item>
     
   </channel>
