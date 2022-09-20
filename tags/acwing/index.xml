@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>acwing on lsy-dot</title>
+    <link>https://lsy-dot.github.io/tags/acwing/</link>
+    <description>Recent content in acwing on lsy-dot</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Thu, 08 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://lsy-dot.github.io/tags/acwing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>acwing</title>
+      <link>https://lsy-dot.github.io/posts/acwing/</link>
+      <pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://lsy-dot.github.io/posts/acwing/</guid>
+      <description>quote 种一棵树最好的时间就是十年前，或者是现在。
+参考链接 动态规划 背包问题 01背包 几个关键的点1、初始化f[n]如果全部初始化为0，那么f[n]表示的是背包体积小于等于n的最大价值f[n]如果f[0]=0f[其他]=-inf那么f[n]表示的是背包体积恰好等于n的最大价值，为-inf表示不可达2、内层循环的执行顺序顺序执行，那么需要二维数组逆序执行，可以压缩二维数组为一维 完全背包 和01背包的区别在于通过改变顺序为顺序从而使得可以选取多件物品 多重背包 1、朴素版直接在01背包的最内层加一层循环2、二进制优化通过二进制枚举优化可以加快第三层的循环 分组背包 每组背包只能选一个，因此可以转换成有s+1种决策的01背包 线性dp https://www.acwing.com/activity/content/11/
+基础算法 二分 整数（重点） 推荐阅读 https://www.acwing.com/blog/content/31/ 解题步骤 上来先定义左右边界、mid left=0,right=n-1 mid = (left+right)/2 想check函数，根据check决定答案落在左区间还是右区间(包含mid) 左边: r=mid 右边: l=mid 如果是l=mid，计算mid时需要加1防止死循环 mid=(left+right)/2 int bsearch_1(int l, int r) { while (l &amp;lt; r) { int mid = l + r &amp;gt;&amp;gt; 1; if (check(mid)) r = mid; else l = mid + 1; } return l; } int bsearch_2(int l, int r) { while (l &amp;lt; r) { int mid = l + r + 1 &amp;gt;&amp;gt; 1; if (check(mid)) l = mid; else r = mid - 1; } return l; } 浮点数 https://www.</description>
+    </item>
+    
+  </channel>
+</rss>

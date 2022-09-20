@@ -175,17 +175,290 @@ redis redlock
 </code></pre><h2 id="可能出的算法题">可能出的算法题</h2>
 <h3 id="lc227">lc227</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>https:<span style="color:#75715e">//leetcode.cn/problems/basic-calculator-ii/
-</span></span></span></code></pre></div><h3 id="lc93">lc93</h3>
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calculate</span><span style="color:#f92672">(</span>String s<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    Deque<span style="color:#f92672">&lt;</span>Integer<span style="color:#f92672">&gt;</span> que<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ArrayDeque<span style="color:#f92672">&lt;&gt;();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n<span style="color:#f92672">=</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> sign<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;+&#39;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>n<span style="color:#f92672">;</span>i<span style="color:#f92672">++)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>Character<span style="color:#f92672">.</span><span style="color:#a6e22e">isDigit</span><span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">))){</span>
+</span></span><span style="display:flex;"><span>            num<span style="color:#f92672">=</span>num<span style="color:#f92672">*</span>10<span style="color:#f92672">+</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)-</span><span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(!</span>Character<span style="color:#f92672">.</span><span style="color:#a6e22e">isDigit</span><span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">))&amp;&amp;</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)!=</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">||</span>i<span style="color:#f92672">==</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">switch</span> <span style="color:#f92672">(</span>sign<span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;+&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                    que<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>num<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                    que<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(-</span>num<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;*&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> top<span style="color:#f92672">=</span>que<span style="color:#f92672">.</span><span style="color:#a6e22e">poll</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>                    que<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>top<span style="color:#f92672">*</span>num<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;/&#39;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> top1<span style="color:#f92672">=</span>que<span style="color:#f92672">.</span><span style="color:#a6e22e">poll</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>                    que<span style="color:#f92672">.</span><span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>top1<span style="color:#f92672">/</span>num<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            num<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            sign<span style="color:#f92672">=</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(!</span>que<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">()){</span>
+</span></span><span style="display:flex;"><span>        ans<span style="color:#f92672">+=</span>que<span style="color:#f92672">.</span><span style="color:#a6e22e">poll</span><span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>扩展 <span style="color:#f92672">(</span>带括号<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>建议阅读:https<span style="color:#f92672">:</span><span style="color:#75715e">//leetcode.cn/problems/basic-calculator-ii/solution/shi-yong-shuang-zhan-jie-jue-jiu-ji-biao-c65k/
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>伪代码
+</span></span><span style="display:flex;"><span>定义
+</span></span><span style="display:flex;"><span>    map存优先级
+</span></span><span style="display:flex;"><span>    栈
+</span></span><span style="display:flex;"><span>    	数字
+</span></span><span style="display:flex;"><span>    	符号
+</span></span><span style="display:flex;"><span>初始化
+</span></span><span style="display:flex;"><span>    数字栈每次进计算符号时加个0来计算负数
+</span></span><span style="display:flex;"><span>    对输入字符串去除空格
+</span></span><span style="display:flex;"><span>遍历
+</span></span><span style="display:flex;"><span>    字符为<span style="color:#e6db74">&#39;(&#39;</span>
+</span></span><span style="display:flex;"><span>    	入符号栈
+</span></span><span style="display:flex;"><span>    字符为<span style="color:#e6db74">&#39;)&#39;</span>
+</span></span><span style="display:flex;"><span>    	取出数字栈两个数和符号栈一个符号计算
+</span></span><span style="display:flex;"><span>    	直到<span style="color:#e6db74">&#39;(&#39;</span>出栈
+</span></span><span style="display:flex;"><span>    字符为数字
+</span></span><span style="display:flex;"><span>    	持续取数字直到数字被取完<span style="color:#960050;background-color:#1e0010">，</span>压入数字栈
+</span></span><span style="display:flex;"><span>    字符为符号
+</span></span><span style="display:flex;"><span>    	如果遇到<span style="color:#e6db74">&#39;(&#39;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#39;+&#39;</span><span style="color:#f92672">,</span><span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">,</span>数字入个0<span style="color:#f92672">(</span>为了计算负数<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    	计算直到当前栈内的操作优先级小于当前符号
+</span></span><span style="display:flex;"><span>   	 	当前符号入符号栈
+</span></span><span style="display:flex;"><span>把剩余的数字和符号计算完
+</span></span><span style="display:flex;"><span>    
+</span></span></code></pre></div><h3 id="lc93">lc93</h3>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>https:<span style="color:#75715e">//leetcode.cn/problems/restore-ip-addresses/
-</span></span></span></code></pre></div><h3 id="lc322">lc322</h3>
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>回溯
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">final</span>  <span style="color:#66d9ef">int</span> SEG_COUNT<span style="color:#f92672">=</span>4<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> seg<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>SEG_COUNT<span style="color:#f92672">];</span>
+</span></span><span style="display:flex;"><span>    List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> ans<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> ArrayList<span style="color:#f92672">&lt;&gt;();</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> List<span style="color:#f92672">&lt;</span>String<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">restoreIpAddresses</span><span style="color:#f92672">(</span>String s<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>s<span style="color:#f92672">==</span><span style="color:#66d9ef">null</span><span style="color:#f92672">)</span><span style="color:#66d9ef">return</span> ans<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        dfs<span style="color:#f92672">(</span>s<span style="color:#f92672">,</span>0<span style="color:#f92672">,</span>0<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span><span style="color:#f92672">(</span>String s<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> st<span style="color:#f92672">,</span><span style="color:#66d9ef">int</span> cnt<span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>cnt<span style="color:#f92672">==</span>4<span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>st<span style="color:#f92672">==</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">()){</span>
+</span></span><span style="display:flex;"><span>                StringBuilder sb<span style="color:#f92672">=</span><span style="color:#66d9ef">new</span> StringBuilder<span style="color:#f92672">();</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>SEG_COUNT<span style="color:#f92672">;</span>i<span style="color:#f92672">++){</span>
+</span></span><span style="display:flex;"><span>                    sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span>seg<span style="color:#f92672">[</span>i<span style="color:#f92672">]);</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>i<span style="color:#f92672">!=</span>SEG_COUNT<span style="color:#f92672">-</span>1<span style="color:#f92672">)</span>sb<span style="color:#f92672">.</span><span style="color:#a6e22e">append</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#39;.&#39;</span><span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>                ans<span style="color:#f92672">.</span><span style="color:#a6e22e">add</span><span style="color:#f92672">(</span>sb<span style="color:#f92672">.</span><span style="color:#a6e22e">toString</span><span style="color:#f92672">());</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>st<span style="color:#f92672">==</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">())</span><span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>st<span style="color:#f92672">)==</span><span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>            seg<span style="color:#f92672">[</span>cnt<span style="color:#f92672">]=</span>0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            dfs<span style="color:#f92672">(</span>s<span style="color:#f92672">,</span>st<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span>cnt<span style="color:#f92672">+</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p<span style="color:#f92672">=</span>0<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span>st<span style="color:#f92672">;</span>i<span style="color:#f92672">&lt;</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">();</span>i<span style="color:#f92672">++)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>            p<span style="color:#f92672">=</span>p<span style="color:#f92672">*</span>10<span style="color:#f92672">+</span>s<span style="color:#f92672">.</span><span style="color:#a6e22e">charAt</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)-</span><span style="color:#e6db74">&#39;0&#39;</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>p<span style="color:#f92672">&gt;</span>0<span style="color:#f92672">&amp;&amp;</span>p<span style="color:#f92672">&lt;=</span>255<span style="color:#f92672">){</span>
+</span></span><span style="display:flex;"><span>                seg<span style="color:#f92672">[</span>cnt<span style="color:#f92672">]=</span>p<span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>                dfs<span style="color:#f92672">(</span>s<span style="color:#f92672">,</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">,</span>cnt<span style="color:#f92672">+</span>1<span style="color:#f92672">);</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">break</span><span style="color:#f92672">;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="lc322">lc322</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">https://leetcode-cn.com/problems/coin-change/
+常规的完全背包
+
+public int coinChange(int[] coins, int amount) {
+        int n=coins.length;
+        int[] dp=new int[amount+1];
+        Arrays.fill(dp,Integer.MAX_VALUE);
+        dp[0]=0;
+        for(int i=0;i&lt;n;i++)
+        {
+            for(int j=coins[i];j&lt;=amount;j++)
+            {
+                if(dp[j-coins[i]]!=Integer.MAX_VALUE)
+                    dp[j]=Math.min(dp[j],dp[j-coins[i]]+1);
+            }
+        }
+        return dp[amount]==Integer.MAX_VALUE?-1:dp[amount];
+    }
 </code></pre><h3 id="lc-94">lc 94</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">https://leetcode.cn/problems/binary-tree-inorder-traversal/
 递归
+    List&lt;Integer&gt; ans=new ArrayList&lt;&gt;();
+    public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+    public void dfs(TreeNode root)
+    {
+        if(root==null)return;
+        dfs(root.left);
+        ans.add(root.val);
+        dfs(root.right);
+    }
+
 非递归
+
+public List&lt;Integer&gt; inorderTraversal(TreeNode root) {
+        List&lt;Integer&gt; ans=new ArrayList&lt;&gt;();
+        Deque&lt;TreeNode&gt; que=new ArrayDeque&lt;&gt;();
+        while(!que.isEmpty()||root!=null){
+            while (root!=null){
+                que.push(root);
+                root=root.left;
+            }
+            TreeNode tp=que.pop();
+            ans.add(tp.val);
+            root=tp.right;
+        }
+        return ans;
+    }
 </code></pre><h3 id="lc707">lc707</h3>
 <pre tabindex="0"><code class="language-a" data-lang="a">https://leetcode.cn/problems/design-linked-list/
 双链表实现
+
+public class ListNode {
+    int val;
+    ListNode next;
+    ListNode prev;
+    ListNode(int x) { val = x; }
+}
+
+class MyLinkedList {
+    int size;
+    // sentinel nodes as pseudo-head and pseudo-tail
+    ListNode head, tail;
+    public MyLinkedList() {
+        size = 0;
+        head = new ListNode(0);
+        tail = new ListNode(0);
+        head.next = tail;
+        tail.prev = head;
+    }
+
+    /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+    public int get(int index) {
+        // if index is invalid
+        if (index &lt; 0 || index &gt;= size) return -1;
+
+        // choose the fastest way: to move from the head
+        // or to move from the tail
+        ListNode curr = head;
+        if (index  &lt; size /2)
+            for(int i = 0; i &lt; index + 1; ++i) curr = curr.next;
+        else {
+            curr = tail;
+            for(int i = 0; i &lt; size - index; ++i) curr = curr.prev;
+        }
+
+        return curr.val;
+    }
+
+    /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+    public void addAtHead(int val) {
+        ListNode pred = head, succ = head.next;
+
+        ++size;
+        ListNode toAdd = new ListNode(val);
+        toAdd.prev = pred;
+        toAdd.next = succ;
+        pred.next = toAdd;
+        succ.prev = toAdd;
+    }
+
+    /** Append a node of value val to the last element of the linked list. */
+    public void addAtTail(int val) {
+        ListNode succ = tail, pred = tail.prev;
+
+        ++size;
+        ListNode toAdd = new ListNode(val);
+        toAdd.prev = pred;
+        toAdd.next = succ;
+        pred.next = toAdd;
+        succ.prev = toAdd;
+    }
+
+    /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+    public void addAtIndex(int index, int val) {
+        // If index is greater than the length,
+        // the node will not be inserted.
+        if (index &gt; size) return;
+
+        // [so weird] If index is negative,
+        // the node will be inserted at the head of the list.
+        if (index &lt; 0) index = 0;
+
+        // find predecessor and successor of the node to be added
+        ListNode pred, succ;
+        if (index &lt; size/2 ) {
+            pred = head;
+            for(int i = 0; i &lt; index; ++i) pred = pred.next;
+            succ = pred.next;
+        }
+        else {
+            succ = tail;
+            for (int i = 0; i &lt; size - index; ++i) succ = succ.prev;
+            pred = succ.prev;
+        }
+
+        // insertion itself
+        ++size;
+        ListNode toAdd = new ListNode(val);
+        toAdd.prev = pred;
+        toAdd.next = succ;
+        pred.next = toAdd;
+        succ.prev = toAdd;
+    }
+
+    /** Delete the index-th node in the linked list, if the index is valid. */
+    public void deleteAtIndex(int index) {
+        // if the index is invalid, do nothing
+        if (index &lt; 0 || index &gt;= size) return;
+
+        // find predecessor and successor of the node to be deleted
+        ListNode pred, succ;
+        if (index &lt; size /2) {
+            pred = head;
+            for(int i = 0; i &lt; index; ++i) pred = pred.next;
+            succ = pred.next.next;
+        }
+        else {
+            succ = tail;
+            for (int i = 0; i &lt; size - index - 1; ++i) succ = succ.prev;
+            pred = succ.prev.prev;
+        }
+
+        // delete pred.next
+        --size;
+        pred.next = succ;
+        succ.prev = pred;
+    }
+}
 </code></pre><h1 id="hr问题">hr问题</h1>
 <h2 id="对自己个人的一个评价吧">对自己个人的一个评价吧</h2>
 <pre tabindex="0"><code class="language-a" data-lang="a">优点
